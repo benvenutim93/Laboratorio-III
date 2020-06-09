@@ -37,19 +37,12 @@ public class Combo {
     public int getiD() {  return iD;    }
     public void cambiarPrecio(int precio){ this.precio=precio; }
     // PARA PROBAR SI AGREGA REPETIDOS  , BORRAR ESTA FUNCION
-    public  void setiD(int a){
-        this.iD=a;
-    }
 
     ///-------------------------------- [O V E R R I D E ] --------------------------------
     @Override
     public String toString() {
         return "\n--------------\n"+"[" +nombre +"]\n"+"Descripcion= " + descripcion +
                 "\nPrecio= $" + precio + "\n--------------";
-
-
-
-
     }
     @Override
     public boolean equals(Object o) {
