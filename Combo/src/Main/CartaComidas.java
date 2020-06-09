@@ -1,30 +1,18 @@
 package Main;
 
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashSet;
 import java.util.Iterator;
 
 
 public class CartaComidas {
-
     private HashSet<Combo> carta;
-    static final String CLAVE_PRECIO ="precio";
-    static final String CLAVE_NOMBRE ="nombre";
-    static final String CLAVE_DESCRIPCION ="descripcion";
-    static final String CLAVE_ID ="id";
+
 
     public CartaComidas() {
         this.carta =new HashSet<Combo>();
     }
-
-    public CartaComidas(HashSet<Combo> carta) {
-        this.carta = carta;
-    }
-    ///-------------------------------- [M E T O D O S] --------------------------------
+///-------------------------------- [M E T O D O S] --------------------------------
     /**
      * Agrega un combo a la carta (criterio de comparacion  ID )
      * @param agregar (Combo)
@@ -76,45 +64,6 @@ public class CartaComidas {
         return rta;
     }
 
-public String cargarJson () throws JSONException {
-        JSONArray jsonArray = new JSONArray();
-
-    Iterator<Combo> it = carta.iterator();
-    while (it.hasNext()){
-        Combo entrada= (Combo) it.next();
-
-        jsonArray.put(entrada.crearJson());
-
-        }
-    return jsonArray.toString();
-    }
-    public HashSet<Combo> decodeJson(String aDecodificar)throws JSONException{
-        HashSet<Combo> cartita=new HashSet<>();
-        JSONArray array= new JSONArray(aDecodificar);
-        int i;
-        for (i=0;i < array.length();i++){
-            JSONObject obj = array.getJSONObject(i);
-            String nombre=obj.getString(CLAVE_NOMBRE);
-            String descripion=obj.getString(CLAVE_DESCRIPCION);
-            double precio = obj.getDouble(CLAVE_PRECIO);
-            int id= obj.getInt(CLAVE_ID);
-
-            Combo aux = new Combo(precio,nombre,descripion);
-            aux.setiD(id);
-
-            cartita.add(aux);
-        }
-
-
-        return cartita;
-
-    }
-
-
-
 
 
 }
-
-
-

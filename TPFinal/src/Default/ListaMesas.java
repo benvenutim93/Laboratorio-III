@@ -1,17 +1,8 @@
 package Default;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class ListaMesas {
-    public static String K_LISTA = "Lista de Mesas";
-    public static String K_MESA_CAPACIDAD = "Capacidad";
-    public static String K_MESA_ID = "ID";
-    public static String K_MESA_OCUPADO = "Ocupado";
-
     private ArrayList<Mesa> listaMesa;
 
     public ListaMesas ()
@@ -169,51 +160,6 @@ public class ListaMesas {
     {
         Mesa aux = buscarMesa(cantidadPersonas);
         aux.setEstaOcupado(true);
-    }
-    /** Crea un String con los datos del array
-     * @return String de Json de la Lista de Mesas
-     * @throws JSONException
-     */
-    public String createJsonString () throws JSONException
-    {
-        JSONArray array = new JSONArray();
-
-        for (Mesa a : listaMesa)
-        {
-            JSONObject obj = new JSONObject();
-            obj.put(K_MESA_CAPACIDAD, a.getCapacidad());
-            obj.put(K_MESA_ID, a.getIdMesa());
-            obj.put(K_MESA_OCUPADO, a.isEstaOcupado());
-
-            array.put(obj);
-        }
-
-        return array.toString();
-    }
-
-    /** Recibe un String codificado en JSON, y lo pasa a un ArrayList de Mesas
-     * @param json
-     * @return ArrayList <Mesa>
-     * @throws JSONException
-     */
-    public ArrayList <Mesa> decodeJsonString (String json) throws JSONException
-    {
-        ArrayList<Mesa> listadoMesas = new ArrayList<Mesa>();
-        JSONArray array = new JSONArray(json);
-
-        for (int i = 0; i < array.length(); i++)
-        {
-            JSONObject obj = array.getJSONObject(i);
-            Mesa aux = new Mesa ();
-
-            aux.setCapacidad(obj.getInt(K_MESA_CAPACIDAD));
-            aux.setEstaOcupado(obj.getBoolean(K_MESA_OCUPADO));
-            aux.setIdMesa(obj.getInt(K_MESA_ID));
-
-            listadoMesas.add(aux);
-        }
-
-        return listadoMesas;
     }
 
 }
