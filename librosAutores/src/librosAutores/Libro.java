@@ -6,8 +6,13 @@ public class Libro {
 	private int stock;
 	private Autor fulano;
 	
-	//CONSTRUCTORES
-	
+	/*
+	CONSTRUCTORES
+	/hola000
+	asdasda
+	asdasdsad
+	*/
+	/adsasdsa
 	public Libro ()
 	{
 		titulo = "";
