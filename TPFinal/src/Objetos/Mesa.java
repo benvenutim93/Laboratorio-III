@@ -1,6 +1,4 @@
-package Default;
-
-import java.util.Objects;
+package Objetos;
 
 public class Mesa {
     private boolean estaOcupado;

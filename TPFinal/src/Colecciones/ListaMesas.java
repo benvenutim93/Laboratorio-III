@@ -1,5 +1,6 @@
-package Default;
+package Colecciones;
 
+import Objetos.Mesa;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,13 +8,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ListaMesas {
+    //Claves JSON
     public static String K_LISTA = "Lista de Mesas";
     public static String K_MESA_CAPACIDAD = "Capacidad";
     public static String K_MESA_ID = "ID";
     public static String K_MESA_OCUPADO = "Ocupado";
-
+    //Atributos
     private ArrayList<Mesa> listaMesa;
 
+
+
+    //Constructores
     public ListaMesas ()
     {
         listaMesa = new ArrayList<Mesa>();
@@ -25,11 +30,12 @@ public class ListaMesas {
      */
     public ListaMesas (Mesa objMesa)
     {
+
         listaMesa = new ArrayList<Mesa>();
         listaMesa.add(objMesa);
     }
 
-    public ArrayList<Mesa> getListaMesa() {
+    private ArrayList<Mesa> getListaMesa() {
         return listaMesa;
     }
 
@@ -43,6 +49,8 @@ public class ListaMesas {
      * @param objMesa
      * @return true si se agrego correctamente, false caso contrario
      */
+
+    //TODO excepcion si la mesa esta agregada
     public boolean addMesa (Mesa objMesa)
     {
         boolean agregado = false;
@@ -77,13 +85,13 @@ public class ListaMesas {
     public String imprimirMesasLibres ()
     {
         StringBuilder sb = new StringBuilder ();
-                for (Mesa obj : listaMesa)
-                {
-                    if (!obj.isEstaOcupado())
-                    {
-                        sb.append(obj.toString()+"\n");
-                    }
-                }
+        for (Mesa obj : listaMesa)
+        {
+            if (!obj.isEstaOcupado())
+            {
+                sb.append(obj.toString()+"\n");
+            }
+        }
         return sb.toString();
     }
 
@@ -133,7 +141,7 @@ public class ListaMesas {
      * @param capacidadPersonas
      * @return una Mesa
      */
-
+    //TODO excepcion si no hay mesas
     public Mesa buscarMesa (int capacidadPersonas)
     {
         Mesa aux = buscarMesaPorCapacidad(capacidadPersonas);
@@ -142,6 +150,28 @@ public class ListaMesas {
             aux = buscarMayorCapacidad(capacidadPersonas);
         }
         return aux;
+    }
+
+    /**
+     * Busca una mesa por ID
+     * @param id
+     * @return La posicion en el ArrayList que ocupa esa mesa
+     */
+    //TODO excepcion si aux queda null
+    public int buscarMesaID (int id)
+    {
+        int flag = 0, i = 0, pos = 0;
+        while (i < cantidadMesas() && flag == 0)
+        {
+            Mesa comparar = listaMesa.get(i);
+            if (comparar.getIdMesa() == id)
+            {
+                flag = 1;
+                pos = i;
+            }
+            i++;
+        }
+        return pos;
     }
 
     /**
@@ -170,10 +200,24 @@ public class ListaMesas {
         Mesa aux = buscarMesa(cantidadPersonas);
         aux.setEstaOcupado(true);
     }
-    /** Crea un String con los datos del array
+
+    /**
+     * Establece el estado de Ocupado en libre a la mesa que le corresponde el ID enviado por parametro
+     * @param ID
+     */
+    //TODO excepcion por si el ID no existe
+    public void liberarMesa (int ID)
+    {
+        int pos = buscarMesaID(ID);
+        listaMesa.get(pos).setEstaOcupado(false);
+    }
+
+    /**
+     * Crea un String con los datos del array
      * @return String de Json de la Lista de Mesas
      * @throws JSONException
      */
+
     public String createJsonString () throws JSONException
     {
         JSONArray array = new JSONArray();
@@ -191,7 +235,8 @@ public class ListaMesas {
         return array.toString();
     }
 
-    /** Recibe un String codificado en JSON, y lo pasa a un ArrayList de Mesas
+    /**
+     * Recibe un String codificado en JSON, y lo pasa a un ArrayList de Mesas
      * @param json
      * @return ArrayList <Mesa>
      * @throws JSONException

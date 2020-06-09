@@ -1,4 +1,6 @@
-package Default;
+package Objetos;
+
+import Colecciones.ListaMesas;
 
 public class Main {
 

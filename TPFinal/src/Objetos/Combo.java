@@ -1,4 +1,4 @@
-package Default;
+package Objetos;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -84,10 +84,12 @@ public class Combo {
     @Override
     public boolean equals(Object o) {
         boolean rta=false;
-        if(o instanceof Combo){
-            Combo aux= (Combo)o;
-            if(this.iD == aux.getiD()){
-                rta=true;
+        if (o != null) {
+            if (o instanceof Combo) {
+                Combo aux = (Combo) o;
+                if (this.iD == aux.getiD()) {
+                    rta = true;
+                }
             }
         }
         return rta;
