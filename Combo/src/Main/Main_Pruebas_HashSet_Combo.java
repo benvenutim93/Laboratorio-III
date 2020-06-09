@@ -1,5 +1,9 @@
 package Main;
 
+import org.json.JSONException;
+
+import java.util.HashSet;
+
 public class Main_Pruebas_HashSet_Combo {
     public static void main(String[] args) {
 
@@ -29,6 +33,18 @@ public class Main_Pruebas_HashSet_Combo {
         System.out.println(Carta.actualizarPrecioParticular(combo3,200));
 
         System.out.println(Carta.listarCarta());
+
+        try {
+            String json=Carta.cargarJson();
+            System.out.println(json);
+
+            CartaComidas carta2 =new CartaComidas( Carta.decodeJson(json));
+            System.out.println("Jsondecode");
+            System.out.println(carta2.listarCarta());
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
 
     }
 }

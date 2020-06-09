@@ -1,5 +1,14 @@
 package Default;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Combo {
+
+    static final String CLAVE_PRECIO ="precio";
+    static final String CLAVE_NOMBRE ="nombre";
+    static final String CLAVE_DESCRIPCION ="descripcion";
+    static final String CLAVE_ID ="id";
 
     private  double precio;
     private  String nombre;
@@ -33,9 +42,33 @@ public class Combo {
     public String getNombre(){ return this.nombre; }
     public int getiD() {  return iD;    }
     public void cambiarPrecio(int precio){ this.precio=precio; }
-    // PARA PROBAR SI AGREGA REPETIDOS  , BORRAR ESTA FUNCION
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
     public  void setiD(int a){
         this.iD=a;
+    }
+
+    /**
+     * Crea un jsonObject del mismo
+     * @return JSONObject del mismo combo
+     * @throws JSONException
+     */
+    public JSONObject crearJson () throws JSONException
+    {
+        JSONObject json = new JSONObject();
+        json.put(CLAVE_DESCRIPCION,getDescripcion());
+        json.put(CLAVE_ID,getiD());
+        json.put(CLAVE_NOMBRE,getNombre());
+        json.put(CLAVE_PRECIO,getPrecio());
+        return json;
+
     }
 
     ///-------------------------------- [O V E R R I D E ] --------------------------------
