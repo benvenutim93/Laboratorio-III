@@ -7,7 +7,7 @@ public class Mesa {
     private int capacidad;
     private int idMesa;
 
-    //Constructores
+    //CONSTRUCTORES
 
     /**
      * Constructor default de la clase.
