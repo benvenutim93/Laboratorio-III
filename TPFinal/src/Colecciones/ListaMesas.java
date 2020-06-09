@@ -1,5 +1,7 @@
 package Colecciones;
 
+import Excepciones.IdInexistenteMesaException;
+import Excepciones.SinMesasException;
 import Objetos.Mesa;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,7 +11,6 @@ import java.util.ArrayList;
 
 public class ListaMesas {
     //Claves JSON
-    public static String K_LISTA = "Lista de Mesas";
     public static String K_MESA_CAPACIDAD = "Capacidad";
     public static String K_MESA_ID = "ID";
     public static String K_MESA_OCUPADO = "Ocupado";
@@ -50,14 +51,12 @@ public class ListaMesas {
      * @return true si se agrego correctamente, false caso contrario
      */
 
-    //TODO excepcion si la mesa esta agregada
     public boolean addMesa (Mesa objMesa)
     {
         boolean agregado = false;
         if (estaAgregado(objMesa))
-            agregado = false;
-        else
         {
+            objMesa.setIdMesa(cantidadMesas()+1);
             listaMesa.add(objMesa);
             agregado = true;
         }
@@ -85,13 +84,13 @@ public class ListaMesas {
     public String imprimirMesasLibres ()
     {
         StringBuilder sb = new StringBuilder ();
-        for (Mesa obj : listaMesa)
-        {
-            if (!obj.isEstaOcupado())
-            {
-                sb.append(obj.toString()+"\n");
-            }
-        }
+                for (Mesa obj : listaMesa)
+                {
+                    if (!obj.isEstaOcupado())
+                    {
+                        sb.append(obj.toString()+"\n");
+                    }
+                }
         return sb.toString();
     }
 
@@ -141,14 +140,14 @@ public class ListaMesas {
      * @param capacidadPersonas
      * @return una Mesa
      */
-    //TODO excepcion si no hay mesas
-    public Mesa buscarMesa (int capacidadPersonas)
+
+    public Mesa buscarMesa (int capacidadPersonas) throws SinMesasException
     {
         Mesa aux = buscarMesaPorCapacidad(capacidadPersonas);
         if (aux == null)
-        {
             aux = buscarMayorCapacidad(capacidadPersonas);
-        }
+        if (aux == null)
+            throw new SinMesasException("No hay mesas disponibles");
         return aux;
     }
 
@@ -157,10 +156,10 @@ public class ListaMesas {
      * @param id
      * @return La posicion en el ArrayList que ocupa esa mesa
      */
-    //TODO excepcion si aux queda null
+
     public int buscarMesaID (int id)
     {
-        int flag = 0, i = 0, pos = 0;
+        int flag = 0, i = 0, pos = -1;
         while (i < cantidadMesas() && flag == 0)
         {
             Mesa comparar = listaMesa.get(i);
@@ -195,7 +194,7 @@ public class ListaMesas {
      * @param cantidadPersonas
      */
 
-    public void ocuparMesa (int cantidadPersonas)
+    public void ocuparMesa (int cantidadPersonas) throws IdInexistenteMesaException, SinMesasException
     {
         Mesa aux = buscarMesa(cantidadPersonas);
         aux.setEstaOcupado(true);
@@ -203,13 +202,17 @@ public class ListaMesas {
 
     /**
      * Establece el estado de Ocupado en libre a la mesa que le corresponde el ID enviado por parametro
+     * Lanza una excepcion si el ID no existe.
      * @param ID
+     * @throws IdInexistenteMesaException
      */
-    //TODO excepcion por si el ID no existe
-    public void liberarMesa (int ID)
+    public void liberarMesa (int ID) throws IdInexistenteMesaException
     {
         int pos = buscarMesaID(ID);
-        listaMesa.get(pos).setEstaOcupado(false);
+        if (pos == -1)
+            throw new IdInexistenteMesaException("El ID no existe");
+        else
+            listaMesa.get(pos).setEstaOcupado(false);
     }
 
     /**

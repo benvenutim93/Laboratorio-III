@@ -15,14 +15,20 @@ public class Mesa {
     {
         capacidad = 4;
         estaOcupado = false;
-        idMesa = 0;
+        idMesa = 1;
     }
     public Mesa (int capacidad)
     {
         this.capacidad = capacidad;
         estaOcupado = false;
-        idMesa = 0;
+        idMesa = 1;
 
+    }
+    public Mesa (int capacidad, boolean estaOcupado)
+    {
+        this.capacidad = capacidad;
+        this.estaOcupado = estaOcupado;
+        idMesa = 1;
     }
     public Mesa (int capacidad, boolean estaOcupado, int idMesa)
     {
