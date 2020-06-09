@@ -1,7 +1,6 @@
 package Main;
 
 public class Main_Pruebas_HashSet_Combo {
-
     public static void main(String[] args) {
 
         Combo combo1 = new Combo(326.89,"combo 1","descripcion1");
