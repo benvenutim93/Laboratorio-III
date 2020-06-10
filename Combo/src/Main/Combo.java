@@ -29,7 +29,7 @@ public class Combo {
     }
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
+    }-
     */
 
     ///-------------------------------- [M E T O D O S] --------------------------------
