@@ -2,6 +2,7 @@ package Objetos;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import Excepciones.PrecioNegativoException;
 
 public class Combo {
 
@@ -41,7 +42,13 @@ public class Combo {
     ///-------------------------------- [M E T O D O S] --------------------------------
     public String getNombre(){ return this.nombre; }
     public int getiD() {  return iD;    }
-    public void cambiarPrecio(int precio){ this.precio=precio; }
+    public void cambiarPrecio(int precio) throws PrecioNegativoException {
+        if(precio >= 0 ) {
+            this.precio = precio;
+        }else {
+            throw new PrecioNegativoException("Error : Precio Negativo");
+        }
+    }
     public double getPrecio() {
         return precio;
     }
