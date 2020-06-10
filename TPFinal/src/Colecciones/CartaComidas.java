@@ -22,6 +22,9 @@ public class CartaComidas {
         this.carta =new HashSet<Combo>();
     }
 ///-------------------------------- [M E T O D O S] --------------------------------
+    public HashSet<Combo>getCarta(){
+        return carta;
+    }
     /**
      * Agrega un combo a la carta (criterio de comparacion  ID )
      * @param agregar (Combo)
