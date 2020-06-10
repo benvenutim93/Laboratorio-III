@@ -1,5 +1,6 @@
 package Colecciones;
 
+import Excepciones.CapacidadMaximaException;
 import Excepciones.IdInexistenteMesaException;
 import Excepciones.SinMesasException;
 import Objetos.Mesa;
@@ -14,7 +15,7 @@ public class ListaMesas {
     public static String K_MESA_CAPACIDAD = "Capacidad";
     public static String K_MESA_ID = "ID";
     public static String K_MESA_OCUPADO = "Ocupado";
-    //Atributos
+    //Atributos de clase
     private ArrayList<Mesa> listaMesa;
 
 
@@ -141,13 +142,18 @@ public class ListaMesas {
      * @return una Mesa
      */
 
-    public Mesa buscarMesa (int capacidadPersonas) throws SinMesasException
+    public Mesa buscarMesa (int capacidadPersonas) throws SinMesasException, CapacidadMaximaException
     {
-        Mesa aux = buscarMesaPorCapacidad(capacidadPersonas);
-        if (aux == null)
-            aux = buscarMayorCapacidad(capacidadPersonas);
-        if (aux == null)
-            throw new SinMesasException("No hay mesas disponibles");
+        Mesa aux = null;
+        if (capMaximaMesas() <= capacidadPersonas)
+        {
+            aux = buscarMesaPorCapacidad(capacidadPersonas);
+            if (aux == null)
+                aux = buscarMayorCapacidad(capacidadPersonas);
+            if (aux == null)
+                throw new SinMesasException("No hay mesas disponibles");
+        }
+        else new CapacidadMaximaException("No tenemos mesa para recibir a tantas personas");
         return aux;
     }
 
@@ -192,12 +198,14 @@ public class ListaMesas {
     /**
      * Busca una mesa libre apta para el grupo de personas que vino al restaurant.
      * @param cantidadPersonas
+     * @return devuelve el ID de la mesa ocupada
      */
 
-    public void ocuparMesa (int cantidadPersonas) throws IdInexistenteMesaException, SinMesasException
+    public int ocuparMesa (int cantidadPersonas) throws IdInexistenteMesaException, SinMesasException, CapacidadMaximaException
     {
         Mesa aux = buscarMesa(cantidadPersonas);
         aux.setEstaOcupado(true);
+        return aux.getIdMesa();
     }
 
     /**
@@ -213,6 +221,22 @@ public class ListaMesas {
             throw new IdInexistenteMesaException("El ID no existe");
         else
             listaMesa.get(pos).setEstaOcupado(false);
+    }
+
+    /**
+     * Busca en el ArrayList de mesas, la mesa con mayor capacidad
+     * @return Devuelve la capacidad maxima de la mesa mas grande.
+     */
+
+    public int capMaximaMesas ()
+    {
+        int max = 0;
+        for (Mesa a : listaMesa)
+        {
+            if (a.getCapacidad() > max)
+                max = a.getCapacidad();
+        }
+        return max;
     }
 
     /**
