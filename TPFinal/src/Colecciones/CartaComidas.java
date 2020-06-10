@@ -1,7 +1,7 @@
 package Colecciones;
 
 
-import Objetos.Combo;
+import Comidas.Combo;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

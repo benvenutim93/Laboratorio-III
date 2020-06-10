@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import Colecciones.CartaComidas;
 import Colecciones.ListaMesas;
+import Comidas.Combo;
 import Excepciones.CapacidadMaximaException;
 import Excepciones.IdInexistenteMesaException;
 import Excepciones.SinMesasException;

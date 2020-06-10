@@ -1,4 +1,4 @@
-package Objetos;
+package Comidas;
 
 import org.json.JSONException;
 import org.json.JSONObject;

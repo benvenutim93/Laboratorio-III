@@ -1,6 +1,6 @@
 package Colecciones;
 
-import Objetos.Combo;
+import Comidas.Combo;
 import Objetos.Ventas;
 import java.util.HashMap;
 import java.util.Iterator;
