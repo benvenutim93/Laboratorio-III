@@ -1,6 +1,4 @@
-package Main;
-
-
+package clientes;
 
 public class Combo {
 
@@ -33,40 +31,24 @@ public class Combo {
     */
 
     ///-------------------------------- [M E T O D O S] --------------------------------
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public String getNombre(){ return this.nombre; }
     public int getiD() {  return iD;    }
     public void cambiarPrecio(int precio){ this.precio=precio; }
     // PARA PROBAR SI AGREGA REPETIDOS  , BORRAR ESTA FUNCION
+    public  void setiD(int a){
+        this.iD=a;
+    }
 
     ///-------------------------------- [O V E R R I D E ] --------------------------------
     @Override
     public String toString() {
         return "\n--------------\n"+"[" +nombre +"]\n"+"Descripcion= " + descripcion +
                 "\nPrecio= $" + precio + "\n--------------";
-    }
 
-    /**
-     * Es el encargado de comparar dos objetos del tipo Combo para determinar si son iguales o no lo son
-     * @param o
-     * @return true si son iguales, por lo contrario false
-     */
+
+
+
+    }
     @Override
     public boolean equals(Object o) {
         boolean rta=false;
@@ -79,8 +61,34 @@ public class Combo {
         return rta;
     }
 
+
+
     @Override
     public int hashCode() {
         return 1;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public static int getIdAutoincremental() {
+        return idAutoincremental;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }
