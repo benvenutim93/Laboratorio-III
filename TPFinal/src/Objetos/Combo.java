@@ -33,7 +33,15 @@ public class Combo {
     public String getNombre(){ return this.nombre; }
     public int getiD() {  return iD;    }
     public void cambiarPrecio(int precio){ this.precio=precio; }
-    // PARA PROBAR SI AGREGA REPETIDOS  , BORRAR ESTA FUNCION
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
     public  void setiD(int a){
         this.iD=a;
     }
