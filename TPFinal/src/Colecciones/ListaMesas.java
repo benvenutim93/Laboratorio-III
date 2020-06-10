@@ -85,13 +85,13 @@ public class ListaMesas {
     public String imprimirMesasLibres ()
     {
         StringBuilder sb = new StringBuilder ();
-        for (Mesa obj : listaMesa)
-        {
-            if (!obj.isEstaOcupado())
-            {
-                sb.append(obj.toString()+"\n");
-            }
-        }
+                for (Mesa obj : listaMesa)
+                {
+                    if (!obj.isEstaOcupado())
+                    {
+                        sb.append(obj.toString()+"\n");
+                    }
+                }
         return sb.toString();
     }
 
@@ -106,13 +106,12 @@ public class ListaMesas {
         Mesa aux = null;
         while ((i < cantidadMesas()) && (flag == 0))
         {
-            aux = listaMesa.get(i);
-            if ((aux.getCapacidad() == cantidadPersonas) && (!aux.isEstaOcupado()))
+            if ((listaMesa.get(i).getCapacidad() == cantidadPersonas) && (!listaMesa.get(i).isEstaOcupado())) {
+                aux = listaMesa.get(i);
                 flag = 1;
+            }
             i++;
         }
-        if (flag == 0)
-            aux = null;
         return aux;
     }
 
@@ -128,31 +127,33 @@ public class ListaMesas {
         Mesa aux = null;
         while ((i < cantidadMesas()) && (flag == 0))
         {
-            aux = listaMesa.get(i);
-            if ((aux.getCapacidad() >= cantidadPersonas) && (!aux.isEstaOcupado()))
+            if ((listaMesa.get(i).getCapacidad() > cantidadPersonas) && !listaMesa.get(i).isEstaOcupado()) {
+                aux = listaMesa.get(i);
                 flag = 1;
+            }
             i++;
         }
-        if (flag == 0)
-            aux = null;
         return aux;
     }
 
     /**
      * Busca una mesa para la cantidad de Personas solicitadas
-     * @param cantidadPersonas
+     * @param capacidadPersonas
      * @return una Mesa
      */
 
-    public Mesa buscarMesa (int cantidadPersonas) throws SinMesasException
+    public Mesa buscarMesa (int capacidadPersonas) throws SinMesasException, CapacidadMaximaException
     {
-        Mesa aux = buscarMesaPorCapacidad(cantidadPersonas);
-
-        if (aux == null)
-            aux = buscarMayorCapacidad(cantidadPersonas);
-
-        if (aux == null)
-            throw new SinMesasException("No hay mesas disponibles");
+        Mesa aux = null;
+        if (capMaximaMesas() <= capacidadPersonas)
+        {
+            aux = buscarMesaPorCapacidad(capacidadPersonas);
+            if (aux == null)
+                aux = buscarMayorCapacidad(capacidadPersonas);
+            if (aux == null)
+                throw new SinMesasException("No hay mesas disponibles");
+        }
+        else new CapacidadMaximaException("No tenemos mesa para recibir a tantas personas");
         return aux;
     }
 
@@ -202,16 +203,9 @@ public class ListaMesas {
 
     public int ocuparMesa (int cantidadPersonas) throws IdInexistenteMesaException, SinMesasException, CapacidadMaximaException
     {
-        int idMesa = 0;
-        if (capMaximaMesas() >= cantidadPersonas)
-        {
-            Mesa aux = buscarMesa(cantidadPersonas);
-            aux.setEstaOcupado(true);
-            idMesa = aux.getIdMesa();
-        }
-        else throw new CapacidadMaximaException("No tenemos mesa para tantas personas");
-
-        return idMesa;
+        Mesa aux = buscarMesa(cantidadPersonas);
+        aux.setEstaOcupado(true);
+        return aux.getIdMesa();
     }
 
     /**
