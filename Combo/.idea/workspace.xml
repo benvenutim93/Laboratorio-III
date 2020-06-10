@@ -26,7 +26,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Guia N°5 Colecciones" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TPFinal" />
   </component>
   <component name="RunManager" selected="Application.Main_Pruebas_hashSet">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -69,27 +69,27 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="101" y="37" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591741088742">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="173" y="39" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591748834590">
+      <screen x="78" y="0" width="1282" height="768" />
     </state>
     <state x="101" y="37" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1591741088742" />
-    <state x="173" y="39" key="#com.intellij.execution.impl.EditConfigurationsDialog/78.0.1282.768@78.0.1282.768" timestamp="1591731071170" />
+    <state x="173" y="39" key="#com.intellij.execution.impl.EditConfigurationsDialog/78.0.1282.768@78.0.1282.768" timestamp="1591748834590" />
     <state x="840" y="39" key="#com.intellij.ide.util.MemberChooser" timestamp="1591744819659">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="840" y="39" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591744819659" />
     <state x="524" y="100" key="#com.intellij.ide.util.MemberChooser/78.0.1282.768@78.0.1282.768" timestamp="1591730854406" />
-    <state x="394" y="159" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1591741085555">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="448" y="168" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1591748831913">
+      <screen x="78" y="0" width="1282" height="768" />
     </state>
     <state x="394" y="159" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1591741085555" />
-    <state x="448" y="168" key="#com.intellij.ide.util.TreeClassChooserDialog/78.0.1282.768@78.0.1282.768" timestamp="1591731068184" />
-    <state x="448" y="132" key="FileChooserDialogImpl" timestamp="1591744201031">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="448" y="168" key="#com.intellij.ide.util.TreeClassChooserDialog/78.0.1282.768@78.0.1282.768" timestamp="1591748831913" />
+    <state x="499" y="139" key="FileChooserDialogImpl" timestamp="1591749194792">
+      <screen x="78" y="0" width="1282" height="768" />
     </state>
     <state x="420" y="132" key="FileChooserDialogImpl/0.0.1280.728@0.0.1280.728" timestamp="1591736136670" />
     <state x="448" y="132" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1591744201031" />
-    <state x="499" y="139" key="FileChooserDialogImpl/78.0.1282.768@78.0.1282.768" timestamp="1591731376657" />
+    <state x="499" y="139" key="FileChooserDialogImpl/78.0.1282.768@78.0.1282.768" timestamp="1591749194792" />
     <state width="1323" height="223" key="GridCell.Tab.0.bottom" timestamp="1591748525670">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -134,10 +134,10 @@
     </state>
     <state width="1237" height="223" key="GridCell.Tab.1.right/0.0.1280.728@0.0.1280.728" timestamp="1591736139704" />
     <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1591748525670" />
-    <state x="415" y="208" key="com.intellij.ide.util.TipDialog" timestamp="1591728090870">
+    <state x="415" y="208" key="com.intellij.ide.util.TipDialog" timestamp="1591748705932">
       <screen x="78" y="0" width="1282" height="768" />
     </state>
-    <state x="415" y="208" key="com.intellij.ide.util.TipDialog/78.0.1282.768@78.0.1282.768" timestamp="1591728090870" />
+    <state x="415" y="208" key="com.intellij.ide.util.TipDialog/78.0.1282.768@78.0.1282.768" timestamp="1591748705932" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Combo$Main_Pruebas_hashSet.ic" NAME="Main_Pruebas_hashSet Coverage Results" MODIFIED="1591747959277" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

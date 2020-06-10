@@ -18,7 +18,7 @@ public class CartaComidas {
     /**
      * Agrega un combo a la carta (criterio de comparacion  ID )
      * @param agregar (Combo)
-     * @return TRUE si fue agregado cin exito
+     * @return TRUE si fue agregado con exito
      */
     public boolean agregarCombo(Combo agregar){
         boolean rta=false;

@@ -1,4 +1,7 @@
 package Objetos;
+
+import Excepciones.PrecioNegativoException;
+
 public class Combo {
 
     private  double precio;
@@ -30,12 +33,17 @@ public class Combo {
     */
 
     ///-------------------------------- [M E T O D O S] --------------------------------
-    public String getNombre(){ return this.nombre; }
+    public String getNombre() { return this.nombre; }
     public int getiD() {  return iD;    }
     public void cambiarPrecio(int precio){ this.precio=precio; }
-    // PARA PROBAR SI AGREGA REPETIDOS  , BORRAR ESTA FUNCION
-    public  void setiD(int a){
+
+    public  void setiD(int a)throws PrecioNegativoException{
+        if(a>=0){
         this.iD=a;
+        }else{
+            throw new PrecioNegativoException(" Error : Precio Negativo");
+        }
+
     }
 
     ///-------------------------------- [O V E R R I D E ] --------------------------------
