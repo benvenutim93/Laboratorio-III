@@ -11,6 +11,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -26,7 +27,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TPFinal" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager" selected="Application.Main_Pruebas_hashSet">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -69,15 +70,15 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="173" y="39" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591748834590">
-      <screen x="78" y="0" width="1282" height="768" />
-    </state>
-    <state x="101" y="37" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1591741088742" />
-    <state x="173" y="39" key="#com.intellij.execution.impl.EditConfigurationsDialog/78.0.1282.768@78.0.1282.768" timestamp="1591748834590" />
-    <state x="840" y="39" key="#com.intellij.ide.util.MemberChooser" timestamp="1591744819659">
+    <state x="101" y="37" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591754288307">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="840" y="39" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591744819659" />
+    <state x="101" y="37" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1591754288307" />
+    <state x="173" y="39" key="#com.intellij.execution.impl.EditConfigurationsDialog/78.0.1282.768@78.0.1282.768" timestamp="1591748834590" />
+    <state x="840" y="39" key="#com.intellij.ide.util.MemberChooser" timestamp="1591754433434">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="840" y="39" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591754433434" />
     <state x="524" y="100" key="#com.intellij.ide.util.MemberChooser/78.0.1282.768@78.0.1282.768" timestamp="1591730854406" />
     <state x="448" y="168" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1591748831913">
       <screen x="78" y="0" width="1282" height="768" />

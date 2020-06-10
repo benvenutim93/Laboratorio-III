@@ -61,6 +61,12 @@ public class Combo {
         return "\n--------------\n"+"[" +nombre +"]\n"+"Descripcion= " + descripcion +
                 "\nPrecio= $" + precio + "\n--------------";
     }
+
+    /**
+     * Es el encargado de comparar dos objetos del tipo Combo para determinar si son iguales o no lo son
+     * @param o
+     * @return true si son iguales, por lo contrario false
+     */
     @Override
     public boolean equals(Object o) {
         boolean rta=false;

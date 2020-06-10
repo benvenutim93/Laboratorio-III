@@ -60,7 +60,6 @@ public class CartaComidas {
             }
 
         }
-
         return rta;
     }
 

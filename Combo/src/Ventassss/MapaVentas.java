@@ -12,29 +12,54 @@ public class MapaVentas
 {
     private HashMap<String,Ventas> hashMap;
     private int cantCombosVendidos;
-
+    private double montoCombosVendidos;
 
     public MapaVentas(){
         this.hashMap = new HashMap<String,Ventas>();
         this.cantCombosVendidos = 0;
+        this.montoCombosVendidos = 0;
+
     }
 
-    public HashMap<String, Ventas> getHashMap() {
-        return hashMap;
-    }
-
-    public void setHashMap(HashMap<String, Ventas> hashMap) {
-        this.hashMap = hashMap;
-    }
-
-    public int getCantCombosPedidos() {
+    /**
+     * Devuelve atributo del objeto
+     * @return cantidad de combos vendidos
+     */
+    public int getCantCombosVendidos() {
         return cantCombosVendidos;
     }
 
-    public void setCantCombosPedidos(int cantCombosPedidos) {
-        this.cantCombosVendidos = cantCombosPedidos;
+    /**
+     * Permite modificar el estado de los combos vendidos
+     * @param cantCombosVendidos
+     */
+    public void setCantCombosVendidos(int cantCombosVendidos) {
+        this.cantCombosVendidos = cantCombosVendidos;
     }
 
+    /**
+     * Devuelve atributo del objeto
+     * @return el monto de combos vendidos
+     */
+    public double getMontoCombosVendidos() {
+        return montoCombosVendidos;
+    }
+
+    /**
+     * Permite modificar el estado del monto de combos vendidos
+     * @param montoCombosVendidos
+     */
+    public void setMontoCombosVendidos(double montoCombosVendidos) {
+        this.montoCombosVendidos = montoCombosVendidos;
+    }
+
+    /**
+     * Permite agregar un combo vendido. Si ya se habia registrado una venta en ese dia, se agregara
+     * a la lista de combos de ese dia. Si o se habia registrado ninguna venta, se crea una nueva lista
+     * y se agrega este combo vendido en ella
+     * @param fecha
+     * @param nuevo
+     */
     public void agregarCombo(String fecha, Combo nuevo)
     {
         Ventas ventas;
@@ -49,9 +74,15 @@ public class MapaVentas
             ventas.agregarVenta(nuevo);
             hashMap.put(fecha, ventas);
         }
-        setCantCombosPedidos(this.cantCombosVendidos+ventas.getCantCombosVendidos());
+        setCantCombosVendidos(this.cantCombosVendidos+ventas.getCantCombosVendidos());
     }
 
+    /**
+     * Nos permite eliminar un combo vendido
+     * @param fecha
+     * @param buscado
+     * @return true si se logro eliminar, por el contrario devolvera false
+     */
     public boolean eliminarCombo(String fecha, Combo buscado)
     {
         boolean rta = false;
@@ -64,7 +95,10 @@ public class MapaVentas
 
     }
 
-
+    /**
+     * NOs permite mostrar toda la informacion del mapa de ventas
+      * @return String con la informacion del mapa
+     */
     public String mostrarMapa()
     {
         StringBuilder builder = new StringBuilder();
