@@ -1,6 +1,8 @@
 package Comidas;
 
-public class Bebida extends  Comida {
+import Interfaces.IPrecio;
+
+public class Bebida extends Comida implements IPrecio {
 
     private boolean tieneGas;
     private  String temperatura;
@@ -33,7 +35,11 @@ public class Bebida extends  Comida {
     ///-------------------------------- [M E T O D O S] --------------------------------
 
     public String datos(){
-        return  "\n***********\n"+"Nombre: "+super.getNombre()+"\n"+"Temperatura: "+getTemperatura()+"\n"+"Tiene gas: "+isTieneGas()+"\n***********\n";
+        return super.getNombre()+" -> [Temperatura: "+getTemperatura()+"] - [Tiene gas: "+isTieneGas()+"]";
     }
 
+    @Override
+    public double getPrecio() {
+        return super.getPrecio();
+    }
 }

@@ -19,7 +19,12 @@ public class Postre extends  Comida{
     }
 
     ///-------------------------------- [M E T O D O S] --------------------------------
-public String datos(){
-        return "\n***********\n"+"Nombre: "+super.getNombre()+"\n"+"Tiene topping: "+isTopping()+"\n***********\n";
-}
+    public String datos(){
+        return super.getNombre()+"-> [Tiene topping: "+isTopping()+"]";
+    }
+
+    @Override
+    public double getPrecio() {
+        return super.getPrecio();
+    }
 }

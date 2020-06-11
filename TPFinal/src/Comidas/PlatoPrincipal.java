@@ -1,6 +1,8 @@
 package Comidas;
 
-public class PlatoPrincipal extends  Comida{
+import Interfaces.IPrecio;
+
+public class PlatoPrincipal extends  Comida implements IPrecio {
     private boolean aptoTacc;
     ///-------------------------------- [C O N S T R U C T O R E S ] --------------------------------
 
@@ -19,7 +21,12 @@ public class PlatoPrincipal extends  Comida{
     }
 
     ///-------------------------------- [M E T O D O S] --------------------------------
-public String datos(){
-        return "\n***********\n"+"Nombre: "+super.getNombre()+"\n"+"Libre de TACC : "+isAptoTacc()+"\n***********\n";
-}
+    public String datos(){
+        return super.getNombre()+(" -> [Libre de TACC: "+isAptoTacc()+ "]");
+    }
+
+    @Override
+    public double getPrecio() {
+        return super.getPrecio();
+    }
 }

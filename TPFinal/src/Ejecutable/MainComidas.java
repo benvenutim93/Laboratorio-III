@@ -1,6 +1,10 @@
 package Ejecutable;
 import Comidas.*;
 import Excepciones.PrecioNegativoException;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+
 public class MainComidas {
     public static void main(String[] args) {
 
@@ -21,7 +25,7 @@ public class MainComidas {
     Guarnicion papasFritas = new Guarnicion(65,"Papas Fritas",true);
     Guarnicion pureDePapa = new Guarnicion(65,"Pure de papa",true);
     Guarnicion ensalada = new Guarnicion(70,"Ensalada",true);
-
+/*
         System.out.println(papasFritas.toString());
         try {
             papasFritas.cambiarPrecio(-10);
@@ -29,12 +33,21 @@ public class MainComidas {
             e.printStackTrace();
         }
         System.out.println(coca.datos());
-        Combo combito = new Combo(pancho,pepsi,flan);
+        */
 
-        System.out.println(combito.getPrecio());
-        combito.ponerTemperatura("caliente");
-        combito.ponerGas(false);
-        System.out.println(combito.getCombo());
+        ArrayList<Combo>arrayList = new ArrayList<Combo>();
+        Combo combito = new Combo(pancho,pepsi,flan);
+        Combo combazo = new Combo(milanesa, coca, helado, papasFritas);
+        arrayList.add(combazo);
+        arrayList.add(combito);
+
+        for (Combo aux:arrayList){
+            System.out.println(aux.getCombo());
+        }
+
+
+
+
 
 
     }

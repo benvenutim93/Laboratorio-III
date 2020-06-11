@@ -1,23 +1,24 @@
 package Comidas;
 
 import Excepciones.PrecioNegativoException;
+import Interfaces.IPrecio;
 
-public class Combo {
+public class Combo implements IPrecio {
     private PlatoPrincipal plato;
     private Bebida bebida;
     private Postre postre;
-    private Guarnicion guarnicionni;
-    private  double precio;
+    private Guarnicion guarnicion;
+    private double precio;
     private int id;
 
-     public static int idAutoincremental=0;
+    public static int idAutoincremental = 0;
     ///-------------------------------- [C O N S T R U C T O R E S ] --------------------------------
 
-    public Combo(PlatoPrincipal plato, Bebida bebida, Postre postre, Guarnicion guarnicionni) {
+    public Combo(PlatoPrincipal plato, Bebida bebida, Postre postre, Guarnicion guarnicion) {
         this.plato = plato;
         this.bebida = bebida;
         this.postre = postre;
-        this.guarnicionni = guarnicionni;
+        this.guarnicion = guarnicion;
         ponerPrecio();
         this.id = ++idAutoincremental;
     }
@@ -30,39 +31,42 @@ public class Combo {
         this.id = ++idAutoincremental;
     }
 
-    public Combo(PlatoPrincipal plato, Bebida bebida, Guarnicion guarnicionni) {
+    public Combo(PlatoPrincipal plato, Bebida bebida, Guarnicion guarnicion) {
         this.plato = plato;
         this.bebida = bebida;
-        this.guarnicionni = guarnicionni;
+        this.guarnicion = guarnicion;
         ponerPrecio();
         this.id = ++idAutoincremental;
     }
 
-    private void ponerPrecio(){
-        double rta ;
-        double acum=0;
-        if(plato != null){
-            acum+=plato.getPrecio();
+    private void ponerPrecio() {
+        double rta;
+        double acum = 0;
+        if (plato != null) {
+            acum += plato.getPrecio();
         }
-        if(bebida != null){
-            acum+=bebida.getPrecio();
+        if (bebida != null) {
+            acum += bebida.getPrecio();
         }
-        if(postre != null){
-            acum+=postre.getPrecio();
+        if (postre != null) {
+            acum += postre.getPrecio();
         }
-        if(guarnicionni != null){
-            acum+=guarnicionni.getPrecio();
+        if (guarnicion != null) {
+            acum += guarnicion.getPrecio();
         }
         //descuento
-        rta=acum*.90;
+        rta = acum * .90;
 
-       this.precio=rta;
+        this.precio = rta;
     }
     ///-------------------------------- [S E T T E R S /\ G E T T E R S] --------------------------------
 
+
+    @Override
     public double getPrecio() {
         return precio;
     }
+
     public int getId() {
         return id;
     }
@@ -74,21 +78,21 @@ public class Combo {
      */
     public String getCombo(){
         StringBuilder builder = new StringBuilder();
-        builder.append("---\t[ Combo "+this.id+" ]" +"-------------\n-");
+        builder.append("| -- [ Combo "+this.id+" ]  >> Precio: $"+this.precio+" << -- |\n");
 
         if(plato != null){
-            builder.append("Plato Principal: "+plato.getNombre()+"\n-");
+            builder.append("| Plato Principal: "+plato.getNombre()+"\n");
         }
         if(bebida !=null){
-            builder.append("Bebida: "+bebida.getNombre()+"\n-");
+            builder.append("| Bebida: "+bebida.getNombre()+"\n");
         }
         if(postre != null){
-            builder.append("Postre: "+postre.getNombre()+"\n-");
+            builder.append("| Postre: "+postre.getNombre()+"\n");
         }
-        if(guarnicionni != null){
-            builder.append("Guarnicion"+guarnicionni.getNombre()+"\n");
+        if(guarnicion != null){
+            builder.append("| Guarnicion: "+guarnicion.getNombre()+"\n");
         }
-        builder.append( "---\t[ Precio ]: $"+this.precio+"------");
+
         return builder.toString();
     }
 
@@ -98,26 +102,25 @@ public class Combo {
      */
     public String getDatosCombo(){
         StringBuilder builder = new StringBuilder();
-        builder.append("---\t[ Combo "+getId()+" ]" +"-------------\n-");
+        builder.append("| -- [ Combo "+this.id+" ]  >> Precio: $"+this.precio+" << -- |\n");
 
         if(plato != null){
-            builder.append("Plato Principal: "+plato.datos()+"\n-");
+            builder.append("| Plato Principal: "+plato.datos()+"\n");
         }
         if(bebida !=null){
-            builder.append("Bebida: "+bebida.datos()+"\n-");
+            builder.append("| Bebida: "+bebida.datos()+"\n");
         }
         if(postre != null){
-            builder.append("Postre: "+postre.datos()+"\n-");
+            builder.append("| Postre: "+postre.datos()+"\n");
         }
-        if(guarnicionni != null){
-            builder.append("Guarnicion"+guarnicionni.datos()+"\n");
+        if(guarnicion != null){
+            builder.append("| Guarnicion"+guarnicion.datos()+"\n");
         }
-        builder.append( "---\t[ Precio ]: $"+this.precio+"------");
         return builder.toString();
     }
     //guarnicion
         public void sinSal(){
-          guarnicionni.sinSal();
+          guarnicion.sinSal();
         }
         //platoprincipal
         public void setAptoTACC(boolean b){

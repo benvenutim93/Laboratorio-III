@@ -1,6 +1,8 @@
 package Comidas;
 
-public class Guarnicion extends  Comida{
+import Interfaces.IPrecio;
+
+public class Guarnicion extends Comida implements IPrecio {
     private boolean tieneSal;
     ///-------------------------------- [C O N S T R U C T O R E S ] --------------------------------
 
@@ -20,6 +22,11 @@ public class Guarnicion extends  Comida{
 
     ///-------------------------------- [M E T O D O S] --------------------------------
     public String datos(){
-        return "\n***********\n"+"Nombre: "+super.getNombre()+"\n"+"Tiene sal: "+isTieneSal()+"\n***********\n";
+        return super.getNombre()+(" -> [Tiene sal: "+isTieneSal()+"]");
+    }
+
+    @Override
+    public double getPrecio() {
+        return super.getPrecio();
     }
 }
