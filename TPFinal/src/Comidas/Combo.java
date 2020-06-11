@@ -42,18 +42,17 @@ public class Combo {
         double rta ;
         double acum=0;
         if(plato != null){
-            acum=plato.getPrecio();
+            acum+=plato.getPrecio();
         }
         if(bebida != null){
-            acum=bebida.getPrecio();
+            acum+=bebida.getPrecio();
         }
         if(postre != null){
-            acum=postre.getPrecio();
+            acum+=postre.getPrecio();
         }
         if(guarnicionni != null){
-            acum=guarnicionni.getPrecio();
+            acum+=guarnicionni.getPrecio();
         }
-        System.out.println("acumulador "+acum);
         //descuento
         rta=acum*.90;
 
