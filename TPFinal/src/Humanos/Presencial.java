@@ -1,10 +1,11 @@
-package Objetos;
+package Humanos;
 
 
 import Excepciones.CapacidadMaximaException;
 import Excepciones.IdInexistenteMesaException;
 import Colecciones.ListaMesas;
 import Excepciones.SinMesasException;
+import Humanos.Cliente;
 
 public class Presencial extends Cliente {
 

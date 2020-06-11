@@ -254,17 +254,14 @@ public class ListaMesas {
     public String createJsonString () throws JSONException
     {
         JSONArray array = new JSONArray();
-
         for (Mesa a : listaMesa)
         {
             JSONObject obj = new JSONObject();
             obj.put(K_MESA_CAPACIDAD, a.getCapacidad());
             obj.put(K_MESA_ID, a.getIdMesa());
             obj.put(K_MESA_OCUPADO, a.isEstaOcupado());
-
             array.put(obj);
         }
-
         return array.toString();
     }
 
@@ -290,7 +287,6 @@ public class ListaMesas {
 
             listadoMesas.add(aux);
         }
-
         return listadoMesas;
     }
 

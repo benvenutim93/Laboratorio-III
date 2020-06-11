@@ -1,4 +1,4 @@
-package Objetos;
+package Humanos;
 
 
 public abstract class Persona {

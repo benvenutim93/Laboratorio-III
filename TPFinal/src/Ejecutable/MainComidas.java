@@ -1,4 +1,5 @@
-package Comidas;
+package Ejecutable;
+import Comidas.*;
 import Excepciones.PrecioNegativoException;
 public class MainComidas {
     public static void main(String[] args) {

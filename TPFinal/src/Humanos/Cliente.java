@@ -1,4 +1,4 @@
-package Objetos;
+package Humanos;
 
 
 import java.util.ArrayList;

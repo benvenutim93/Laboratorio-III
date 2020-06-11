@@ -1,16 +1,12 @@
-package Objetos;
+package Humanos;
+
+import Humanos.Cliente;
 
 public class Virtual extends Cliente
 {
     private String telefono;
     private String direccion;
     private boolean entregado;
-
-    public Virtual(String telefono, String direccion, boolean entregado) {
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.entregado = entregado;
-    }
 
     public Virtual(String nombre, String apellido, String dni, String telefono, String direccion, boolean entregado) {
         super(nombre, apellido, dni);

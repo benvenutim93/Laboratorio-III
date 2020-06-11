@@ -1,11 +1,8 @@
-package Objetos;
+package Ejecutable;
 
-import Colecciones.ListaMesas;
-import Excepciones.IdInexistenteMesaException;
-import Excepciones.SinMesasException;
-import org.json.JSONException;
-
-import java.util.ArrayList;
+import Humanos.Persona;
+import Humanos.Presencial;
+import Humanos.Virtual;
 
 public class Main {
 
