@@ -10,8 +10,8 @@ public class MainComidas {
     PlatoPrincipal burger= new PlatoPrincipal(320,"Hamburguesa",true);
 
     Bebida coca = new Bebida(90,"Coca-Cola",true,"fria");
-   Bebida pepsi = new Bebida(85,"Pepsi",true,"fria");
-   Bebida manaos = new Bebida(90,"Manaos de Uva",true,"fria");
+    Bebida pepsi = new Bebida(85,"Pepsi",true,"fria");
+    Bebida manaos = new Bebida(90,"Manaos de Uva",true,"fria");
 
     Postre helado = new Postre(125,"Helado",true);
     Postre flan = new Postre(200,"Flan ",true);
