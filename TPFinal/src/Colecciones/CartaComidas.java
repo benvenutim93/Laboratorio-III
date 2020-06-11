@@ -60,66 +60,24 @@ public class CartaComidas {
      *
      *
      */
-    public boolean actualizarPrecioParticular(Combo aCambiar,int nuevoPrecio){
+    public boolean actualizarPrecioParticular(Combo aCambiar, int nuevoPrecio){
         boolean rta =false;
 
         Iterator<Combo> it = carta.iterator();
         while (it.hasNext()){
             Combo entrada= (Combo) it.next();
-            if(entrada.getNombre().equalsIgnoreCase(aCambiar.getNombre())){
-                aCambiar.cambiarPrecio(nuevoPrecio);
+            if(entrada.getId()==(aCambiar.getId())){
+                //todo descomentar esto
+            //    aCambiar.cambiarPrecio(nuevoPrecio);
                 rta=true;
             }
 
         }
         return rta;
     }
-    /**
-     * Crea una JSon con todos los datos del HashSet
-     * @return String con todos los datos del Hashset
-     * @throws JSONException
-     */
-    public String cargarJson () throws JSONException {
-        JSONArray jsonArray = new JSONArray();
-
-        Iterator<Combo> it = carta.iterator();
-        while (it.hasNext()){
-            Combo entrada= (Combo) it.next();
-
-            jsonArray.put(entrada.crearJson());
-
-        }
-        return jsonArray.toString();
-    }
-
-    /**
-     * Crea un HashSet con todos los datos del JSON
-     * @param aDecodificar (String)
-     * @return un HashSet con todos los datos cargados
-     * @throws JSONException
-     */
-    public HashSet<Combo> decodeJson(String aDecodificar)throws JSONException{
-        HashSet<Combo> cartita=new HashSet<>();
-        JSONArray array= new JSONArray(aDecodificar);
-        int i;
-        for (i=0;i < array.length();i++){
-            JSONObject obj = array.getJSONObject(i);
-            //guardo los datos
-            String nombre=obj.getString(CLAVE_NOMBRE);
-            String descripion=obj.getString(CLAVE_DESCRIPCION);
-            double precio = obj.getDouble(CLAVE_PRECIO);
-            int id= obj.getInt(CLAVE_ID);
-            //cargo los datos
-            Combo aux = new Combo(precio,nombre,descripion);
-            aux.setiD(id);
-
-            cartita.add(aux);
-        }
 
 
-        return cartita;
 
-    }
 
 
 

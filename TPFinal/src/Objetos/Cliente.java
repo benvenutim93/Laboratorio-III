@@ -42,14 +42,14 @@ public class Cliente extends Persona {
     public void pedirCombo(CartaComidas cartaComidas)
     {
         cartaComidas.listarCarta();
-        String nombre= "combo1";
+        int nombre= 1;
         HashSet<Combo>carta=cartaComidas.getCarta();
         Iterator<Combo> it=  carta.iterator();
         Combo respuesta=null;
         while (it.hasNext())
         {
             Combo aux= (Combo) it.next();
-            if(aux.getNombre().equalsIgnoreCase(nombre)) {
+            if(aux.getId()==(nombre)) {
                 respuesta= aux;
             }
         }
