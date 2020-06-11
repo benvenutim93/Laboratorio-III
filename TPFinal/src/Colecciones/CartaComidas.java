@@ -1,14 +1,14 @@
 package Colecciones;
 
 
+
 import Comidas.Combo;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashSet;
 import java.util.Iterator;
-
+import Excepciones.PrecioNegativoException;
 
 public class CartaComidas {
     static final String CLAVE_PRECIO ="precio";
@@ -60,15 +60,14 @@ public class CartaComidas {
      *
      *
      */
-    public boolean actualizarPrecioParticular(Combo aCambiar, int nuevoPrecio){
+    public boolean actualizarPrecioParticular(Combo aCambiar, int nuevoPrecio) throws PrecioNegativoException{
         boolean rta =false;
 
         Iterator<Combo> it = carta.iterator();
         while (it.hasNext()){
             Combo entrada= (Combo) it.next();
             if(entrada.getId()==(aCambiar.getId())){
-                //todo descomentar esto
-            //    aCambiar.cambiarPrecio(nuevoPrecio);
+                aCambiar.cambiarPrecio(nuevoPrecio);
                 rta=true;
             }
 

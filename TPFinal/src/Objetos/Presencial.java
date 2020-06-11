@@ -39,4 +39,10 @@ public class Presencial extends Cliente {
     public int getNuMesa() {
         return nuMesa;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"\nNumMesa= "+nuMesa+"\nCantidad Personas= " +cantPer+"\nEspera?= " +espera;
+
+    }
 }

@@ -97,7 +97,7 @@ public class Cliente extends Persona {
 
     @Override
     public String toString() {
-        return  super.toString()+"\n Pedidos realizados: "+mostrarPedidos()+"\n factura: "+factura+"\n cantPedidos: "+getCantPedidos();
+        return  super.toString()+"\nPedidos realizados= "+mostrarPedidos()+"\nFactura= "+factura+"\nCantidad de Pedidos= "+getCantPedidos();
     }
     public void PedirMesa(ListaMesas listaMesas)throws IdInexistenteMesaException, SinMesasException, CapacidadMaximaException
     {

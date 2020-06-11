@@ -39,4 +39,12 @@ public class Pedido <T extends IPrecio> implements IOpBasicas {
         return eliminado;
     }
 
+    public int getTotal(){
+        return lista.size();
+    }
+
+    public ArrayList<T> getLista(){
+        return this.lista;
+    }
+
 }
