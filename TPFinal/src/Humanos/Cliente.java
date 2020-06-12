@@ -1,27 +1,32 @@
 package Humanos;
 
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Scanner;
 
 import Colecciones.CartaComidas;
 import Colecciones.ListaMesas;
-import Comidas.Combo;
+import Comidas.*;
 import Excepciones.CapacidadMaximaException;
 import Excepciones.IdInexistenteMesaException;
 import Excepciones.SinMesasException;
+import Humanos.Persona;
+import Objetos.Pedido;
+import jdk.swing.interop.SwingInterOpUtils;
 
 public class Cliente extends Persona {
 
-    private ArrayList<Combo> pedidos;
+    Pedido pedido;
     private double factura;
     private int cantPedidos;
     CartaComidas cartaComidas= new CartaComidas();
 
     public Cliente(){
         super();
-        pedidos=null;
+        pedido=new Pedido();
         factura=0;
         cantPedidos=0;
     }
@@ -29,7 +34,7 @@ public class Cliente extends Persona {
     public Cliente(String nombre, String apellido, String dni)
     {
         super(nombre,apellido,dni);
-        pedidos= new ArrayList<Combo>();
+        pedido=new Pedido();
         factura=0;
         cantPedidos=0;
     }
@@ -46,6 +51,7 @@ public class Cliente extends Persona {
         HashSet<Combo>carta=cartaComidas.getCarta();
         Iterator<Combo> it=  carta.iterator();
         Combo respuesta=null;
+
         while (it.hasNext())
         {
             Combo aux= (Combo) it.next();
@@ -54,22 +60,82 @@ public class Cliente extends Persona {
             }
         }
         if(respuesta != null) {
-            pedidos.add(respuesta);
+            System.out.println("agegar combo");
+            pedido.agregar(respuesta);
             setCantPedidos();
+        }
+    }
+
+    /** agrega una comida al pedido(plato principal, postre, guardicion, o bebida) NO AGREGA COMBOS
+     *
+     * @param num indica que comida es la que va a agregar
+     */
+    public void crearPedido(int num)
+    {
+        switch (num)
+        {
+            case 1:
+                System.out.println("CASE 1");
+                Bebida bebida=new Bebida(15,"agua",false, "natural");
+                pedido.agregar(bebida);
+                break;
+            case 2:
+                PlatoPrincipal platoPrincipal= new PlatoPrincipal(100,"milanga",true);
+                pedido.agregar(platoPrincipal);
+                break;
+            case 3:
+                Postre postre=new Postre(200,"helado",false);
+                pedido.agregar(postre);
+                break;
+            case 4:
+                Guarnicion guarnicion=new Guarnicion(150,"fritas",true);
+                pedido.agregar(guarnicion);
+                break;
         }
     }
 
     /**Recorre el array de los pedidos y va sumando el precio
      * seria como un """set"""
      */
-    public void calcularFactura()
+    public double calcularFactura()
     {
-        for (Combo aux:pedidos)
+        factura=0;
+        for (int i=0;i< pedido.getTotal();i++)
         {
-            factura+=aux.getPrecio();
+            if(pedido.getObjeto(i) instanceof Combo) {
+                Combo combo = (Combo) pedido.getObjeto(i);
+                factura+=combo.getPrecio();
+            }
+            if(pedido.getObjeto(i) instanceof PlatoPrincipal) {
+                PlatoPrincipal platoPrincipal = (PlatoPrincipal) pedido.getObjeto(i);
+                factura+=platoPrincipal.getPrecio();
+            }
+            if(pedido.getObjeto(i) instanceof Bebida) {
+                Bebida bebida = (Bebida) pedido.getObjeto(i);
+                factura+=bebida.getPrecio();
+            }
+            if(pedido.getObjeto(i) instanceof Postre) {
+                Postre postre = (Postre) pedido.getObjeto(i);
+                factura+=postre.getPrecio();
+            }
+            if(pedido.getObjeto(i) instanceof Guarnicion) {
+                Guarnicion guarnicion = (Guarnicion) pedido.getObjeto(i);
+                factura+=guarnicion.getPrecio();
+            }
         }
+        return factura;
     }
 
+    /**elimina ya sea un combo o una comida elegida
+     *
+     * @param i es en donde se encuentra el combo o la comida q se elige para eliminar
+     * @return true si lo elimino, false si no
+     */
+    public boolean eliminar(int i)
+    {
+        factura-=pedido.getObjeto(i).getPrecio();
+        return pedido.eliminar(pedido.getObjeto(i));
+    }
     /**
      * Muestra todos los pedidos de un cliente determinado
      * @return toString del builder
@@ -77,14 +143,34 @@ public class Cliente extends Persona {
     public String mostrarPedidos()
     {
         StringBuilder buil=new StringBuilder();
-        for(Combo aux:pedidos)
-            buil.append(aux.toString());
-
+        for(int i=0;i< pedido.getTotal();i++){
+            buil.append("\n["+i+"]\n");
+            if(pedido.getObjeto(i) instanceof Combo) {
+                Combo combo = (Combo) pedido.getObjeto(i);
+                buil.append(combo.getCombo());
+            }
+            if(pedido.getObjeto(i) instanceof PlatoPrincipal) {
+                PlatoPrincipal platoPrincipal = (PlatoPrincipal) pedido.getObjeto(i);
+                buil.append(platoPrincipal.toString());
+            }
+            if(pedido.getObjeto(i) instanceof Bebida) {
+                Bebida bebida = (Bebida) pedido.getObjeto(i);
+                buil.append(bebida.toString());
+            }
+            if(pedido.getObjeto(i) instanceof Postre) {
+                Postre postre = (Postre) pedido.getObjeto(i);
+                buil.append(postre.toString());
+            }
+            if(pedido.getObjeto(i) instanceof Guarnicion) {
+                Guarnicion guarnicion = (Guarnicion) pedido.getObjeto(i);
+                buil.append(guarnicion.toString());
+            }
+        }
         return buil.toString();
     }
 
     public  void setCantPedidos() {
-        cantPedidos=pedidos.size();
+        cantPedidos=pedido.getTotal();
     }
 
     public int getCantPedidos() {

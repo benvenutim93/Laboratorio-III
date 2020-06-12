@@ -47,4 +47,7 @@ public class Pedido <T extends IPrecio> implements IOpBasicas {
         return this.lista;
     }
 
+    public T getObjeto(int i){
+        return lista.get(i);
+    }
 }
