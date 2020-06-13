@@ -11,6 +11,14 @@ public class Virtual extends Cliente
     private String direccion;
     private boolean entregado;
 
+    public Virtual ()
+    {
+        super ();
+        telefono = "";
+        direccion = "";
+        entregado = false;
+    }
+
     public Virtual(String nombre, String apellido, String dni, String telefono, String direccion) {
         super(nombre, apellido, dni);
         this.telefono = telefono;
