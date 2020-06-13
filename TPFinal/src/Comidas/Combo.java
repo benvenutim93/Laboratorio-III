@@ -38,6 +38,12 @@ public class Combo implements IPrecio {
         ponerPrecio();
         this.id = ++idAutoincremental;
     }
+    public Combo(PlatoPrincipal plato, Bebida bebida) {
+        this.plato = plato;
+        this.bebida = bebida;
+        ponerPrecio();
+        this.id = ++idAutoincremental;
+    }
 
     private void ponerPrecio() {
         double rta;

@@ -1,21 +1,18 @@
 package Humanos;
 
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Scanner;
 
 import Colecciones.CartaComidas;
 import Colecciones.ListaMesas;
 import Comidas.*;
 import Excepciones.CapacidadMaximaException;
+import Excepciones.ComboNoExistenteException;
 import Excepciones.IdInexistenteMesaException;
 import Excepciones.SinMesasException;
-import Humanos.Persona;
 import Objetos.Pedido;
-import jdk.swing.interop.SwingInterOpUtils;
+import Excepciones.ComidaInexistenteException;
 
 public class Cliente extends Persona {
 
@@ -44,33 +41,34 @@ public class Cliente extends Persona {
      * y lo guarda en el arreglo de pedidos
      * @param cartaComidas es para mostrar la carta, y poder recorrerla y asi extraer los combos/objetos
      */
-    public void pedirCombo(CartaComidas cartaComidas)
-    {
-        cartaComidas.listarCarta();
-        int nombre= 1;
-        HashSet<Combo>carta=cartaComidas.getCarta();
-        Iterator<Combo> it=  carta.iterator();
-        Combo respuesta=null;
+    public void pedirCombo(CartaComidas cartaComidas, int num) throws ComboNoExistenteException {
+        Combo respuesta = null;
+        if(num<=cartaComidas.getCantidad()) {
+            int nombre = 1;
+            HashSet<Combo> carta = cartaComidas.getCarta();
+            Iterator<Combo> it = carta.iterator();
 
-        while (it.hasNext())
-        {
-            Combo aux= (Combo) it.next();
-            if(aux.getId()==(nombre)) {
-                respuesta= aux;
+
+            while (it.hasNext()) {
+                Combo aux = (Combo) it.next();
+                if (aux.getId() == (nombre)) {
+                    respuesta = aux;
+                }
+            }
+            if (respuesta != null) {
+                pedido.agregar(respuesta);
+                setCantPedidos();
             }
         }
-        if(respuesta != null) {
-            System.out.println("agegar combo");
-            pedido.agregar(respuesta);
-            setCantPedidos();
-        }
+        else
+            throw new ComboNoExistenteException("El combo ingresado es invalido");
     }
 
     /** agrega una comida al pedido(plato principal, postre, guardicion, o bebida) NO AGREGA COMBOS
      *
      * @param num indica que comida es la que va a agregar
      */
-    public void crearPedido(int num)
+    public void crearPedido(int num) throws ComidaInexistenteException
     {
         switch (num)
         {
@@ -91,7 +89,11 @@ public class Cliente extends Persona {
                 Guarnicion guarnicion=new Guarnicion(150,"fritas",true);
                 pedido.agregar(guarnicion);
                 break;
+            default:
+                throw new ComidaInexistenteException("La opcion ingresada es invalida");
+
         }
+
     }
 
     /**Recorre el array de los pedidos y va sumando el precio
@@ -185,7 +187,6 @@ public class Cliente extends Persona {
     public String toString() {
         return  super.toString()+"\nPedidos realizados= "+mostrarPedidos()+"\nFactura= "+factura+"\nCantidad de Pedidos= "+getCantPedidos();
     }
-    public void PedirMesa(ListaMesas listaMesas)throws IdInexistenteMesaException, SinMesasException, CapacidadMaximaException
-    {
-    }
+
+
 }

@@ -1,5 +1,8 @@
 package Humanos;
 
+import Colecciones.CartaComidas;
+import Excepciones.ComboNoExistenteException;
+import Excepciones.ComidaInexistenteException;
 import Humanos.Cliente;
 
 public class Virtual extends Cliente
@@ -8,12 +11,41 @@ public class Virtual extends Cliente
     private String direccion;
     private boolean entregado;
 
-    public Virtual(String nombre, String apellido, String dni, String telefono, String direccion, boolean entregado) {
+    public Virtual(String nombre, String apellido, String dni, String telefono, String direccion) {
         super(nombre, apellido, dni);
         this.telefono = telefono;
         this.direccion = direccion;
-        this.entregado = entregado;
+        this.entregado = false;
     }
+
+    public void realizarEntrega() {
+        entregado=true;
+    }
+    @Override
+    public void pedirCombo(CartaComidas cartaComidas,int num) throws ComboNoExistenteException {
+        super.pedirCombo(cartaComidas,num);
+    }
+
+    @Override
+    public void crearPedido(int num)throws ComidaInexistenteException {
+        super.crearPedido(num);
+    }
+
+    @Override
+    public double calcularFactura() {
+        return super.calcularFactura();
+    }
+
+    @Override
+    public boolean eliminar(int i) {
+        return super.eliminar(i);
+    }
+
+    @Override
+    public String mostrarPedidos() {
+        return super.mostrarPedidos();
+    }
+
 
     public String getTelefono() {
         return telefono;

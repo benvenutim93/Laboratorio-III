@@ -74,6 +74,10 @@ public class CartaComidas
 
 
     }
+    public int getCantidad ()
+    {
+        return carta.size();
+    }
 
 
 
