@@ -3,6 +3,7 @@ package Colecciones;
 import Excepciones.CapacidadMaximaException;
 import Excepciones.IdInexistenteMesaException;
 import Excepciones.SinMesasException;
+import Interfaces.IOpBasicas;
 import Objetos.Mesa;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,7 +11,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ListaMesas {
+public class ListaMesas implements IOpBasicas {
     //Claves JSON
     public static String K_MESA_CAPACIDAD = "Capacidad";
     public static String K_MESA_ID = "ID";
@@ -46,37 +47,6 @@ public class ListaMesas {
         return listaMesa.size();
     }
 
-    /**
-     * Método que agrega una mesa en el ArrayList, si esté no fue agregado previamente.
-     * @param objMesa
-     * @return true si se agrego correctamente, false caso contrario
-     */
-
-    public boolean addMesa (Mesa objMesa)
-    {
-        boolean agregado = false;
-        if (estaAgregado(objMesa))
-        {
-            objMesa.setIdMesa(cantidadMesas()+1);
-            listaMesa.add(objMesa);
-            agregado = true;
-        }
-        return agregado;
-    }
-
-    /**
-     * Imprime el listado de todas las mesas agregadas
-     * @return string.
-     */
-    public String imprimirListado ()
-    {
-        StringBuilder sb = new StringBuilder ();
-        for (Mesa obj : listaMesa)
-        {
-            sb.append(obj.toString()+"\n");
-        }
-        return sb.toString();
-    }
 
     /**
      * Imprime un listado de mesas libres
@@ -178,6 +148,24 @@ public class ListaMesas {
         return pos;
     }
 
+    public Mesa buscarMesa (String nombreCliente) throws NullPointerException
+    {
+        Mesa aux = null;
+        int i = 0, flag = 0;
+        while ((i < cantidadMesas()) && (flag == 0))
+        {
+            aux = listaMesa.get(i);
+            if (aux.getNombreCliente().equalsIgnoreCase(nombreCliente))
+            {
+                flag = 1;
+            }
+        }
+
+        if (aux == null)
+            throw new NullPointerException ("El cliente no esta ocupando ninguna mesa");
+
+        return aux;
+    }
     /**
      * Verifica si la mesa se encuentra en el ArrayList.
      * @param mesa
@@ -230,6 +218,16 @@ public class ListaMesas {
     }
 
     /**
+     * Busca una mesa en el ArrayList por el nombre del Cliente. Una vez encontrada, establece que la mesa está libre.
+     * @param nombreCliente (String)
+     */
+    public void liberarMesa (String nombreCliente)
+    {
+        Mesa obj = buscarMesa(nombreCliente);
+        obj.setEstaOcupado(false);
+    }
+
+    /**
      * Busca en el ArrayList de mesas, la mesa con mayor capacidad
      * @return Devuelve la capacidad maxima de la mesa mas grande.
      */
@@ -243,6 +241,25 @@ public class ListaMesas {
                 max = a.getCapacidad();
         }
         return max;
+    }
+
+    /**
+     * Busca la posicion de una mesa determinada en el ArrayList
+     * @param obj (Mesa)
+     * @return La posicion de la mesa buscada
+     */
+    public int buscarPosMesa (Mesa obj)
+    {
+        int i = 0, pos = -1;
+        while ((i < listaMesa.size()) && (pos == -1))
+        {
+            if (listaMesa.get(i).equals(obj))
+            {
+                pos = i;
+            }
+            i++;
+        }
+        return pos;
     }
 
     /**
@@ -290,4 +307,68 @@ public class ListaMesas {
         return listadoMesas;
     }
 
+    //Metodos Interfaz
+
+    /**
+     * Imprime el listado de todas las mesas agregadas
+     * @return string.
+     */
+    @Override
+    public String listar() {
+        StringBuilder sb = new StringBuilder ();
+        for (Mesa obj : listaMesa)
+        {
+            sb.append(obj.toString()+"\n");
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Método que agrega una mesa en el ArrayList, si esté no fue agregado previamente.
+     * @param objMesa
+     * @return true si se agrego correctamente, false caso contrario
+     */
+
+    @Override
+    public boolean agregar(Object objMesa) {
+        boolean agregado = false;
+        if (objMesa != null) {
+
+            if (objMesa instanceof Mesa) {
+                Mesa aux = (Mesa)objMesa;
+
+                if (estaAgregado(aux))
+                {
+                    aux.setIdMesa(cantidadMesas() + 1);
+                    listaMesa.add(aux);
+                    agregado = true;
+                }
+            }
+        }
+            return agregado;
+    }
+
+    /**
+     * Elimina una Mesa del arrayList
+     * @param obj
+     * @return true si lo elimino correctamente. False caso contrario
+     */
+    @Override
+    public boolean eliminar(Object obj) {
+        boolean eliminado = false;
+        if (obj != null)
+        {
+            if (obj instanceof Mesa)
+            {
+                Mesa aux = (Mesa) obj;
+                int pos = buscarPosMesa(aux);
+                if (pos != -1)
+                {
+                    listaMesa.remove(pos);
+                    eliminado = true;
+                }
+            }
+        }
+        return eliminado;
+    }
 }

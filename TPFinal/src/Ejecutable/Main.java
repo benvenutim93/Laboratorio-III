@@ -6,7 +6,7 @@ import Excepciones.*;
 import Humanos.Cliente;
 import Humanos.Presencial;
 import Humanos.Virtual;
-import Menu.MenuPpal;
+import Menu.*
 import  Objetos.Mesa;
 import Colecciones.ListaMesas;
 
@@ -17,17 +17,20 @@ public class Main {
 
     public static void main(String[] args) {
 
-        scan = new Scanner (System.in);
-        MenuPpal.MenuPrincipal(scan);
+        //scan = new Scanner (System.in);
+        //MenuPpal.MenuPrincipal(scan);
 
-//        Mesa a = new Mesa (4, false);
-//        Mesa b = new Mesa (8, false);
-//        Mesa c = new Mesa (6, false);
-//        Mesa d = new Mesa (3, false);
-//        ListaMesas lista = new ListaMesas(a);
-//        lista.addMesa(b);
-//        lista.addMesa(c);
-//        lista.addMesa(d);
+        Mesa a = new Mesa (4, false);
+        Mesa b = new Mesa (8, false);
+        Mesa c = new Mesa (6, false);
+        Mesa d = new Mesa (3, false);
+        ListaMesas lista = new ListaMesas(a);
+        lista.agregar(b);
+        lista.agregar(c);
+        lista.agregar(d);
+
+        lista.eliminar(b);
+        System.out.println(lista.listar());
 //
 //        System.out.println(lista.imprimirListado());
 //

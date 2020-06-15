@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 import Colecciones.ListaMesas;
 import Humanos.*;
-import Objetos.*;
 import Comidas.*;
+import Objetos.*;
 
 
 public class MenuPpal {
@@ -205,7 +205,7 @@ public class MenuPpal {
                 break;
             case 2:
                 //TODO ver como agregar mesa, si se crea o como.
-                lista.addMesa(crearMesa(scan));
+                lista.agregar(crearMesa(scan));
                 break;
             case 3:
                 //TODO funcion de eliminar mesa

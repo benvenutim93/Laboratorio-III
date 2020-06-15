@@ -1,9 +1,12 @@
 package Objetos;
 
+import java.util.Objects;
+
 public class Mesa {
     private boolean estaOcupado;
     private int capacidad;
     private int idMesa;
+    private String nombreCliente;
 
     //Constructores
 
@@ -16,12 +19,14 @@ public class Mesa {
         capacidad = 4;
         estaOcupado = false;
         idMesa = 1;
+        nombreCliente = "";
     }
     public Mesa (int capacidad)
     {
         this.capacidad = capacidad;
         estaOcupado = false;
         idMesa = 1;
+        nombreCliente = "";
 
     }
     public Mesa (int capacidad, boolean estaOcupado)
@@ -29,12 +34,14 @@ public class Mesa {
         this.capacidad = capacidad;
         this.estaOcupado = estaOcupado;
         idMesa = 1;
+        nombreCliente = "";
     }
-    public Mesa (int capacidad, boolean estaOcupado, int idMesa)
+    public Mesa (int capacidad, boolean estaOcupado, int idMesa, String nombreCliente)
     {
         this.capacidad = capacidad;
         this.estaOcupado = estaOcupado;
         this.idMesa = idMesa;
+        this.nombreCliente = nombreCliente;
     }
 
     //Getters y Setters
@@ -51,6 +58,9 @@ public class Mesa {
         return idMesa;
     }
 
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
@@ -61,6 +71,10 @@ public class Mesa {
 
     public void setIdMesa(int idMesa) {
         this.idMesa = idMesa;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
     }
 
     /**
@@ -98,4 +112,8 @@ public class Mesa {
         return rta;
     }
 
+    @Override
+    public int hashCode() {
+        return 17;
+    }
 }
