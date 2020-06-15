@@ -8,6 +8,7 @@ import Objetos.Mesa;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import Humanos.*;
 
 import java.util.ArrayList;
 
@@ -148,14 +149,21 @@ public class ListaMesas implements IOpBasicas {
         return pos;
     }
 
-    public Mesa buscarMesa (String nombreCliente) throws NullPointerException
+    /**
+     * Busca la mesa ocupada por el cliente en cuestion
+     * @param dniCliente
+     * @return Mesa
+     * @throws NullPointerException
+     */
+
+    public Mesa buscarMesa (String dniCliente) throws NullPointerException
     {
         Mesa aux = null;
         int i = 0, flag = 0;
         while ((i < cantidadMesas()) && (flag == 0))
         {
             aux = listaMesa.get(i);
-            if (aux.getNombreCliente().equalsIgnoreCase(nombreCliente))
+            if (aux.getDniCliente().equalsIgnoreCase(dniCliente))
             {
                 flag = 1;
             }
@@ -218,12 +226,12 @@ public class ListaMesas implements IOpBasicas {
     }
 
     /**
-     * Busca una mesa en el ArrayList por el nombre del Cliente. Una vez encontrada, establece que la mesa está libre.
-     * @param nombreCliente (String)
+     * Busca una mesa en el ArrayList por el DNI del Cliente. Una vez encontrada, establece que la mesa está libre.
+     * @param dniCliente (String)
      */
-    public void liberarMesa (String nombreCliente)
+    public void liberarMesa (String dniCliente)
     {
-        Mesa obj = buscarMesa(nombreCliente);
+        Mesa obj = buscarMesa(dniCliente);
         obj.setEstaOcupado(false);
     }
 

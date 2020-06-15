@@ -6,7 +6,7 @@ public class Mesa {
     private boolean estaOcupado;
     private int capacidad;
     private int idMesa;
-    private String nombreCliente;
+    private String dniCliente;
 
     //Constructores
 
@@ -19,14 +19,14 @@ public class Mesa {
         capacidad = 4;
         estaOcupado = false;
         idMesa = 1;
-        nombreCliente = "";
+        dniCliente = "";
     }
     public Mesa (int capacidad)
     {
         this.capacidad = capacidad;
         estaOcupado = false;
         idMesa = 1;
-        nombreCliente = "";
+        dniCliente = "";
 
     }
     public Mesa (int capacidad, boolean estaOcupado)
@@ -34,14 +34,14 @@ public class Mesa {
         this.capacidad = capacidad;
         this.estaOcupado = estaOcupado;
         idMesa = 1;
-        nombreCliente = "";
+        dniCliente = "";
     }
-    public Mesa (int capacidad, boolean estaOcupado, int idMesa, String nombreCliente)
+    public Mesa (int capacidad, boolean estaOcupado, int idMesa, String dniCliente)
     {
         this.capacidad = capacidad;
         this.estaOcupado = estaOcupado;
         this.idMesa = idMesa;
-        this.nombreCliente = nombreCliente;
+        this.dniCliente = dniCliente;
     }
 
     //Getters y Setters
@@ -58,9 +58,10 @@ public class Mesa {
         return idMesa;
     }
 
-    public String getNombreCliente() {
-        return nombreCliente;
+    public String getDniCliente() {
+        return dniCliente;
     }
+
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
@@ -73,8 +74,8 @@ public class Mesa {
         this.idMesa = idMesa;
     }
 
-    public void setNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
+    public void setDniCliente(String dniCliente) {
+        this.dniCliente = dniCliente;
     }
 
     /**
