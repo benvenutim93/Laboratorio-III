@@ -17,11 +17,11 @@ public class Main {
 
         ListaMesas lista = new ListaMesas(a);
 
-        lista.addMesa(b);
-        lista.addMesa(c);
-        lista.addMesa(d);
+        lista.agregar(b);
+        lista.agregar(c);
+        lista.agregar(d);
 
-        System.out.println(lista.imprimirListado());
+        System.out.println(lista.listar());
 
 //        Mesa aux = new Mesa ();
 //

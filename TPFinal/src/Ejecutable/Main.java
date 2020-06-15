@@ -6,7 +6,7 @@ import Excepciones.*;
 import Humanos.Cliente;
 import Humanos.Presencial;
 import Humanos.Virtual;
-import Menu.*
+import Menu.*;
 import  Objetos.Mesa;
 import Colecciones.ListaMesas;
 
