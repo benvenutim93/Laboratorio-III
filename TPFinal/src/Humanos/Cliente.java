@@ -43,9 +43,9 @@ public class Cliente extends Persona {
      */
     public void pedirCombo(CartaComidas cartaComidas, int num) throws ComboNoExistenteException {
         Combo respuesta = null;
-        if(num<=cartaComidas.getCantidad()) {
+        if(num<=cartaComidas.getCantidadCombo()) {
             int nombre = 1;
-            HashSet<Combo> carta = cartaComidas.getCarta();
+            HashSet<Combo> carta = cartaComidas.getCartaCombo();
             Iterator<Combo> it = carta.iterator();
 
 

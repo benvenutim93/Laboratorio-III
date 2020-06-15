@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class ListaMesas implements IOpBasicas {
     //Claves JSON
+    public static String K_MESA_DNICLIENTE = "Dni Cliente";
     public static String K_MESA_CAPACIDAD = "Capacidad";
     public static String K_MESA_ID = "ID";
     public static String K_MESA_OCUPADO = "Ocupado";
@@ -285,6 +286,7 @@ public class ListaMesas implements IOpBasicas {
             obj.put(K_MESA_CAPACIDAD, a.getCapacidad());
             obj.put(K_MESA_ID, a.getIdMesa());
             obj.put(K_MESA_OCUPADO, a.isEstaOcupado());
+            obj.put(K_MESA_DNICLIENTE,a.getDniCliente());
             array.put(obj);
         }
         return array.toString();
@@ -309,6 +311,7 @@ public class ListaMesas implements IOpBasicas {
             aux.setCapacidad(obj.getInt(K_MESA_CAPACIDAD));
             aux.setEstaOcupado(obj.getBoolean(K_MESA_OCUPADO));
             aux.setIdMesa(obj.getInt(K_MESA_ID));
+            aux.setDniCliente(obj.getString(K_MESA_DNICLIENTE));
 
             listadoMesas.add(aux);
         }
