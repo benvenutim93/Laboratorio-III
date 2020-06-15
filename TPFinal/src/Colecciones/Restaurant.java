@@ -16,6 +16,19 @@ public class Restaurant
         this.cartaComidas = new CartaComidas();
     }
 
+    public String mostrarListaClientes(){
+        return listaClientes.listar();
+    }
+
+    public String mostrarListaMesas(){
+        return listaMesas.listar();
+    }
+
+    public String mostrarCartaComidas(){
+        return cartaComidas.listarCompleto();
+    }
+
+
 
 
 }
