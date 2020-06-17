@@ -13,6 +13,10 @@ public class ListaClientes implements IOpBasicas<Cliente>
         this.listaClientes = new ArrayList<Cliente>();
     }
 
+    /**
+     * Nos permite mostrar nuestra lista de Clientes
+     * @return string
+     */
     @Override
     public String listar() {
         StringBuilder builder = new StringBuilder();
@@ -21,6 +25,11 @@ public class ListaClientes implements IOpBasicas<Cliente>
         return builder.toString();
     }
 
+    /**
+     * Agrega un cleinte a la lista de clientes existente
+     * @param obj
+     * @return true o false si lo agrego o no respectivamente
+     */
     @Override
     public boolean agregar(Cliente obj) {
         boolean rta = false;
@@ -31,6 +40,11 @@ public class ListaClientes implements IOpBasicas<Cliente>
         return rta;
     }
 
+    /**
+     * Elimina de la lista de clientes existente el cliente enviado por parametro, si es que existe
+     * @param obj
+     * @return true o false si lo elimino o no respectivamente
+     */
     @Override
     public boolean eliminar(Cliente obj) {
         boolean rta = false;
@@ -41,6 +55,11 @@ public class ListaClientes implements IOpBasicas<Cliente>
         return rta;
     }
 
+    /**
+     * Nos dice si un cleinte esta presente en nuestra lista de clientes
+     * @param buscado
+     * @return true o false si lo encontro o no respectivamente
+     */
     public boolean contiene(Cliente buscado){
         boolean rta = false;
         if (buscado != null)
@@ -48,6 +67,11 @@ public class ListaClientes implements IOpBasicas<Cliente>
         return rta;
     }
 
+    /**
+     * Busca un cliente en nuestra lista por dni
+     * @param dni
+     * @return null si no lo encontro, sino el objeto en si con todos sus datos
+     */
     public Cliente buscarPorDni(String dni){
         Cliente aux = null;;
         int i =0;

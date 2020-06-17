@@ -40,15 +40,14 @@ public class ListaMesas implements IOpBasicas {
         listaMesa.add(objMesa);
     }
 
-    private ArrayList<Mesa> getListaMesa() {
-        return listaMesa;
-    }
-
+    /**
+     * Nos permite conocer la cantidad de mesas
+     * @return tamaño de la lista de mesas
+     */
     public int cantidadMesas ()
     {
         return listaMesa.size();
     }
-
 
     /**
      * Imprime un listado de mesas libres
