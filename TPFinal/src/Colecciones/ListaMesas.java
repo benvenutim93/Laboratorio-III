@@ -196,7 +196,7 @@ public class ListaMesas implements IOpBasicas {
      * @return devuelve el ID de la mesa ocupada
      */
 
-    public int ocuparMesa (int cantidadPersonas) throws IdInexistenteMesaException, SinMesasException, CapacidadMaximaException
+    public void ocuparMesa (int cantidadPersonas, String dni) throws IdInexistenteMesaException, SinMesasException, CapacidadMaximaException
     {
         int idMesa = 0;
         if (capMaximaMesas() >= cantidadPersonas)
@@ -204,10 +204,9 @@ public class ListaMesas implements IOpBasicas {
             Mesa aux = buscarMesa(cantidadPersonas);
             aux.setEstaOcupado(true);
             idMesa = aux.getIdMesa();
+            aux.setDniCliente(dni);
         }
         else throw new CapacidadMaximaException("No tenemos mesa para tantas personas");
-
-        return idMesa;
     }
 
     /**
@@ -347,12 +346,10 @@ public class ListaMesas implements IOpBasicas {
             if (objMesa instanceof Mesa) {
                 Mesa aux = (Mesa)objMesa;
 
-                if (estaAgregado(aux))
-                {
-                    aux.setIdMesa(cantidadMesas() + 1);
-                    listaMesa.add(aux);
-                    agregado = true;
-                }
+                aux.setIdMesa(cantidadMesas() + 1);
+                listaMesa.add(aux);
+                agregado = true;
+
             }
         }
             return agregado;

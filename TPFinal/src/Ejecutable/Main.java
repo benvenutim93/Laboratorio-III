@@ -1,6 +1,7 @@
 package Ejecutable;
 
 import Colecciones.CartaComidas;
+import Colecciones.Restaurant;
 import Comidas.*;
 import Excepciones.*;
 import Humanos.Cliente;
@@ -17,9 +18,34 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //scan = new Scanner (System.in);
-        //MenuPpal.MenuPrincipal(scan);
+        PlatoPrincipal milanesa= new PlatoPrincipal(250,"Milanesa ",true);
+        PlatoPrincipal milanesaNapo= new PlatoPrincipal(350,"Milanesa Napolitana",true);
+        PlatoPrincipal sorrentinos= new PlatoPrincipal(286,"Sorrentinos",true);
+        PlatoPrincipal pancho= new PlatoPrincipal(130,"Pancho",true);
+        PlatoPrincipal burger= new PlatoPrincipal(320,"Hamburguesa",true);
 
+        Bebida coca = new Bebida(90,"Coca-Cola",true,"fria");
+        Bebida pepsi = new Bebida(85,"Pepsi",true,"fria");
+        Bebida manaos = new Bebida(90,"Manaos de Uva",true,"fria");
+
+        Postre helado = new Postre(125,"Helado",true);
+        Postre flan = new Postre(200,"Flan ",true);
+        Postre ensaladaFrutas = new Postre(150,"Ensala de frutas",true);
+
+        Guarnicion papasFritas = new Guarnicion(65,"Papas Fritas",true);
+        Guarnicion pureDePapa = new Guarnicion(65,"Pure de papa",true);
+        Guarnicion ensalada = new Guarnicion(70,"Ensalada",true);
+
+        scan = new Scanner (System.in);
+        Restaurant resto=new Restaurant();
+        resto.agregarComida(manaos);
+        resto.agregarComida(milanesa);
+        resto.agregarComida(helado);
+        resto.agregarComida(pureDePapa);
+        Presencial nico= new Presencial("nnico","nico","123",5);
+        resto.agregarCliente(nico);
+        MenuPpal.MenuPrincipal(scan,resto);
+/*
         Mesa a = new Mesa (4, false);
         Mesa b = new Mesa (8, false);
         Mesa c = new Mesa (6, false);

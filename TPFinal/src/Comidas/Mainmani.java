@@ -1,8 +1,15 @@
 package Comidas;
 import Colecciones.CartaComidas;
 import Colecciones.Restaurant;
+import Excepciones.CapacidadMaximaException;
+import Excepciones.IdInexistenteMesaException;
 import Excepciones.PrecioNegativoException;
-public class MainComidas {
+import Excepciones.SinMesasException;
+import Humanos.Cliente;
+import Humanos.Presencial;
+import Objetos.Mesa;
+
+public class Mainmani {
     public static void main(String[] args) {
 
         PlatoPrincipal milanesa = new PlatoPrincipal(250, "Milanesa ", true);
@@ -10,6 +17,11 @@ public class MainComidas {
         PlatoPrincipal sorrentinos = new PlatoPrincipal(286, "Sorrentinos", true);
         PlatoPrincipal pancho = new PlatoPrincipal(130, "Pancho", true);
         PlatoPrincipal burger = new PlatoPrincipal(320, "Hamburguesa", true);
+
+        Mesa a = new Mesa (4, false);
+        Mesa b = new Mesa (8, false);
+        Mesa c = new Mesa (6, false);
+        Mesa d = new Mesa (3, false);
 
         Bebida coca = new Bebida(90, "Coca-Cola", true, "fria");
         Bebida pepsi = new Bebida(85, "Pepsi", true, "fria");
@@ -24,11 +36,11 @@ public class MainComidas {
         Guarnicion ensalada = new Guarnicion(70, "Ensalada", true);
 
         //System.out.println(papasFritas.toString());
-        try {
+        /*try {
             papasFritas.cambiarPrecio(-10);
         } catch (PrecioNegativoException e) {
             e.printStackTrace();
-        }
+        }*/
         //System.out.println(coca.datos());
         Combo combito = new Combo(pancho, pepsi, flan);
 
@@ -38,6 +50,36 @@ public class MainComidas {
         //System.out.println(combito.getCombo());
 
         Restaurant restaurant = new Restaurant();
+
+        restaurant.agregarComida(milanesa);
+        restaurant.agregarComida(milanesaNapo);
+        restaurant.agregarComida(sorrentinos);
+
+        Presencial presencial1 = new Presencial("Pepe","popo", "5421521", 5);
+        Presencial presencial2 = new Presencial("Azul","popo", "2222", 2);
+        restaurant.agregarCliente(presencial1);
+        restaurant.agregarCliente(presencial2);
+
+        System.out.println(restaurant.agregarMesa(a));
+
+        System.out.println(restaurant.agregarMesa(c));
+        restaurant.agregarMesa(b);
+        restaurant.agregarMesa(d);
+
+        try {
+            restaurant.ocuparMesa(presencial1);
+        } catch (IdInexistenteMesaException e) {
+            e.printStackTrace();
+        } catch (SinMesasException e) {
+            e.printStackTrace();
+        } catch (CapacidadMaximaException e) {
+            e.printStackTrace();
+        }
+
+
+        System.out.println(restaurant.listarClientes());
+        System.out.println(restaurant.listarCompleto());
+        System.out.println(restaurant.listarMesas());
 
 
 

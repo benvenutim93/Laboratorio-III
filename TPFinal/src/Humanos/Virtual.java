@@ -35,8 +35,8 @@ public class Virtual extends Cliente
     }
 
     @Override
-    public void crearPedido(int num)throws ComidaInexistenteException {
-        super.crearPedido(num);
+    public void crearPedido(int num,CartaComidas carta)throws ComidaInexistenteException {
+        super.crearPedido(num,carta);
     }
 
     @Override

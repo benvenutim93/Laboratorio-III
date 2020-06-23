@@ -68,12 +68,14 @@ public class Cliente extends Persona {
      *
      * @param num indica que comida es la que va a agregar
      */
-    public void crearPedido(int num) throws ComidaInexistenteException
+    public void crearPedido(int num,CartaComidas carta) throws ComidaInexistenteException
     {
+        ///todo arreglar esto y hacer funcion buscar comida
+        System.out.println(carta.listarComidas());
         switch (num)
         {
             case 1:
-                System.out.println("CASE 1");
+
                 Bebida bebida=new Bebida(15,"agua",false, "natural");
                 pedido.agregar(bebida);
                 break;
@@ -188,5 +190,23 @@ public class Cliente extends Persona {
         return  super.toString()+"\nPedidos realizados= "+mostrarPedidos()+"\nFactura= "+factura+"\nCantidad de Pedidos= "+getCantPedidos();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        boolean rta=false;
+        if(o != null){
+            if (o instanceof Cliente){
+                Cliente aux = (Cliente)o;
+                if(aux.getDNI().equalsIgnoreCase(getDNI())){
+                    rta=true;
+                }
+            }
 
+        }
+     return  rta;
+    }
+
+    @Override
+    public int hashCode() {
+        return 3;
+    }
 }

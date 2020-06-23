@@ -3,13 +3,18 @@ package Menu;
 import java.util.Scanner;
 
 import Colecciones.ListaMesas;
+import Colecciones.Restaurant;
+import Excepciones.ClienteInexistenteException;
+import Excepciones.ComidaInexistenteException;
+import Excepciones.DniExistenteException;
+import Excepciones.DniNOexistenteExecption;
 import Humanos.*;
 import Comidas.*;
 import Objetos.*;
 
 
 public class MenuPpal {
-    public static void MenuPrincipal (Scanner scan)
+    public static void MenuPrincipal (Scanner scan, Restaurant restaurant)
     {
         int op, var;
         imprimirMenuPrincipal();
@@ -21,7 +26,7 @@ public class MenuPpal {
             {
                 imprimirOpionesClientePresencial();
                 var = elegirOpcion(scan);
-                MenuClientePresencial(var,scan);
+                MenuClientePresencial(var,scan, restaurant); //submenu
                 break;
             }
             case 2:
@@ -106,22 +111,99 @@ public class MenuPpal {
         System.out.println("3- Lista de espera");
         System.out.println("0- Regresar");
     }
+    public static  void imprimirOpcionesTomarPedido(){
+        System.out.println("1-Combos\n"+"2-Comidas");
+    }
+    public static void imprimirOpcionesTomarPedidoComidas(){
+        System.out.println("1-Bebida\n"+ "2-PlatoPrinciapl\n"+"3-Postre\n"+"4-Guarnicion");
+    }
 
-    public static void MenuClientePresencial (int op, Scanner scan)
+    public static void MenuClientePresencial (int op, Scanner scan, Restaurant restaurant)
     {
-        Presencial cliente;
+
+        Presencial presencial = null;
+        Cliente cliente = null;
+        System.out.println(" Ingrese Dni del  Cliente: ");
+        String dni = scan.next();
         switch (op)
         {
             case 1:
-                cliente = crearClientePresencial(scan);
-                System.out.println(cliente.toString());
-                //System.out.println("Tomar pedido");
+                presencial = crearClientePresencial(scan);
+                try {
+                    if (!restaurant.agregarCliente(presencial)) {
+                        throw new DniExistenteException();
+                    }else {
+                        System.out.println(presencial.toString());
+                    }
 
+                }catch(DniExistenteException e){
+                    System.out.println(e.getMessage());
+
+                  }
                 break;
             case 2:
-                ///todo hacer metodo de busqueda de clientes
+                try {
+
+                    cliente = restaurant.buscarPorDni(dni);
+                    if (cliente != null) {
+                        System.out.println("Cliente existe!");
+                        System.out.println(cliente.toString());
+                    } else
+                    {
+                        throw new ClienteInexistenteException(dni);
+
+                    }
+                }catch (ClienteInexistenteException e){
+                    String opc;
+                    System.out.println(e.getMessage()); //muestra mensajito
+                    System.out.println("Desea crear el cliente? (si /no)");
+                    opc= scan.next();
+                    if(opc.equalsIgnoreCase("si")){
+                        String nombre;
+                        String apellido;
+                        String documento = e.getDni();
+                        int cantPersonas;
+                        System.out.println("Ingrese nombre -> ");
+                        nombre=scan.next();
+                        System.out.println("Ingrese apellido -> ");
+                        apellido=scan.next();
+                        System.out.println("Ingrese cantidad de personas -> ");
+                        cantPersonas = scan.nextInt();
+                        Presencial nuevoPresencial = new Presencial(nombre,apellido,documento,cantPersonas);
+                        restaurant.agregarCliente(nuevoPresencial);
+
+                    }
+
+                }
+
                 break;
             case 3:
+                cliente = restaurant.buscarPorDni(dni);
+                try {
+                    if (cliente == null) {
+                        throw new DniNOexistenteExecption();
+                    }else {
+                        int opc;
+                        Presencial aux =(Presencial)cliente;
+                        imprimirOpcionesTomarPedido();
+                        opc =elegirOpcion(scan);
+                        switch (opc){
+                            case 1:
+
+                            case 2:
+                                imprimirOpcionesTomarPedidoComidas();
+                                opc=elegirOpcion(scan);
+                                aux.crearPedido(opc,restaurant.getCartaComidas());
+                        }
+
+
+
+                    }
+                }catch (DniNOexistenteExecption | ComidaInexistenteException e){
+                    System.out.println(e.getMessage());
+                }
+
+
                 //buscar cliente y tomar el pedido
                 //mini switch de si quiere combo o pedir comida sola
                 break;
@@ -132,6 +214,7 @@ public class MenuPpal {
                 op = elegirOpcion(scan);
                 break;
         }
+        MenuPrincipal(scan,restaurant);
     }
 
     public static Presencial crearClientePresencial(Scanner scan)

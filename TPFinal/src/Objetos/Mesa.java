@@ -94,7 +94,7 @@ public class Mesa {
 
     @Override
     public String toString() {
-        return "Id Mesa: "+getIdMesa()+"\n"+conversionBooleanString()+"\nCapacidad: "+getCapacidad()+"\n";
+        return "---------\nId Mesa: "+getIdMesa()+"\n"+conversionBooleanString()+"\nCapacidad: "+getCapacidad()+"\nCliente: "+getDniCliente()+"\n--------";
     }
 
     /**

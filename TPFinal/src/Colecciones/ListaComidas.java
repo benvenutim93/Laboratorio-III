@@ -47,10 +47,13 @@ public class ListaComidas implements IOpBasicas<Comida> {
         StringBuilder builderBebida = new StringBuilder();
         StringBuilder builderPostre = new StringBuilder();
         StringBuilder builderGuarnicion = new StringBuilder();
+
         if(!listaComidas.isEmpty()) {
             for (Comida aux : listaComidas) {
+
                 if (aux instanceof PlatoPrincipal) {
                     builderPlato.append("\n"+aux.toString());
+
                 }
                 if (aux instanceof Bebida) {
                     builderBebida.append("\n"+aux.toString());

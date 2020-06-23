@@ -9,6 +9,7 @@ import Excepciones.CapacidadMaximaException;
 import Excepciones.IdInexistenteMesaException;
 import Excepciones.SinMesasException;
 import Humanos.Cliente;
+import Humanos.Presencial;
 import Objetos.Mesa;
 
 import java.util.ArrayList;
@@ -249,11 +250,11 @@ public class Restaurant
 
     /**
      * Pasamanos-> Busca una mesa libre apta para el grupo de personas que vino al restaurant.
-     * @param cantidadPersonas
+     * @param persona
      * @return devuelve el ID de la mesa ocupada
      */
-    public int ocuparMesa (int cantidadPersonas) throws IdInexistenteMesaException, SinMesasException, CapacidadMaximaException{
-        return listaMesas.ocuparMesa(cantidadPersonas);
+    public void ocuparMesa (Presencial persona) throws IdInexistenteMesaException, SinMesasException, CapacidadMaximaException{
+         listaMesas.ocuparMesa(persona.getCantidadPersonas(), persona.getDNI());
     }
 
     /**

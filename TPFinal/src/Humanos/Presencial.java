@@ -7,14 +7,12 @@ import Objetos.Mesa;
 
 public class Presencial extends Cliente {
 
-    private int nuMesa;
     private int cantPer;
     private boolean espera;
 
     public Presencial()
     {
         super();
-        nuMesa=0;
         cantPer=0;
         espera=false;
     }
@@ -29,11 +27,9 @@ public class Presencial extends Cliente {
      * Pide una mesa, en caso de no haber, usa las excepciones
      *
      */
-    public void PedirMesa(ListaMesas listaMesas) throws IdInexistenteMesaException, SinMesasException,CapacidadMaximaException
+    public void pedirMesa(ListaMesas listaMesas) throws IdInexistenteMesaException, SinMesasException,CapacidadMaximaException
     {
-        int numMesa=0;
-        numMesa=listaMesas.ocuparMesa(cantPer);
-        setNuMesa(numMesa);
+        listaMesas.ocuparMesa(cantPer, getDNI());
     }
 
     /**
@@ -59,8 +55,8 @@ public class Presencial extends Cliente {
     }
 
     @Override
-    public void crearPedido(int num) throws ComidaInexistenteException {
-        super.crearPedido(num);
+    public void crearPedido(int num,CartaComidas carta) throws ComidaInexistenteException {
+        super.crearPedido(num,carta);
     }
 
 
@@ -90,13 +86,6 @@ public class Presencial extends Cliente {
         return super.eliminar(i);
     }
 
-    public void setNuMesa(int nuMesa) {
-        this.nuMesa = nuMesa;
-    }
-
-    public int getNuMesa() {
-        return nuMesa;
-    }
 
     public boolean getEspera()
     {
@@ -104,7 +93,11 @@ public class Presencial extends Cliente {
     }
     @Override
     public String toString() {
-        return super.toString()+"\nNumMesa= "+nuMesa+"\nCantidad Personas= " +cantPer+"\nEspera= " +espera;
+        return super.toString()+"\nCantidad Personas= " +cantPer+"\nEspera= " +espera;
 
+    }
+
+    public int getCantidadPersonas() {
+        return this.cantPer;
     }
 }
