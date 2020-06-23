@@ -3,6 +3,7 @@ package Humanos;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Scanner;
 
 import Colecciones.CartaComidas;
 import Colecciones.ListaMesas;
@@ -70,26 +71,35 @@ public class Cliente extends Persona {
      */
     public void crearPedido(int num,CartaComidas carta) throws ComidaInexistenteException
     {
-        ///todo arreglar esto y hacer funcion buscar comida
-        System.out.println(carta.listarComidas());
+        Scanner scan= new Scanner(System.in);
+        int numero=0;
         switch (num)
         {
             case 1:
+                System.out.println(carta.listarBebidas());
+                System.out.println("Ingrese el numero de la bebida a elegir");
+                numero=scan.nextInt();
+                pedido.agregar(carta.getComidaPos(numero));
 
-                Bebida bebida=new Bebida(15,"agua",false, "natural");
-                pedido.agregar(bebida);
                 break;
             case 2:
-                PlatoPrincipal platoPrincipal= new PlatoPrincipal(100,"milanga",true);
-                pedido.agregar(platoPrincipal);
+
+                System.out.println(carta.listarPlatosPrincipales());
+                System.out.println("Ingrese el numero del plato a elegir");
+                numero=scan.nextInt();
+                pedido.agregar(carta.getComidaPos(numero));
                 break;
             case 3:
-                Postre postre=new Postre(200,"helado",false);
-                pedido.agregar(postre);
+                System.out.println(carta.listarPostres());
+                System.out.println("Ingrese el numero del postre a elegir");
+                numero=scan.nextInt();
+                pedido.agregar(carta.getComidaPos(numero));
                 break;
             case 4:
-                Guarnicion guarnicion=new Guarnicion(150,"fritas",true);
-                pedido.agregar(guarnicion);
+                System.out.println(carta.listarGuarnicion());
+                System.out.println("Ingrese el numero de la guarnicion a elegir");
+                numero=scan.nextInt();
+                pedido.agregar(carta.getComidaPos(numero));
                 break;
             default:
                 throw new ComidaInexistenteException("La opcion ingresada es invalida");
