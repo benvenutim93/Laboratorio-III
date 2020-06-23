@@ -38,7 +38,7 @@ public class CartaComidas
     public boolean agregarCombo(Combo nuevo){
         return setCombos.agregar(nuevo);
     }
-
+///-----------------------------------------Listar--------------------------------------
     /**
      * Nos permite visualizar nuestro set de combos
      * @return string
@@ -59,13 +59,7 @@ public class CartaComidas
      * Cuenta la cantidad de combos en la coleccion
      * @return cantidad de combos
      */
-    public int getCantidadCombo(){
-        return   setCombos.getCantidad();
-    }
 
-    public HashSet<Combo> getCartaCombo(){
-        return  setCombos.getCartaCombo();
-    }
 
     /**
      * Nos permite visualizar tanto nustra lista de combos como todas las comidas individuales disponibles
@@ -76,6 +70,44 @@ public class CartaComidas
         builder.append("----Combos----:\n"+setCombos.listar());
         builder.append("\n----Comidas----:\n"+listaComida.listar());
         return builder.toString();
+    }
+    /**
+     * Lista las Bebidas con su indice
+     * @return String
+     */
+    public  String listarBebidas(){return listaComida.listaBebidas();}
+
+    /**
+     * Lista los postres con su indice
+     * @return String
+     */
+    public  String listarPostres(){return listaComida.listaPostre();}
+
+    /**
+     * Lista los platos principales con su indice
+     * @return String
+     */
+    public  String listarPlatosPrincipales(){return listaComida.listaPlatosprincipales();}
+
+    /**
+     * Lista las guarniciones con su indice
+     * @return String
+     */
+    public  String listarGuarnicion(){return listaComida.listaGuarnicion();}
+
+    ///-----------------------------------------------------------------
+    public int getCantidadCombo(){
+        return   setCombos.getCantidad();
+    }
+
+    /**
+     * Busca la comida en un lugar especifico del arreglo de comidas
+     * @param pos (entero)
+     * @return Comida
+     */
+    public  Comida getComidaPos(int pos){return  listaComida.getComidapos(pos);}
+    public HashSet<Combo> getCartaCombo(){
+        return  setCombos.getCartaCombo();
     }
 
     /**

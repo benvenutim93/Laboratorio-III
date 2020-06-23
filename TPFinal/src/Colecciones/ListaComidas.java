@@ -39,6 +39,58 @@ public class ListaComidas implements IOpBasicas<Comida> {
         }
         return rta;
     }
+    //------------------------------------------listar---------------------
+    public  String listaGuarnicion(){
+        StringBuilder builder = new StringBuilder();
+        if(!listaComidas.isEmpty()){
+            for (Comida aux: listaComidas){
+                if(aux instanceof Guarnicion){
+
+                    builder.append(listaComidas.indexOf(aux)+". "+aux.toString()+"\n");
+                }
+            }
+        }
+        return builder.toString();
+    }
+
+    public  String listaPostre(){
+        StringBuilder builder = new StringBuilder();
+        if(!listaComidas.isEmpty()){
+            for (Comida aux: listaComidas){
+                if(aux instanceof Postre){
+
+                    builder.append(listaComidas.indexOf(aux)+". "+aux.toString()+"\n");
+                }
+            }
+        }
+        return builder.toString();
+    }
+
+    public  String listaPlatosprincipales(){
+        StringBuilder builder = new StringBuilder();
+        if(!listaComidas.isEmpty()){
+            for (Comida aux: listaComidas){
+                if(aux instanceof PlatoPrincipal){
+
+                    builder.append(listaComidas.indexOf(aux)+". "+aux.toString()+"\n");
+                }
+            }
+        }
+        return builder.toString();
+    }
+
+    public  String listaBebidas(){
+        StringBuilder builder = new StringBuilder();
+        if(!listaComidas.isEmpty()){
+            for (Comida aux: listaComidas){
+                if(aux instanceof Bebida){
+
+                    builder.append(listaComidas.indexOf(aux)+". "+aux.toString()+"\n");
+                }
+            }
+        }
+        return builder.toString();
+    }
 
     @Override
     public String listar() {
@@ -77,7 +129,7 @@ public class ListaComidas implements IOpBasicas<Comida> {
         return builder.toString();
     }
 
-
+//---------------------------------------------------------------------------------------------------
 
     @Override
     /**
