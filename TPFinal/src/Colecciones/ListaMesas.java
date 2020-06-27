@@ -13,11 +13,12 @@ import Humanos.*;
 import java.util.ArrayList;
 
 public class ListaMesas implements IOpBasicas {
-    //Claves JSON
+
     public static String K_MESA_DNICLIENTE = "Dni Cliente";
     public static String K_MESA_CAPACIDAD = "Capacidad";
-    public static String K_MESA_ID = "ID";
+    public static String K_MESA_ID = "Id";
     public static String K_MESA_OCUPADO = "Ocupado";
+
     //Atributos de clase
     private ArrayList<Mesa> listaMesa;
 
@@ -269,13 +270,21 @@ public class ListaMesas implements IOpBasicas {
         return pos;
     }
 
+    public JSONArray codeListaMesas () throws JSONException
+    {
+        JSONArray array = new JSONArray();
+        for (Mesa a : listaMesa)
+            array.put(a.code());
+        return array;
+    }
+
     /**
      * Crea un String con los datos del array
      * @return String de Json de la Lista de Mesas
      * @throws JSONException
      */
 
-    public String createJsonString () throws JSONException
+    public JSONArray createJsonString () throws JSONException
     {
         JSONArray array = new JSONArray();
         for (Mesa a : listaMesa)
@@ -287,7 +296,7 @@ public class ListaMesas implements IOpBasicas {
             obj.put(K_MESA_DNICLIENTE,a.getDniCliente());
             array.put(obj);
         }
-        return array.toString();
+        return array;
     }
 
     /**
@@ -378,4 +387,5 @@ public class ListaMesas implements IOpBasicas {
         }
         return eliminado;
     }
+
 }

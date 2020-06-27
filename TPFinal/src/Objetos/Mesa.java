@@ -1,8 +1,18 @@
 package Objetos;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Objects;
 
 public class Mesa {
+
+    public static String K_MESA_DNICLIENTE = "Dni Cliente";
+    public static String K_MESA_CAPACIDAD = "Capacidad";
+    public static String K_MESA_ID = "Id";
+    public static String K_MESA_OCUPADO = "Ocupado";
+
     private boolean estaOcupado;
     private int capacidad;
     private int idMesa;
@@ -42,6 +52,15 @@ public class Mesa {
         this.estaOcupado = estaOcupado;
         this.idMesa = idMesa;
         this.dniCliente = dniCliente;
+    }
+
+    public JSONObject code() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(K_MESA_CAPACIDAD, getCapacidad());
+        jsonObject.put(K_MESA_ID, getIdMesa());
+        jsonObject.put(K_MESA_OCUPADO, isEstaOcupado());
+        jsonObject.put(K_MESA_DNICLIENTE, getDniCliente());
+        return jsonObject;
     }
 
     //Getters y Setters

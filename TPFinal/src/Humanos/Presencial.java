@@ -4,9 +4,13 @@ import Colecciones.CartaComidas;
 import Colecciones.ListaMesas;
 import Excepciones.*;
 import Objetos.Mesa;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Presencial extends Cliente {
 
+    static final String K_CANTIDADPERSONAS = "Cantidad de Personas";
+    static final String K_ESPERA = "Espera";
     private int cantPer;
     private boolean espera;
 
@@ -21,6 +25,14 @@ public class Presencial extends Cliente {
         super(nombre,apellido,dni);
         this.cantPer=cantPer;
         espera= false;
+    }
+
+    @Override
+    public JSONObject code() throws JSONException {
+        JSONObject jsonObject = super.code();
+        jsonObject.put(K_CANTIDADPERSONAS, getCantidadPersonas());
+        jsonObject.put(K_ESPERA, espera);
+        return jsonObject;
     }
 
     /**

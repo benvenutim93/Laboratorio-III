@@ -2,10 +2,16 @@ package Colecciones;
 
 import Comidas.*;
 import Interfaces.IOpBasicas;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class ListaComidas implements IOpBasicas<Comida> {
+
+    static final String K_LISTADOCOMIDA = "Listado Comida";
+
     private ArrayList<Comida>listaComidas;
 
     public ListaComidas() {
@@ -14,6 +20,13 @@ public class ListaComidas implements IOpBasicas<Comida> {
 
 ///-------------------------------- [M E T O D O S] --------------------------------
 
+
+    public JSONArray codeListaComidas() throws JSONException {
+        JSONArray jsonArray = new JSONArray();
+        for(Comida aux:listaComidas)
+            jsonArray.put(aux.code());
+        return jsonArray;
+    }
 
     /**
      * Busca la posicion de una comida en el ArrayList

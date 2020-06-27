@@ -10,6 +10,8 @@ import Humanos.Virtual;
 import Menu.*;
 import  Objetos.Mesa;
 import Colecciones.ListaMesas;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Scanner;
 
@@ -17,6 +19,8 @@ public class Main {
     static Scanner scan ;
 
     public static void main(String[] args) {
+
+        Restaurant restaurant = new Restaurant();
 
         PlatoPrincipal milanesa= new PlatoPrincipal(250,"Milanesa ",true);
         PlatoPrincipal milanesaNapo= new PlatoPrincipal(350,"Milanesa Napolitana",true);
@@ -37,24 +41,53 @@ public class Main {
         Guarnicion ensalada = new Guarnicion(70,"Ensalada",true);
 
         scan = new Scanner (System.in);
-        Restaurant resto=new Restaurant();
-        resto.agregarComida(manaos);
-        resto.agregarComida(milanesa);
-        resto.agregarComida(helado);
-        resto.agregarComida(pureDePapa);
-        Presencial nico= new Presencial("nnico","nico","123",5);
-        resto.agregarCliente(nico);
-        MenuPpal.MenuPrincipal(scan,resto);
-/*
+        restaurant.agregarComida(manaos);
+        restaurant.agregarComida(milanesa);
+        restaurant.agregarComida(helado);
+        restaurant.agregarComida(pureDePapa);
+        restaurant.agregarComida(milanesaNapo);
+        restaurant.agregarComida(pancho);
+        restaurant.agregarComida(burger);
+        restaurant.agregarComida(ensaladaFrutas);
+        restaurant.agregarComida(ensalada);
+
+        Presencial nico= new Presencial("Nico","Bertu","543453123",5);
+        Presencial marian = new Presencial("Marian","Benv","54253",2);
+        Virtual lau = new Virtual("Lautaro", "Fullone", "43317286", "476965", "Espa 3571" );
+        Virtual rodri = new Virtual("Rodri", "Perez", "5454521", "548525", "Lejos123");
+
+        restaurant.agregarCliente(nico);
+        restaurant.agregarCliente(lau);
+        restaurant.agregarCliente(marian);
+        restaurant.agregarCliente(rodri);
+
+        //MenuPpal.MenuPrincipal(scan,restaurant);
+
         Mesa a = new Mesa (4, false);
         Mesa b = new Mesa (8, false);
         Mesa c = new Mesa (6, false);
         Mesa d = new Mesa (3, false);
-        ListaMesas lista = new ListaMesas(a);
-        lista.agregar(b);
-        lista.agregar(c);
-        lista.agregar(d);
 
+        restaurant.agregarMesa(a);
+        restaurant.agregarMesa(b);
+        restaurant.agregarMesa(c);
+        restaurant.agregarMesa(d);
+
+        Combo combo1 = new Combo(milanesa, coca, helado, papasFritas);
+        Combo combo2 = new Combo(sorrentinos, pepsi, flan, pureDePapa);
+
+        restaurant.agregarCombo(combo1);
+        restaurant.agregarCombo(combo2);
+
+        try {
+            JSONObject jsonObject = restaurant.codeRestaurant();
+            System.out.println(jsonObject.toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+/*
         lista.eliminar(b);
         System.out.println(lista.listar());
 //
@@ -78,30 +111,7 @@ public class Main {
 ////            System.out.println(e.getMessage());
 ////        }
 ////
-//        PlatoPrincipal milanesa= new PlatoPrincipal(250,"Milanesa ",true);
-//        PlatoPrincipal milanesaNapo= new PlatoPrincipal(350,"Milanesa Napolitana",true);
-//        PlatoPrincipal sorrentinos= new PlatoPrincipal(286,"Sorrentinos",true);
-//        PlatoPrincipal pancho= new PlatoPrincipal(130,"Pancho",true);
-//        PlatoPrincipal burger= new PlatoPrincipal(320,"Hamburguesa",true);
-//
-//        Bebida coca = new Bebida(90,"Coca-Cola",true,"fria");
-//        Bebida pepsi = new Bebida(85,"Pepsi",true,"fria");
-//        Bebida manaos = new Bebida(90,"Manaos de Uva",true,"fria");
-//
-//        Postre helado = new Postre(125,"Helado",true);
-//        Postre flan = new Postre(200,"Flan ",true);
-//        Postre ensaladaFrutas = new Postre(150,"Ensala de frutas",true);
-//
-//        Guarnicion papasFritas = new Guarnicion(65,"Papas Fritas",true);
-//        Guarnicion pureDePapa = new Guarnicion(65,"Pure de papa",true);
-//        Guarnicion ensalada = new Guarnicion(70,"Ensalada",true);
-//
-//        Combo combo1=new Combo(milanesa,coca,helado);
-//        Combo combo2= new Combo(pancho,manaos);
-//        Virtual nico = new Virtual("Nicolas", "Bertuccio", "40256888", "2235897455", "Colon 3030");
-//        Presencial rodri = new Presencial("Carlos", "Perez", "42256477", 5);
-//
-//
+
 //        CartaComidas carta= new CartaComidas();
 //
 //        carta.agregarCombo(combo1);

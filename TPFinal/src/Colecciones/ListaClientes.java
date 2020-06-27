@@ -1,12 +1,20 @@
 package Colecciones;
 
 import Humanos.Cliente;
+import Humanos.Persona;
+import Humanos.Presencial;
+import Humanos.Virtual;
 import Interfaces.IOpBasicas;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class ListaClientes implements IOpBasicas<Cliente>
 {
+    public static String K_VIRTUALES = "Virtuales";
+    public static String K_PRESECIALES = "Presenciales";
     private ArrayList<Cliente>listaClientes;
 
     public ListaClientes() {
@@ -23,6 +31,23 @@ public class ListaClientes implements IOpBasicas<Cliente>
         for (Cliente aux : listaClientes)
             builder.append(aux.toString()+"\n");
         return builder.toString();
+    }
+
+    public JSONObject codeListaClientes() throws JSONException {
+        JSONArray virtuales = new JSONArray();
+        JSONArray presenciales = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
+
+        for (Persona aux : listaClientes){
+            if (aux instanceof Virtual)
+                virtuales.put(aux.code());
+            else if (aux instanceof Presencial)
+                presenciales.put(aux.code());
+
+        }
+        jsonObject.put(K_VIRTUALES, virtuales);
+        jsonObject.put(K_PRESECIALES, presenciales);
+        return jsonObject;
     }
 
     /**

@@ -13,12 +13,22 @@ import Excepciones.PrecioNegativoException;
 
 public class CartaComidas
 {
+    static final String K_COMBOS = "Combos";
+    static final String K_LISTADOCOMIDA = "Listado Comida";
+
     private SetCombo setCombos;
     private ListaComidas listaComida;
 
     public CartaComidas(){
         this.listaComida=new ListaComidas();
         this.setCombos=new SetCombo();
+    }
+
+    public JSONObject codeCartaComidas() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(K_LISTADOCOMIDA, listaComida.codeListaComidas());
+        jsonObject.put(K_COMBOS, setCombos.codeSetCombos());
+        return jsonObject;
     }
 
     /**
@@ -127,7 +137,6 @@ public class CartaComidas
     public boolean eliminarComida(Comida aBorrar){
         return listaComida.eliminar(aBorrar);
     }
-
 
 
 }

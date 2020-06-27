@@ -6,16 +6,17 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 import Colecciones.CartaComidas;
-import Colecciones.ListaMesas;
 import Comidas.*;
-import Excepciones.CapacidadMaximaException;
 import Excepciones.ComboNoExistenteException;
-import Excepciones.IdInexistenteMesaException;
-import Excepciones.SinMesasException;
 import Objetos.Pedido;
 import Excepciones.ComidaInexistenteException;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class Cliente extends Persona {
+public abstract class Cliente extends Persona {
+
+    static final String K_FACTURA = "Factura" ;
+    static final String K_CANTIDADPEDIDOS = "Cantidad de Pedidos" ;
 
     Pedido pedido;
     private double factura;
@@ -35,7 +36,17 @@ public class Cliente extends Persona {
         pedido=new Pedido();
         factura=0;
         cantPedidos=0;
+
     }
+
+    @Override
+    public JSONObject code() throws JSONException {
+        JSONObject jsonObject = super.code();
+        jsonObject.put(K_FACTURA, getFactura());
+        jsonObject.put(K_CANTIDADPEDIDOS, getCantPedidos());
+        return jsonObject;
+    }
+
 
     /**
      * Recibe como parametro la carta de comida, y le pide el nombre del combo que desea

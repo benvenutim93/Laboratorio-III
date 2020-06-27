@@ -4,9 +4,16 @@ import Colecciones.CartaComidas;
 import Excepciones.ComboNoExistenteException;
 import Excepciones.ComidaInexistenteException;
 import Humanos.Cliente;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Virtual extends Cliente
 {
+
+    static final String K_TELEFONO = "Telefono";
+    static final String K_DIRECCION = "Direccion";
+    static final String K_ENTREGADO = "Entregado";
+
     private String telefono;
     private String direccion;
     private boolean entregado;
@@ -24,6 +31,15 @@ public class Virtual extends Cliente
         this.telefono = telefono;
         this.direccion = direccion;
         this.entregado = false;
+    }
+
+    @Override
+    public JSONObject code() throws JSONException {
+        JSONObject jsonObject = super.code();
+        jsonObject.put(K_TELEFONO, telefono);
+        jsonObject.put(K_ENTREGADO, entregado);
+        jsonObject.put(K_DIRECCION, direccion);
+        return jsonObject;
     }
 
     public void realizarEntrega() {

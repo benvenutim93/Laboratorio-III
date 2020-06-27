@@ -1,8 +1,5 @@
 package Colecciones;
 
-import Colecciones.CartaComidas;
-import Colecciones.ListaClientes;
-import Colecciones.ListaMesas;
 import Comidas.Combo;
 import Comidas.Comida;
 import Excepciones.CapacidadMaximaException;
@@ -11,12 +8,17 @@ import Excepciones.SinMesasException;
 import Humanos.Cliente;
 import Humanos.Presencial;
 import Objetos.Mesa;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Restaurant
 {
+    static final String K_LISTADOCLIENTES = "Listado Clientes";
+    static final String K_LISTADOMESAS = "Listado Mesas";
+    static final String K_CARTACOMIDAS = "Carta de Comidas";
+
     private ListaClientes listaClientes;
     private ListaMesas listaMesas;
     private CartaComidas cartaComidas;
@@ -26,6 +28,14 @@ public class Restaurant
         this.listaMesas = new ListaMesas();
         this.cartaComidas = new CartaComidas();
 
+    }
+    
+    public JSONObject codeRestaurant() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(K_LISTADOCLIENTES, listaClientes.codeListaClientes());
+        jsonObject.put(K_LISTADOMESAS, listaMesas.codeListaMesas());
+        jsonObject.put(K_CARTACOMIDAS, cartaComidas.codeCartaComidas());
+        return jsonObject;
     }
 
     public ListaClientes getListaClientes() {

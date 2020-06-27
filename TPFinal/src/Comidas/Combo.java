@@ -2,8 +2,18 @@ package Comidas;
 
 import Excepciones.PrecioNegativoException;
 import Interfaces.IPrecio;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Combo implements IPrecio {
+
+    static final String K_PLATOPRINCIPAL = "Plato Principal";
+    static final String K_BEBIDA = "Bebida";
+    static final String K_POSTRE = "Postre";
+    static final String K_GUARNICION = "Guarnicion";
+    static final String K_PRECIO = "Precio";
+
     private PlatoPrincipal plato;
     private Bebida bebida;
     private Postre postre;
@@ -43,6 +53,15 @@ public class Combo implements IPrecio {
         this.bebida = bebida;
         ponerPrecio();
         this.id = ++idAutoincremental;
+    }
+
+    public JSONObject code() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(K_PLATOPRINCIPAL, plato.getNombre());
+        jsonObject.put(K_BEBIDA, bebida.getNombre());
+        jsonObject.put(K_GUARNICION, guarnicion.getNombre());
+        jsonObject.put(K_POSTRE, postre.getNombre());
+        return jsonObject;
     }
 
     private void ponerPrecio() {
@@ -166,5 +185,6 @@ public class Combo implements IPrecio {
     public int hashCode() {
         return 1;
     }
+
 
 }

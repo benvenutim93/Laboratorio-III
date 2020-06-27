@@ -1,7 +1,14 @@
 package Humanos;
 
 
-public abstract class Persona {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public abstract class Persona  {
+
+    static final String K_NOMBRE = "Nombre" ;
+    static final String K_APELLIDO = "Apellido" ;
+    static final String K_DNI = "Dni" ;
 
     private String nombre;
     private String apellido;
@@ -19,6 +26,15 @@ public abstract class Persona {
         this.nombre = nombre;
         this.apellido = apellido;
         this.DNI = dni;
+    }
+
+    public JSONObject code() throws JSONException
+    {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(K_NOMBRE, getNombre());
+        jsonObject.put(K_APELLIDO, getApellido());
+        jsonObject.put(K_DNI, getDNI());
+        return jsonObject;
     }
 
     public String getNombre() {
