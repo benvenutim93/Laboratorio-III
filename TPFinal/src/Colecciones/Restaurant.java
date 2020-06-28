@@ -29,6 +29,14 @@ public class Restaurant
         this.cartaComidas = new CartaComidas();
 
     }
+
+    public ListaComidas getListaComidas(){
+        return cartaComidas.getListaComida();
+    }
+
+    public SetCombo getSetCombos(){
+        return cartaComidas.getSetCombos();
+    }
     
     public JSONObject codeRestaurant() throws JSONException {
         JSONObject jsonObject = new JSONObject();

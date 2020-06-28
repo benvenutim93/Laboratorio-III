@@ -4,7 +4,9 @@ import Excepciones.PrecioNegativoException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class Comida {
+import java.io.Serializable;
+
+public abstract class Comida implements Serializable {
 
     static final String K_NOMBRE = "Nombre";
     static final String K_PRECIO = "Precio";
@@ -49,7 +51,7 @@ public abstract class Comida {
 
     @Override
     public String toString() {
-        return "[" +nombre +"]"+ "Precio=$ " + precio;
+        return "["+nombre+"]"+ "Precio=$ " + precio;
 
 
 

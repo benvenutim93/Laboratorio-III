@@ -28,6 +28,10 @@ public class ListaComidas implements IOpBasicas<Comida> {
         return jsonArray;
     }
 
+    public ArrayList<Comida> getListaComidas() {
+        return listaComidas;
+    }
+
     /**
      * Busca la posicion de una comida en el ArrayList
      * @param aBuscar

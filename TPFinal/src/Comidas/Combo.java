@@ -6,7 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Combo implements IPrecio {
+import java.io.Serializable;
+import java.util.Set;
+
+public class Combo implements IPrecio, Serializable {
 
     static final String K_PLATOPRINCIPAL = "Plato Principal";
     static final String K_BEBIDA = "Bebida";

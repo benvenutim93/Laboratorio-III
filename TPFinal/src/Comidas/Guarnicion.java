@@ -2,7 +2,9 @@ package Comidas;
 
 import Interfaces.IPrecio;
 
-public class Guarnicion extends Comida implements IPrecio {
+import java.io.Serializable;
+
+public class Guarnicion extends Comida implements IPrecio, Serializable {
     private boolean tieneSal;
     ///-------------------------------- [C O N S T R U C T O R E S ] --------------------------------
 

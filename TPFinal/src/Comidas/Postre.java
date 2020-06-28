@@ -1,6 +1,8 @@
 package Comidas;
 
-public class Postre extends  Comida{
+import java.io.Serializable;
+
+public class Postre extends  Comida implements Serializable {
     private boolean topping;
     ///-------------------------------- [C O N S T R U C T O R E S ] --------------------------------
 

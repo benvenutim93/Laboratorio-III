@@ -2,7 +2,9 @@ package Comidas;
 
 import Interfaces.IPrecio;
 
-public class PlatoPrincipal extends  Comida implements IPrecio {
+import java.io.Serializable;
+
+public class PlatoPrincipal extends  Comida implements IPrecio, Serializable {
     private boolean aptoTacc;
     ///-------------------------------- [C O N S T R U C T O R E S ] --------------------------------
 
