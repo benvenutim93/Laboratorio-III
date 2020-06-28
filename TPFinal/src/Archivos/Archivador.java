@@ -1,15 +1,15 @@
 package Archivos;
 
+import Colecciones.ListaClientes;
 import Colecciones.ListaComidas;
 import Colecciones.SetCombo;
 import Comidas.Combo;
 import Comidas.Comida;
-
+import Humanos.Cliente;
 import java.io.*;
-import java.util.HashSet;
-import java.util.Iterator;
 
-public class Archivador_CartaComidas
+
+public class Archivador
 {
     static final String ARCHIVO_COMIDAS = "comidas.dat";
     static final String ARCHIVO_COMBOS = "combos.dat";
@@ -87,13 +87,39 @@ public class Archivador_CartaComidas
 
 //---------------------------------------------------------------------------------------------------------------------
 
+    public static void agregarClientes (ListaClientes listaClientes) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(ARCHIVO_CLIENTES);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
+        for (Cliente aux: listaClientes.getListaClientes())
+            objectOutputStream.writeObject(aux);
 
+        objectOutputStream.close();
+    }
 
+    public static ListaClientes leerArchivoClientes () {
+        ListaClientes listaClientes = new ListaClientes();
 
-
-
-
+        try {
+            FileInputStream fileInputStream = new FileInputStream(ARCHIVO_CLIENTES);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            boolean bandera = true;
+            Cliente aux ;
+            while (bandera) {
+                aux = (Cliente) objectInputStream.readObject();
+                listaClientes.agregar(aux);
+            }
+            objectInputStream.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace(); }
+        catch (IOException e) {
+            e.printStackTrace(); }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return listaClientes;
+    }
 
 
 

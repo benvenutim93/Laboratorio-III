@@ -1,7 +1,7 @@
 package Ejecutable;
 
-import Archivos.Archivador_CartaComidas;
-import Colecciones.ListaComidas;
+import Archivos.Archivador;
+import Colecciones.ListaClientes;
 import Colecciones.Restaurant;
 import Colecciones.SetCombo;
 import Comidas.*;
@@ -84,9 +84,6 @@ public class Main {
         restaurant.agregarCombo(combo9);
         restaurant.agregarCombo(combo10);
 
-        SetCombo setCombo = Archivador_CartaComidas.leerArchivoCombos();
-        System.out.println(setCombo.listar());
-
         //scan = new Scanner (System.in);
 
         restaurant.agregarComida(manaosDeUva);
@@ -109,6 +106,8 @@ public class Main {
         restaurant.agregarCliente(marian);
         restaurant.agregarCliente(rodri);
 
+        ListaClientes listaClientes = Archivador.leerArchivoClientes();
+        System.out.println(listaClientes.listar());
         //MenuPpal.MenuPrincipal(scan,restaurant);
 
         Mesa a = new Mesa (4, false);

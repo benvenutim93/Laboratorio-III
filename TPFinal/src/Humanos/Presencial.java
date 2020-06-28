@@ -7,7 +7,9 @@ import Objetos.Mesa;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Presencial extends Cliente {
+import java.io.Serializable;
+
+public class Presencial extends Cliente implements Serializable {
 
     static final String K_CANTIDADPERSONAS = "Cantidad de Personas";
     static final String K_ESPERA = "Espera";

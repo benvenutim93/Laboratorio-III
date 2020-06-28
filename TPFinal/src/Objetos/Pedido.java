@@ -3,9 +3,10 @@ package Objetos;
 import Interfaces.IOpBasicas;
 import Interfaces.IPrecio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pedido <T extends IPrecio> implements IOpBasicas {
+public class Pedido <T extends IPrecio> implements IOpBasicas, Serializable {
     private ArrayList<T> lista;
 
     public Pedido ()

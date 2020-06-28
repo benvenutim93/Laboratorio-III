@@ -1,6 +1,7 @@
 package Humanos;
 
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -13,15 +14,15 @@ import Excepciones.ComidaInexistenteException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class Cliente extends Persona {
+public class Cliente extends Persona implements Serializable {
 
     static final String K_FACTURA = "Factura" ;
     static final String K_CANTIDADPEDIDOS = "Cantidad de Pedidos" ;
 
-    Pedido pedido;
+    private Pedido pedido;  //se puede usar transient para que el pedido no se guarde en el archivo
     private double factura;
     private int cantPedidos;
-    CartaComidas cartaComidas= new CartaComidas();
+
 
     public Cliente(){
         super();
@@ -39,6 +40,9 @@ public abstract class Cliente extends Persona {
 
     }
 
+    public void setPedido(Pedido nuevo){
+        pedido = nuevo;
+    }
     @Override
     public JSONObject code() throws JSONException {
         JSONObject jsonObject = super.code();
