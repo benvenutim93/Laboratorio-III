@@ -48,7 +48,7 @@ public class SetCombo implements IOpBasicas<Combo> {
         return rta;
     }
 
-    public HashSet<Combo> getCartaCombo() {
+    public HashSet<Combo> getSetCombo() {
         return setCombo;
     }
 

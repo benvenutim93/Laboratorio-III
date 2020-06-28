@@ -132,7 +132,7 @@ public class CartaComidas
      */
     public  Comida getComidaPos(int pos){return  listaComida.getComidapos(pos);}
     public HashSet<Combo> getCartaCombo(){
-        return  setCombos.getCartaCombo();
+        return  setCombos.getSetCombo();
     }
 
     /**

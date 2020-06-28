@@ -3,10 +3,13 @@ package Ejecutable;
 import Archivos.Archivador_CartaComidas;
 import Colecciones.ListaComidas;
 import Colecciones.Restaurant;
+import Colecciones.SetCombo;
 import Comidas.*;
 import Humanos.Presencial;
 import Humanos.Virtual;
 import  Objetos.Mesa;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -81,6 +84,9 @@ public class Main {
         restaurant.agregarCombo(combo9);
         restaurant.agregarCombo(combo10);
 
+        SetCombo setCombo = Archivador_CartaComidas.leerArchivoCombos();
+        System.out.println(setCombo.listar());
+
         //scan = new Scanner (System.in);
 
         restaurant.agregarComida(manaosDeUva);
@@ -125,8 +131,6 @@ public class Main {
         }*/
 
 
-        ListaComidas listaComidas = Archivador_CartaComidas.leerArchivoComidas();
-        System.out.println(listaComidas.listar());
 
 
 

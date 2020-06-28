@@ -12,7 +12,8 @@ import java.util.Iterator;
 public class Archivador_CartaComidas
 {
     static final String ARCHIVO_COMIDAS = "comidas.dat";
-
+    static final String ARCHIVO_COMBOS = "combos.dat";
+    static final String ARCHIVO_CLIENTES = "clientes.dat";
 
     public static void agregarComidas (ListaComidas listaComidas) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(ARCHIVO_COMIDAS);
@@ -48,45 +49,28 @@ public class Archivador_CartaComidas
         return listaComidas;
     }
 
-    public static void cargarArchivoCombos(String nombre,SetCombo setCombo) throws IOException {
-        FileOutputStream archi = new FileOutputStream(nombre);
-        ObjectOutputStream obj = new ObjectOutputStream(archi);
-        HashSet<Combo> combos = setCombo.getCartaCombo();
-        Iterator<Combo> it = combos.iterator();
-        while (it.hasNext()) {
-            Combo entrada = (Combo) it.next();
-            obj.writeObject(entrada);
-        }
-    }/*
-    public  static SetCombo leerArchivoCombos(String nombre) throws IOException, ClassNotFoundException {
-        SetCombo rta = new SetCombo();
-        FileInputStream archi =new FileInputStream(nombre);
-        ObjectInputStream obj = new ObjectInputStream(archi);
-        Combo aux;
-        try {
-            while ((aux = (Combo) obj.readObject()) != null) {
-                System.out.println(aux.getClass().getSimpleName());
-                rta.agregar(aux);
-            }
-        }catch (EOFException e){
-            System.out.println("Fin archivo");
-        }
-        return rta;
+//---------------------------------------------------------------------------------------------------------------------
+
+    public static void cargarArchivoCombos(SetCombo setCombo) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(ARCHIVO_COMBOS);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        for (Combo aux: setCombo.getSetCombo())
+            objectOutputStream.writeObject(aux);
+        objectOutputStream.close();
     }
-*/
-    public static SetCombo leerArchivoCombos(String nombre) {
+
+    public static SetCombo leerArchivoCombos() {
         SetCombo rta=new SetCombo();
         try {
-            FileInputStream archi =new FileInputStream(nombre);
-            ObjectInputStream ob = new ObjectInputStream(archi);
+            FileInputStream fileInputStream =new FileInputStream(ARCHIVO_COMBOS);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             boolean flag =true;
             Combo combo1;
             while (flag){
-                combo1=(Combo)ob.readObject();
+                combo1=(Combo)objectInputStream.readObject();
                 rta.agregar(combo1);
             }
-            ob.close();
-
+            objectInputStream.close();
         }catch (EOFException e){
             System.out.println("Fin ");
         }
@@ -98,8 +82,19 @@ public class Archivador_CartaComidas
         catch (ClassNotFoundException e){
             e.printStackTrace();
         }
-
         return rta;
     }
+
+//---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
 
 }
