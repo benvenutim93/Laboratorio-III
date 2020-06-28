@@ -57,6 +57,13 @@ public class Restaurant
     public CartaComidas getCartaComidas() {
         return cartaComidas;
     }
+    /**
+     * Devuelve el set de combos
+     * @return SetCombos
+     */
+    public  SetCombo getHash(){
+        return cartaComidas.getHashsetCombo();
+    }
 
     public String mostrarListaClientes(){
         return listaClientes.listar();

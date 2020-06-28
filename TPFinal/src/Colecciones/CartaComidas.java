@@ -40,6 +40,13 @@ public class CartaComidas
     }
 
     /**
+     * Devuelve el set de combos
+     * @return SetCombos
+     */
+    public SetCombo getHashsetCombo(){
+        return this.setCombos;
+    }
+    /**
      * Agrega una comida nueva a nuestra lista de comidas
      * @param nueva
      * @return true o false si la agrego o no respectivamente
