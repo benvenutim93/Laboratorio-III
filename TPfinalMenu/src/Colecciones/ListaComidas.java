@@ -13,7 +13,7 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable {
 
     static final String K_LISTADOCOMIDA = "Listado Comida";
 
-    private ArrayList<Comida>listaComidas;
+    private ArrayList<Comida> listaComidas;
 
     public ListaComidas() {
         this.listaComidas = new ArrayList<Comida>();
@@ -24,7 +24,7 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable {
 
     public JSONArray codeListaComidas() throws JSONException {
         JSONArray jsonArray = new JSONArray();
-        for(Comida aux:listaComidas)
+        for (Comida aux : listaComidas)
             jsonArray.put(aux.code());
         return jsonArray;
     }
@@ -35,75 +35,79 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable {
 
     /**
      * Busca la posicion de una comida en el ArrayList
+     *
      * @param aBuscar
      * @return posicion de la comida
      */
-    public int getPosComida(Comida aBuscar){
-        int rta=-1;
-        if(listaComidas.contains(aBuscar)){
-            rta= listaComidas.indexOf(aBuscar);
+    public int getPosComida(Comida aBuscar) {
+        int rta = -1;
+        if (listaComidas.contains(aBuscar)) {
+            rta = listaComidas.indexOf(aBuscar);
         }
         return rta;
     }
+
     /**
      * Restorna una comida del Arraylist
+     *
      * @param pos
      * @return Comida
      */
-    public Comida getComidapos(int pos){
-        Comida rta=null;
-        if(!listaComidas.isEmpty()){
-            rta=listaComidas.get(pos);
+    public Comida getComidapos(int pos) {
+        Comida rta = null;
+        if (!listaComidas.isEmpty()) {
+            rta = listaComidas.get(pos);
         }
         return rta;
     }
+
     //------------------------------------------listar---------------------
-    public  String listaGuarnicion(){
+    public String listaGuarnicion() {
         StringBuilder builder = new StringBuilder();
-        if(!listaComidas.isEmpty()){
-            for (Comida aux: listaComidas){
-                if(aux instanceof Guarnicion){
+        if (!listaComidas.isEmpty()) {
+            for (Comida aux : listaComidas) {
+                if (aux instanceof Guarnicion) {
 
-                    builder.append(listaComidas.indexOf(aux)+". "+aux.toString()+"\n");
+                    builder.append(listaComidas.indexOf(aux) + ". " + aux.toString() + "\n");
                 }
             }
         }
         return builder.toString();
     }
 
-    public  String listaPostre(){
+    public String listaPostre() {
         StringBuilder builder = new StringBuilder();
-        if(!listaComidas.isEmpty()){
-            for (Comida aux: listaComidas){
-                if(aux instanceof Postre){
+        if (!listaComidas.isEmpty()) {
+            for (Comida aux : listaComidas) {
+                if (aux instanceof Postre) {
 
-                    builder.append(listaComidas.indexOf(aux)+". "+aux.toString()+"\n");
+                    builder.append(listaComidas.indexOf(aux) + ". " + aux.toString() + "\n");
                 }
             }
         }
         return builder.toString();
     }
 
-    public  String listaPlatosprincipales(){
+    public String listaPlatosprincipales() {
         StringBuilder builder = new StringBuilder();
-        if(!listaComidas.isEmpty()){
-            for (Comida aux: listaComidas){
-                if(aux instanceof PlatoPrincipal){
+        if (!listaComidas.isEmpty()) {
+            for (Comida aux : listaComidas) {
+                if (aux instanceof PlatoPrincipal) {
 
-                    builder.append(listaComidas.indexOf(aux)+". "+aux.toString()+"\n");
+                    builder.append(listaComidas.indexOf(aux) + ". " + aux.toString() + "\n");
                 }
             }
         }
         return builder.toString();
     }
 
-    public  String listaBebidas(){
+    public String listaBebidas() {
         StringBuilder builder = new StringBuilder();
-        if(!listaComidas.isEmpty()){
-            for (Comida aux: listaComidas){
-                if(aux instanceof Bebida){
+        if (!listaComidas.isEmpty()) {
+            for (Comida aux : listaComidas) {
+                if (aux instanceof Bebida) {
 
-                    builder.append(listaComidas.indexOf(aux)+". "+aux.toString()+"\n");
+                    builder.append(listaComidas.indexOf(aux) + ". " + aux.toString() + "\n");
                 }
             }
         }
@@ -118,29 +122,29 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable {
         StringBuilder builderPostre = new StringBuilder();
         StringBuilder builderGuarnicion = new StringBuilder();
 
-        if(!listaComidas.isEmpty()) {
+        if (!listaComidas.isEmpty()) {
             for (Comida aux : listaComidas) {
 
                 if (aux instanceof PlatoPrincipal) {
-                    builderPlato.append("\n"+aux.toString());
+                    builderPlato.append("\n" + aux.toString());
 
                 }
                 if (aux instanceof Bebida) {
-                    builderBebida.append("\n"+aux.toString());
+                    builderBebida.append("\n" + aux.toString());
                 }
                 if (aux instanceof Postre) {
-                    builderPostre.append("\n"+aux.toString());
+                    builderPostre.append("\n" + aux.toString());
                 }
                 if (aux instanceof Guarnicion) {
-                    builderGuarnicion.append("\n"+aux.toString());
+                    builderGuarnicion.append("\n" + aux.toString());
                 }
 
             }
             builder.append("----PlatosPrincipales:" + builderPlato.toString());
-            builder.append("\n----Bebidas:"+builderBebida.toString());
-            builder.append("\n----Postres:"+builderPostre.toString());
-            builder.append("\n----Guarniciones  :"+builderGuarnicion.toString());
-        }else{
+            builder.append("\n----Bebidas:" + builderBebida.toString());
+            builder.append("\n----Postres:" + builderPostre.toString());
+            builder.append("\n----Guarniciones  :" + builderGuarnicion.toString());
+        } else {
             builder.append("No hay comidas cargadas ");
         }
 
@@ -156,8 +160,8 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable {
      * @return true agregado con exito
      */
     public boolean agregar(Comida obj) {
-        boolean rta=false;
-        if(!listaComidas.contains(obj)){
+        boolean rta = false;
+        if (!listaComidas.contains(obj)) {
             rta = listaComidas.add(obj);
         }
         return rta;
@@ -166,11 +170,39 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable {
 
     @Override
     public boolean eliminar(Comida obj) {
-        boolean rta=false;
-        if(!listaComidas.isEmpty()){
-            rta=listaComidas.remove(obj);
+        boolean rta = false;
+        if (!listaComidas.isEmpty()) {
+            rta = listaComidas.remove(obj);
         }
 
         return rta;
+    }
+
+    public String listarComidaConPosicion() {
+        StringBuilder builder = new StringBuilder();
+
+        if (!listaComidas.isEmpty()) {
+            for (Comida aux : listaComidas) {
+
+                if (aux instanceof PlatoPrincipal) {
+                    builder.append("\n" + "\033[33m"+listaComidas.indexOf(aux) + "\u001B[0m"+ ". " + aux.toString() + "\n");
+
+                }
+                if (aux instanceof Bebida) {
+                    builder.append("\n" + "\033[33m"+listaComidas.indexOf(aux) +"\u001B[0m"+ ". " + aux.toString() + "\n");
+                }
+                if (aux instanceof Postre) {
+                    builder.append("\n" + "\033[33m"+listaComidas.indexOf(aux) + "\u001B[0m"+". " + aux.toString() + "\n");
+                }
+                if (aux instanceof Guarnicion) {
+                    builder.append("\n" + "\033[33m"+listaComidas.indexOf(aux) + "\u001B[0m"+". " + aux.toString() + "\n");
+                }
+
+            }
+        } else {
+            builder.append("No hay comidas cargadas ");
+        }
+
+        return builder.toString();
     }
 }

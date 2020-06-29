@@ -40,6 +40,7 @@ public class MenuPpal {
             case 4:
                 imprimirOpcionesGestionCombosComidas();
                 var = elegirOpcion(scan);
+                MenuCombos(var,scan,restaurant);
                 break;
             case 0:
                 System.out.println("Gracias, vuelva pronto! =) ");
@@ -482,16 +483,98 @@ public class MenuPpal {
 
 
 
-    public static void MenuCombos (int op, Scanner scan)
+    public static void MenuCombos (int op, Scanner scan,Restaurant restaurant)
     {
         Combo combo;
         Comida comida;
+        PlatoPrincipal plato ;
+        Bebida bebida ;
+        Postre postre;
+        Guarnicion guarni;
+        int pos;String confirmar;
         switch (op)
         {
             case 1:
 
 
+                System.out.println("\033[33m"+"Creando Combo"+"\u001B[0m");
+                System.out.println("\033[35m"+"Eliga un PlatoPrincipal"+"\u001B[0m");
+                System.out.println(restaurant.getCartaComidas().listarPlatosPrincipales());
+                pos=elegirOpcion(scan);
+                plato= (PlatoPrincipal) restaurant.getCartaComidas().getComidaPos(pos);
+
+                System.out.println("\033[33m"+"Creando Combo"+"\u001B[0m");
+                System.out.println("\033[35m"+"Eliga una Bebida"+"\u001B[0m");
+                System.out.println(restaurant.getCartaComidas().listarBebidas());
+                pos=elegirOpcion(scan);
+                bebida=(Bebida)restaurant.getCartaComidas().getComidaPos(pos);
+
+                System.out.println("\033[33m"+"Creando Combo"+"\u001B[0m");
+                System.out.println("\033[35m"+"Eliga un Postre"+"\u001B[0m");
+                System.out.println(restaurant.getCartaComidas().listarPostres());
+                pos=elegirOpcion(scan);
+                postre=(Postre)restaurant.getCartaComidas().getComidaPos(pos);
+
+                System.out.println("\033[33m"+"Creando Combo"+"\u001B[0m");
+                System.out.println("\033[35m"+"Eliga una Guarnicion"+"\u001B[0m");
+                System.out.println(restaurant.getCartaComidas().listarGuarnicion());
+                pos=elegirOpcion(scan);
+                guarni=(Guarnicion)restaurant.getCartaComidas().getComidaPos(pos);
+
+                combo=new Combo(plato,bebida,postre,guarni);
+                System.out.println("\033[33m"+"Combo a agregar "+"\u001B[0m");
+                System.out.println(combo.getCombo());
+                confirmar=scan.next();
+
+                if (confirmar.equalsIgnoreCase("si")){
+                    restaurant.agregarCombo(combo);
+                    System.out.println("\033[33m"+"Combo agregado al Resto"+"\u001B[0m");
+                }
+                break;
+            case 2:
+                System.out.println("Eliga un combo a " +"\033[31m"+"Eliminar"+"\u001B[0m");
+                System.out.println(restaurant.listarCombos());
+
+                pos=elegirOpcion(scan);
+                combo= restaurant.getSetCombos().getComboPos(pos);
+                System.out.println("\033[33m"+"Combo a "+"\033[31m"+"Eliminar"+"\u001B[0m"+"\u001B[0m");
+                System.out.println(combo.getCombo());
+                System.out.println("\033[33m"+"Desea borrar este combo (SI/NO) "+"\u001B[0m");
+                confirmar=scan.next();
+                if(confirmar.equalsIgnoreCase("si")){
+                    restaurant.eliminarCombo(combo);
+                    System.out.println("\033[33m"+"Combo Eliminado del Restaurant "+"\u001B[0m");
+                }
+                break;
+
+            case 3:
+                break;
+            case 4:
+            System.out.println("\033[33m"+"Eliga una comida a Borrar"+"\u001B[0m");
+            System.out.println("\033[35m"+"Eliga una comida a "+"\033[31m"+"Eliminar"+"\u001B[0m"+ "\u001B[0m");
+            System.out.println(restaurant.listarComidaConPosicion());
+            pos=elegirOpcion(scan);
+            comida=restaurant.getCartaComidas().getComidaPos(pos);
+
+            System.out.println("Desea borra esta comida (SI/NO)");
+                System.out.println("\033[31m"+comida.toString()+"\u001B[0m");
+
+            confirmar=scan.next();
+            if (confirmar.equalsIgnoreCase("si")){
+                restaurant.eliminarComida(comida);
+                System.out.println("\033[33m"+"Comida eliminada con exito"+"\u001B[0m");
+            }
+
+            break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 0:
+                break;
+
         }
+        MenuPrincipal(scan,restaurant);
     }
 
 
