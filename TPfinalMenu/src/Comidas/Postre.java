@@ -2,7 +2,9 @@ package Comidas;
 
 import Interfaces.IPrecio;
 
-public class Postre extends  Comida implements IPrecio {
+import java.io.Serializable;
+
+public class Postre extends  Comida implements IPrecio, Serializable {
     private boolean topping;
     ///-------------------------------- [C O N S T R U C T O R E S ] --------------------------------
 

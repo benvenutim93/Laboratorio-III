@@ -7,10 +7,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class SetCombo implements IOpBasicas<Combo> {
+public class SetCombo implements IOpBasicas<Combo>, Serializable {
 
     static final String K_LISTADOCOMBOS= "Listado Combos";
 
@@ -48,7 +49,8 @@ public class SetCombo implements IOpBasicas<Combo> {
         return rta;
     }
 
-    public HashSet<Combo> getCartaCombo() {
+
+    public HashSet<Combo> getSetCombo() {
         return setCombo;
     }
 

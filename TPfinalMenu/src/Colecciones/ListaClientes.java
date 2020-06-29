@@ -21,6 +21,10 @@ public class ListaClientes implements IOpBasicas<Cliente>
         this.listaClientes = new ArrayList<Cliente>();
     }
 
+    public ArrayList<Cliente> getListaClientes() {
+        return listaClientes;
+    }
+
     /**
      * Nos permite mostrar nuestra lista de Clientes
      * @return string

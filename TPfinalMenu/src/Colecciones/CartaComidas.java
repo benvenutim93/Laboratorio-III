@@ -24,6 +24,16 @@ public class CartaComidas
         this.setCombos=new SetCombo();
     }
 
+    public ListaComidas getListaComida ()
+    {
+        return listaComida;
+    }
+
+    public SetCombo getSetCombos ()
+    {
+        return setCombos;
+    }
+
     public JSONObject codeCartaComidas() throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(K_LISTADOCOMIDA, listaComida.codeListaComidas());
@@ -117,7 +127,7 @@ public class CartaComidas
      */
     public  Comida getComidaPos(int pos){return  listaComida.getComidapos(pos);}
     public HashSet<Combo> getCartaCombo(){
-        return  setCombos.getCartaCombo();
+        return  setCombos.getSetCombo();
     }
 
     /**

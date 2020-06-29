@@ -4,7 +4,9 @@ package Humanos;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class Persona  {
+import java.io.Serializable;
+
+public abstract class Persona implements Serializable {
 
     static final String K_NOMBRE = "Nombre" ;
     static final String K_APELLIDO = "Apellido" ;

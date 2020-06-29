@@ -66,6 +66,22 @@ public class ListaMesas implements IOpBasicas {
         }
         return sb.toString();
     }
+    /**
+     * Imprime un listado de mesas ocupadas
+     * @return string con todas las mesas ocupadas
+     */
+    public String imprimirMesasOcupadas ()
+    {
+        StringBuilder sb = new StringBuilder ();
+        for (Mesa obj : listaMesa)
+        {
+            if (obj.isEstaOcupado())
+            {
+                sb.append(obj.toString()+"\n");
+            }
+        }
+        return sb.toString();
+    }
 
     /**
      * Busca una mesa libre con la misma capacidad de gente que ingreso.
@@ -134,7 +150,7 @@ public class ListaMesas implements IOpBasicas {
      * @return La posicion en el ArrayList que ocupa esa mesa
      */
 
-    public int buscarMesaID (int id)
+    public int buscarMesaIDpos (int id)
     {
         int flag = 0, i = 0, pos = -1;
         while (i < cantidadMesas() && flag == 0)
@@ -148,6 +164,28 @@ public class ListaMesas implements IOpBasicas {
             i++;
         }
         return pos;
+    }
+
+    /**
+     * Busca una mesa por numero de ID
+     * @param id
+     * @return una Mesa
+     */
+    public Mesa buscarMesaIDmesa (int id)
+    {
+        int flag = 0, i = 0, pos = -1;
+        Mesa aux = new Mesa ();
+        while (i < cantidadMesas() && flag == 0)
+        {
+            Mesa comparar = listaMesa.get(i);
+            if (comparar.getIdMesa() == id)
+            {
+                flag = 1;
+                aux = listaMesa.get(i);
+            }
+            i++;
+        }
+        return aux;
     }
 
     /**
@@ -200,7 +238,6 @@ public class ListaMesas implements IOpBasicas {
     {
         boolean espera=true;
         int idMesa = 0;
-        System.out.println(capMaximaMesas());
         if (capMaximaMesas() >= cliente.getCantidadPersonas())
         {
             Mesa aux = buscarMesa(cliente.getCantidadPersonas());
@@ -222,11 +259,14 @@ public class ListaMesas implements IOpBasicas {
      */
     public void liberarMesa (int ID) throws IdInexistenteMesaException
     {
-        int pos = buscarMesaID(ID);
-        if (pos == -1)
-            throw new IdInexistenteMesaException("El ID no existe");
-        else
+        int pos = buscarMesaIDpos(ID);
+        if (listaMesa.get(pos).isEstaOcupado())
+        {
             listaMesa.get(pos).setEstaOcupado(false);
+        }
+        else //if (pos == -1)
+            throw new IdInexistenteMesaException("El ID no existe");
+
     }
 
     /**
@@ -358,11 +398,9 @@ public class ListaMesas implements IOpBasicas {
 
             if (objMesa instanceof Mesa) {
                 Mesa aux = (Mesa)objMesa;
-
                 aux.setIdMesa(cantidadMesas() + 1);
                 listaMesa.add(aux);
                 agregado = true;
-
             }
         }
             return agregado;

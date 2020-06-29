@@ -23,17 +23,18 @@ public class MenuPpal {
             {
                 imprimirOpionesClientePresencial();
                 var = elegirOpcion(scan);
-                MenuClientePresencial(var,scan, restaurant);
+                MenuClientePresencial(var,scan, restaurant, " ");
                 break;
             }
             case 2:
                 imprimirOpcionesDelivery();
                 var = elegirOpcion(scan);
-                MenuDelivery(var,scan,restaurant);
+                MenuDelivery(var,scan,restaurant, " ");
                 break;
             case 3:
                 imprimirOpcionesMesas();
                 var = elegirOpcion(scan);
+                MenuMesas(var, scan, restaurant);
 
                 break;
             case 4:
@@ -111,17 +112,19 @@ public class MenuPpal {
         System.out.println("1-Bebida\n"+ "2-PlatoPrinciapl\n"+"3-Postre\n"+"4-Guarnicion");
     }
 
-    public static void MenuClientePresencial (int op, Scanner scan, Restaurant restaurant)
+    public static void MenuClientePresencial (int op, Scanner scan, Restaurant restaurant, String dni)
     {
 
         Presencial presencial = null;
         Cliente cliente = null;
-
-        String dni ;
+        if (dni.equalsIgnoreCase(" ")) {
+            System.out.println(" Ingrese Dni del  Cliente: ");
+            dni = scan.next();
+        }
         switch (op)
         {
             case 1:
-                presencial = crearClientePresencial(scan);
+                presencial = crearClientePresencial(scan, dni);
                 try {
                     if (!restaurant.agregarCliente(presencial)) {
                         throw new DniExistenteException();
@@ -134,8 +137,8 @@ public class MenuPpal {
                 }
                 break;
             case 2:
-                System.out.println(" Ingrese Dni del  Cliente: ");
-                dni=scan.next();
+                //System.out.println(" Ingrese Dni del  Cliente: ");
+                //dni=scan.next();
                 try {
 
                     presencial = (Presencial) restaurant.buscarPorDni(dni);
@@ -171,8 +174,8 @@ public class MenuPpal {
                 }
                 break;
             case 3:
-                System.out.println(" Ingrese Dni del  Cliente: ");
-                dni=scan.next();
+                //System.out.println(" Ingrese Dni del  Cliente: ");
+                //dni=scan.next();
                 presencial = (Presencial) restaurant.buscarPorDni(dni);
                 if (presencial.getEspera()==false) {
                     try {
@@ -185,14 +188,38 @@ public class MenuPpal {
                             opc = elegirOpcion(scan);
                             switch (opc) {
                                 case 1:
-                                    System.out.println(restaurant.listarCombos());
-                                    opc = elegirOpcion(scan);
-                                    aux.pedirCombo(restaurant.getCartaComidas(), opc);
+                                    String seguir;
+                                    do {
+                                            System.out.println(restaurant.listarCombos());
+                                            opc = elegirOpcion(scan);
+                                            aux.pedirCombo(restaurant.getCartaComidas(), opc);
+                                            System.out.println("Desea agregar algo mas? SI/NO");
+                                            seguir  = scan.next();
+                                            if (seguir.equalsIgnoreCase("si")) {
+                                                System.out.println("--------------------------------------------------------");
+                                                System.out.println("Su pedido hasta ahora");
+                                                System.out.println(aux.mostrarPedidos());
+                                                System.out.println("--------------------------------------------------------");
+
+                                            }
+                                        }while (seguir.equalsIgnoreCase("Si"));
                                     break;
                                 case 2:
-                                    imprimirOpcionesTomarPedidoComidas();
-                                    opc = elegirOpcion(scan);
-                                    aux.crearPedido(opc, restaurant.getCartaComidas());
+                                    String continuar;
+                                    do {
+                                        imprimirOpcionesTomarPedidoComidas();
+                                        opc = elegirOpcion(scan);
+                                        aux.crearPedido(opc, restaurant.getCartaComidas());
+                                        System.out.println("Desea agregar algo mas? SI/NO");
+                                        continuar  = scan.next();
+                                        if (continuar.equalsIgnoreCase("si")) {
+                                            System.out.println("--------------------------------------------------------");
+                                            System.out.println("Su pedido hasta ahora");
+                                            System.out.println(aux.mostrarPedidos());
+                                            System.out.println("--------------------------------------------------------");
+
+                                        }
+                                    }while (continuar.equalsIgnoreCase("si"));
                                     break;
                             }
                         }
@@ -204,7 +231,8 @@ public class MenuPpal {
                     try {
                         throw new SentarPersonaException();
                     }
-                    catch (SentarPersonaException e) {
+                    catch (SentarPersonaException e)
+                    {
                         System.out.println(e.getMessage());
                         System.out.println("Desea ubicarlo ahora? SI/NO");
                         String rta = scan.next();
@@ -212,21 +240,24 @@ public class MenuPpal {
                         if (rta.equalsIgnoreCase("si")) {
                             try {
                                 presencial.setEspera(restaurant.ocuparMesa(presencial));
+                                MenuClientePresencial(3, scan, restaurant, dni);
 
                             }  catch (SinMesasException sinMesasException) {
                                 System.out.println(sinMesasException.getMessage());
+                                MenuPrincipal(scan, restaurant);
                             } catch (CapacidadMaximaException capacidadMaximaException) {
                                 System.out.println(capacidadMaximaException.getMessage());
                             } catch (IdInexistenteMesaException idInexistenteMesaException) {
                                 idInexistenteMesaException.printStackTrace();
                             }
                         }
+
                     }
                 }
                 break;
             case 4:
-                System.out.println(" Ingrese Dni del  Cliente: ");
-                dni=scan.next();
+                //System.out.println(" Ingrese Dni del  Cliente: ");
+                //dni=scan.next();
                 Cliente aux= restaurant.buscarPorDni(dni);
                 try{
                     if (aux == null) {
@@ -249,7 +280,7 @@ public class MenuPpal {
         MenuPrincipal(scan,restaurant);
     }
 
-    public static Presencial crearClientePresencial(Scanner scan)
+    public static Presencial crearClientePresencial(Scanner scan, String dni)
     {
         Presencial a = new Presencial ();
         System.out.println("Nombre: ");
@@ -257,8 +288,7 @@ public class MenuPpal {
         a.setNombre(scan.nextLine());
         System.out.println("Apellido: ");
         a.setApellido(scan.nextLine());
-        System.out.println("DNI: ");
-        a.setDNI(scan.nextLine());
+        a.setDNI(dni);
         System.out.println("Cantidad de personas: ");
         a.setCantPer(scan.nextInt());
         return a;
@@ -279,10 +309,14 @@ public class MenuPpal {
         a.setDireccion(scan.nextLine());
         return a;
     }
-    public static void MenuDelivery (int op, Scanner scan,Restaurant restaurant)
+    public static void MenuDelivery (int op, Scanner scan,Restaurant restaurant, String dni)
     {
         Virtual virtual;
-        String dni;
+        if (dni.equalsIgnoreCase(" ")) {
+            System.out.println(" Ingrese Dni del  Cliente: ");
+            dni = scan.next();
+        }
+
         switch (op)
         {
             case 1:
@@ -300,8 +334,8 @@ public class MenuPpal {
                 }
                 break;
             case 2:
-                System.out.println(" Ingrese Dni del  Cliente: ");
-                dni=scan.next();
+                //System.out.println(" Ingrese Dni del  Cliente: ");
+                //dni=scan.next();
                 virtual = (Virtual) restaurant.buscarPorDni(dni);
                 try {
                     if (virtual == null) {
@@ -314,14 +348,38 @@ public class MenuPpal {
                         opc = elegirOpcion(scan);
                         switch (opc) {
                             case 1:
-                                System.out.println(restaurant.listarCombos());
-                                opc = elegirOpcion(scan);
-                                aux.pedirCombo(restaurant.getCartaComidas(), opc);
+                                String seguir;
+                                do {
+                                    System.out.println(restaurant.listarCombos());
+                                    opc = elegirOpcion(scan);
+                                    aux.pedirCombo(restaurant.getCartaComidas(), opc);
+                                    System.out.println("Desea agregar algo mas? SI/NO");
+                                    seguir  = scan.next();
+                                    if (seguir.equalsIgnoreCase("si")) {
+                                        System.out.println("--------------------------------------------------------");
+                                        System.out.println("Su pedido hasta ahora");
+                                        System.out.println(aux.mostrarPedidos());
+                                        System.out.println("--------------------------------------------------------");
+
+                                    }
+                                }while (seguir.equalsIgnoreCase("Si"));
                                 break;
                             case 2:
-                                imprimirOpcionesTomarPedidoComidas();
-                                opc = elegirOpcion(scan);
-                                aux.crearPedido(opc, restaurant.getCartaComidas());
+                                String continuar;
+                                do {
+                                    imprimirOpcionesTomarPedidoComidas();
+                                    opc = elegirOpcion(scan);
+                                    aux.crearPedido(opc, restaurant.getCartaComidas());
+                                    System.out.println("Desea agregar algo mas? SI/NO");
+                                    continuar  = scan.next();
+                                    if (continuar.equalsIgnoreCase("si")) {
+                                        System.out.println("--------------------------------------------------------");
+                                        System.out.println("Su pedido hasta ahora");
+                                        System.out.println(aux.mostrarPedidos());
+                                        System.out.println("--------------------------------------------------------");
+
+                                    }
+                                }while (continuar.equalsIgnoreCase("si"));
                                 break;
                         }
                     }
@@ -331,8 +389,8 @@ public class MenuPpal {
                 }
                 break;
             case 3:
-                System.out.println(" Ingrese Dni del  Cliente: ");
-                dni=scan.next();
+                //System.out.println(" Ingrese Dni del  Cliente: ");
+                //dni=scan.next();
                 Cliente aux= restaurant.buscarPorDni(dni);
                 try{
                     if (aux == null) {
@@ -365,29 +423,61 @@ public class MenuPpal {
         return a;
     }
 
-    public static void MenuMesas (int op, Scanner scan, ListaMesas lista)
+    public static void MenuMesas (int op, Scanner scan, Restaurant restaurant)
     {
         Mesa mesa;
         switch (op)
         {
             case 1:
-                lista.imprimirMesasLibres();
+                System.out.println(restaurant.imprimirMesasLibres());
                 break;
             case 2:
-                //TODO ver como agregar mesa, si se crea o como.
-                lista.agregar(crearMesa(scan));
+                int id, flag = 0;
+                System.out.println(restaurant.imprimirMesasOcupadas());
+                System.out.println("Ingrese el ID de la mesa a liberar");
+                id = scan.nextInt();
+                do {
+                        try {
+                            restaurant.liberarMesa(id);
+                            System.out.println(restaurant.imprimirMesasOcupadas());
+                            flag = 1;
+
+                        } catch (IdInexistenteMesaException e) {
+                            System.out.println(e.getMessage());
+                            System.out.println("Ingrese un ID valido");
+                            id = scan.nextInt();
+                        } catch (IndexOutOfBoundsException ex)
+                        {
+                            System.out.println("Ingrese un ID menor o igual a "+restaurant.cantidadMesas());
+                            id = scan.nextInt();
+                        }
+                    } while (flag == 0);
                 break;
             case 3:
-                //TODO funcion de eliminar mesa
+                String seguir;
+                do{
+                    restaurant.agregarMesa(crearMesa(scan));
+                    System.out.println("Quiere agregar mas mesas? SI/NO");
+                    seguir = scan.next();
+                }while (seguir.equalsIgnoreCase("si"));
                 break;
             case 4:
-                ///TODO la mesa tenga asignado el DNI del cliente que la ocupa.
+                int id2;
+                System.out.println(restaurant.mostrarListaMesas());
+                System.out.println("Ingrese el ID de la mesa a eliminar");
+                id2 = scan.nextInt();
+                restaurant.eliminarMesa(restaurant.buscarMesaIDmesa(id2));
+                System.out.println(restaurant.mostrarListaMesas());
+                break;
+            case 0:
                 break;
             default:
                 System.out.println("Opción invalida");
                 op = elegirOpcion(scan);
                 break;
         }
+        MenuPrincipal(scan, restaurant);
+
     }
 
 

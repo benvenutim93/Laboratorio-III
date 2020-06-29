@@ -6,9 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ListaComidas implements IOpBasicas<Comida> {
+public class ListaComidas implements IOpBasicas<Comida>, Serializable {
 
     static final String K_LISTADOCOMIDA = "Listado Comida";
 
@@ -26,6 +27,10 @@ public class ListaComidas implements IOpBasicas<Comida> {
         for(Comida aux:listaComidas)
             jsonArray.put(aux.code());
         return jsonArray;
+    }
+
+    public ArrayList<Comida> getListaComidas() {
+        return listaComidas;
     }
 
     /**

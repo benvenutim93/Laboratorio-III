@@ -63,6 +63,8 @@ public class Restaurant
     }
 
 
+
+
     //------------------------- <<| M E T O D O S   C O M I D A S |>> ------------------------
 
     /**
@@ -137,6 +139,22 @@ public class Restaurant
         return cartaComidas.eliminarComida(aBorrar);
     }
 
+    /**
+     * Pasamanos-> Devuelve la lista de comidas
+     * @return
+     */
+    public ListaComidas getListaComidas(){
+        return cartaComidas.getListaComida();
+    }
+
+    /**
+     * Pasamanos-> Devuelve el set de combos.
+     * @return
+     */
+    public SetCombo getSetCombos(){
+        return cartaComidas.getSetCombos();
+    }
+
 
 
     //------------------------ <<| M E T O D O S   C L I E N T E S |>> -----------------------
@@ -202,7 +220,13 @@ public class Restaurant
     public String imprimirMesasLibres (){
         return listaMesas.imprimirMesasLibres();
     }
-
+    /**
+     * Pasamanos-> Imprime un listado de mesas ocupadas
+     * @return string con todas las mesas ocupadas
+     */
+    public String imprimirMesasOcupadas (){
+        return listaMesas.imprimirMesasOcupadas();
+    }
     /**
      * Pasamanos-> Busca una mesa libre con la misma capacidad de gente que ingreso.
      * @param cantidadPersonas
@@ -245,8 +269,17 @@ public class Restaurant
      * @param id
      * @return La posicion en el ArrayList que ocupa esa mesa
      */
-    public int buscarMesaID (int id){
-        return listaMesas.buscarMesaID(id);
+    public int buscarMesaIDpos (int id){
+        return listaMesas.buscarMesaIDpos(id);
+    }
+
+    /**
+     * Pasamanos-> Busca una mesa por ID
+     * @param id
+     * @return una Mesa
+     */
+    public Mesa buscarMesaIDmesa (int id){
+        return listaMesas.buscarMesaIDmesa(id);
     }
 
     /**

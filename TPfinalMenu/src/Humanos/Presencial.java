@@ -7,7 +7,9 @@ import Objetos.Mesa;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Presencial extends Cliente {
+import java.io.Serializable;
+
+public class Presencial extends Cliente implements Serializable {
 
     static final String K_CANTIDADPERSONAS = "Cantidad de Personas";
     static final String K_ESPERA = "Espera";
@@ -100,9 +102,19 @@ public class Presencial extends Cliente {
     {
         return espera;
     }
+    public String booleanToString ()
+    {
+        String rta = "";
+        if (espera)
+        {
+            rta = "El cliente debe aguardar un momento";
+        }
+        else rta = "No posee espera";
+        return rta;
+    }
     @Override
     public String toString() {
-        return super.toString()+"\nCantidad Personas= " +cantPer+"\nEspera= " +espera;
+        return super.toString()+"\nCantidad Personas= " +cantPer+"\nEspera= " +booleanToString();
 
     }
 

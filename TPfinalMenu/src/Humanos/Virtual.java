@@ -7,8 +7,9 @@ import Humanos.Cliente;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Virtual extends Cliente
-{
+import java.io.Serializable;
+
+public class Virtual extends Cliente implements Serializable {
 
     static final String K_TELEFONO = "Telefono";
     static final String K_DIRECCION = "Direccion";

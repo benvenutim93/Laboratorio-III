@@ -2,7 +2,9 @@ package Comidas;
 
 import Interfaces.IPrecio;
 
-public class Bebida extends Comida implements IPrecio {
+import java.io.Serializable;
+
+public class Bebida extends Comida implements IPrecio, Serializable {
 
     private boolean tieneGas;
     private  String temperatura;

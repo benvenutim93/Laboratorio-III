@@ -4,9 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Mesa {
+public class Mesa implements Serializable {
 
     public static String K_MESA_DNICLIENTE = "Dni Cliente";
     public static String K_MESA_CAPACIDAD = "Capacidad";

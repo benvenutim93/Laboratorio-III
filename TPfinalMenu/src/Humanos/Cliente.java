@@ -1,6 +1,7 @@
 package Humanos;
 
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -13,15 +14,15 @@ import Excepciones.ComidaInexistenteException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class Cliente extends Persona {
+public abstract class Cliente extends Persona implements Serializable {
 
     static final String K_FACTURA = "Factura" ;
     static final String K_CANTIDADPEDIDOS = "Cantidad de Pedidos" ;
 
-    Pedido pedido;
+    private transient Pedido pedido;
     private double factura;
     private int cantPedidos;
-    CartaComidas cartaComidas= new CartaComidas();
+
 
     public Cliente(){
         super();
@@ -56,14 +57,13 @@ public abstract class Cliente extends Persona {
     public void pedirCombo(CartaComidas cartaComidas, int num) throws ComboNoExistenteException {
         Combo respuesta = null;
         if(num<=cartaComidas.getCantidadCombo()) {
-            int nombre = 1;
             HashSet<Combo> carta = cartaComidas.getCartaCombo();
             Iterator<Combo> it = carta.iterator();
 
 
             while (it.hasNext()) {
                 Combo aux = (Combo) it.next();
-                if (aux.getId() == (nombre)) {
+                if (aux.getId() == (num)) {
                     respuesta = aux;
                 }
             }
