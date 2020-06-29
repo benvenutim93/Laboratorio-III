@@ -48,7 +48,18 @@ public class SetCombo implements IOpBasicas<Combo>, Serializable {
         }
         return rta;
     }
+    public Combo getComboPos(int pos) {
+     Combo rta=null;
+        Iterator<Combo> it = setCombo.iterator();
+        while (it.hasNext()) {
+            Combo entrada = (Combo) it.next();
+            if (entrada.getId() == pos) {
+               rta=entrada.getComboComida();
 
+            }
+        }
+        return rta;
+    }
 
     public HashSet<Combo> getSetCombo() {
         return setCombo;

@@ -100,6 +100,9 @@ public class Restaurant
     public String listaComidas(){
         return cartaComidas.listarComidas();
     }
+    public String listarComidaConPosicion(){
+        return cartaComidas.listarComidaConPosicion();
+    }
 
     /**
      * Pasamanos-> Cuenta la cantidad de combos en la coleccion

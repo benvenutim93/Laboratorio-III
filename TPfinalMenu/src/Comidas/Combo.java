@@ -189,4 +189,7 @@ public class Combo implements IPrecio, Serializable {
     }
 
 
+    public Combo getComboComida() {
+        return this;
+    }
 }
