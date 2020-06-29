@@ -49,16 +49,18 @@ public class Virtual extends Cliente implements Serializable {
     @Override
     public void pedirCombo(CartaComidas cartaComidas,int num) throws ComboNoExistenteException {
         super.pedirCombo(cartaComidas,num);
+        setCantPedidos();
     }
 
     @Override
     public void crearPedido(int num,CartaComidas carta)throws ComidaInexistenteException {
         super.crearPedido(num,carta);
+        setCantPedidos();
     }
 
     @Override
-    public double calcularFactura() {
-        return super.calcularFactura();
+    public void calcularFactura() {
+        super.calcularFactura();
     }
 
     @Override

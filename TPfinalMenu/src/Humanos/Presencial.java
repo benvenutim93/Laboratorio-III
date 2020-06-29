@@ -83,8 +83,8 @@ public class Presencial extends Cliente implements Serializable {
 
 
     @Override
-    public double calcularFactura() {
-        return super.calcularFactura();
+    public void calcularFactura() {
+         super.calcularFactura();
     }
 
     @Override

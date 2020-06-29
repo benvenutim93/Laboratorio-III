@@ -353,7 +353,8 @@ public class MenuPpal {
                                     System.out.println(restaurant.listarCombos());
                                     opc = elegirOpcion(scan);
                                     aux.pedirCombo(restaurant.getCartaComidas(), opc);
-                                    System.out.println("Desea agregar algo mas? SI/NO");
+                                    virtual.calcularFactura();
+                                    System.out.println("Desea agregar otro combo mas? SI/NO");
                                     seguir  = scan.next();
                                     if (seguir.equalsIgnoreCase("si")) {
                                         System.out.println("--------------------------------------------------------");
@@ -370,23 +371,27 @@ public class MenuPpal {
                                     imprimirOpcionesTomarPedidoComidas();
                                     opc = elegirOpcion(scan);
                                     aux.crearPedido(opc, restaurant.getCartaComidas());
-                                    System.out.println("Desea agregar algo mas? SI/NO");
+                                    virtual.calcularFactura();
+                                    System.out.println("Desea agregar otra comida? SI/NO");
                                     continuar  = scan.next();
                                     if (continuar.equalsIgnoreCase("si")) {
                                         System.out.println("--------------------------------------------------------");
                                         System.out.println("Su pedido hasta ahora");
+
                                         System.out.println(aux.mostrarPedidos());
                                         System.out.println("--------------------------------------------------------");
 
                                     }
                                 }while (continuar.equalsIgnoreCase("si"));
-                                break;
+
+
                         }
                     }
                 }
          catch (DniNOexistenteExecption | ComidaInexistenteException | ComboNoExistenteException e) {
         System.out.println(e.getMessage());
                 }
+                MenuDelivery(2,scan, restaurant,dni);
                 break;
             case 3:
                 //System.out.println(" Ingrese Dni del  Cliente: ");

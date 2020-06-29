@@ -122,7 +122,7 @@ public abstract class Cliente extends Persona implements Serializable {
     /**Recorre el array de los pedidos y va sumando el precio
      * seria como un """set"""
      */
-    public double calcularFactura()
+    public void calcularFactura()
     {
         factura=0;
         for (int i=0;i< pedido.getTotal();i++)
@@ -148,7 +148,7 @@ public abstract class Cliente extends Persona implements Serializable {
                 factura+=guarnicion.getPrecio();
             }
         }
-        return factura;
+
     }
 
     /**elimina ya sea un combo o una comida elegida
@@ -208,7 +208,7 @@ public abstract class Cliente extends Persona implements Serializable {
 
     @Override
     public String toString() {
-        return  super.toString()+"\nPedidos realizados= "+mostrarPedidos()+"\nFactura= "+factura+"\nCantidad de Pedidos= "+getCantPedidos();
+        return  super.toString()+"\nPedidos realizados= "+mostrarPedidos()+"\nFactura= "+getFactura()+"\nCantidad de Pedidos= "+getCantPedidos();
     }
 
     @Override
