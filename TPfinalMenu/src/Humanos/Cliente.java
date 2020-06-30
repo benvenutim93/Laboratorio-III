@@ -92,27 +92,63 @@ public  class Cliente extends Persona implements Serializable {
                 System.out.println(carta.listarBebidas());
                 System.out.println("Ingrese el numero de la bebida a elegir");
                 numero=scan.nextInt();
-                pedido.agregar(carta.getComidaPos(numero));
-
+                try {
+                    if (carta.getComidaPos(numero) instanceof Bebida)
+                        pedido.agregar(carta.getComidaPos(numero));
+                    else
+                        System.out.println("Opcion invalida");
+                }
+                catch (IndexOutOfBoundsException a)
+                {
+                    System.out.println("Opcion invalida");
+                }
                 break;
             case 2:
 
                 System.out.println(carta.listarPlatosPrincipales());
                 System.out.println("Ingrese el numero del plato a elegir");
                 numero=scan.nextInt();
-                pedido.agregar(carta.getComidaPos(numero));
+                try{
+                    if (carta.getComidaPos(numero) instanceof PlatoPrincipal)
+                    pedido.agregar(carta.getComidaPos(numero));
+                    else
+                        System.out.println("Opcion invalida");
+                }
+                catch (IndexOutOfBoundsException a)
+                {
+                    System.out.println("Opcion invalida");
+                }
+
                 break;
             case 3:
                 System.out.println(carta.listarPostres());
                 System.out.println("Ingrese el numero del postre a elegir");
                 numero=scan.nextInt();
-                pedido.agregar(carta.getComidaPos(numero));
+                try{
+                    if (carta.getComidaPos(numero) instanceof Postre)
+                        pedido.agregar(carta.getComidaPos(numero));
+                    else
+                        System.out.println("Opcion invalida");
+                }
+                catch (IndexOutOfBoundsException a)
+                {
+                    System.out.println("Opcion invalida");
+                }
                 break;
             case 4:
                 System.out.println(carta.listarGuarnicion());
                 System.out.println("Ingrese el numero de la guarnicion a elegir");
                 numero=scan.nextInt();
-                pedido.agregar(carta.getComidaPos(numero));
+                try{
+                    if (carta.getComidaPos(numero) instanceof Guarnicion)
+                        pedido.agregar(carta.getComidaPos(numero));
+                    else
+                        System.out.println("Opcion invalida");
+                }
+                catch (IndexOutOfBoundsException a)
+                {
+                    System.out.println("Opcion invalida");
+                }
                 break;
             default:
                 throw new ComidaInexistenteException("La opcion ingresada es invalida");

@@ -364,7 +364,4 @@ public class Restaurant
         return listaMesas.eliminar(obj);
     }
 
-
-
-
 }

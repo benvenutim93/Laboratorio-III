@@ -103,4 +103,6 @@ public class Virtual extends Cliente implements Serializable {
     public String toString() {
         return super.toString()+ "\nTelefono= " +telefono+"\nDireccion= " +direccion+"\nEntregado= " + entregado;
     }
+
+
 }

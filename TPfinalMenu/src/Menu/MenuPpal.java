@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import Colecciones.ListaComidas;
-import Colecciones.ListaMesas;
-import Colecciones.Restaurant;
-import Colecciones.SetCombo;
+import Colecciones.*;
 import Excepciones.*;
 import Humanos.*;
 import Comidas.*;
@@ -113,7 +110,7 @@ public class MenuPpal {
         System.out.println("1- Tomar datos del cliente");
         System.out.println("2- Tomar pedido");
         System.out.println("3- Mostrar datos cliente");
-        System.out.println("4-Entregar Pedido");
+        System.out.println("4- Entregar Pedido");
         System.out.println("0- Regresar");
     }
     public static void imprimirOpcionesMesas()
@@ -134,6 +131,7 @@ public class MenuPpal {
         System.out.println("4- Eliminar comidas");
         System.out.println("5- Modificar precio");
         System.out.println("6- Listado de comidas");
+        System.out.println("0-Regresar");
     }
     public static void ImprimirOpcionesSubMenuComida()
     {
@@ -141,6 +139,7 @@ public class MenuPpal {
         System.out.println("2-Plato Principal");
         System.out.println("3-Postre");
         System.out.println("4-Guarnicion");
+        System.out.println("0-Regresar");
     }
     public static  void imprimirOpcionesTomarPedido(){
         System.out.println("1-Combos\n"+"2-Comidas\n"+"0-Regresar");
@@ -179,6 +178,7 @@ public class MenuPpal {
                 try {
 
                     presencial = (Presencial) restaurant.buscarPorDni(dni);
+
                     if (presencial != null) {
                         System.out.println("Cliente existe!");
                         System.out.println(presencial.toString());
@@ -207,118 +207,129 @@ public class MenuPpal {
                         cantPersonas = scan.nextInt();
                         Presencial nuevoPresencial = new Presencial(nombre,apellido,documento,cantPersonas);
                         restaurant.agregarCliente(nuevoPresencial);
-
                     }
+                    else if(opc.equalsIgnoreCase("no"))
+                    {
+                        System.out.println("Volviendo al menu principal");
+                    }
+                    else
+                        System.out.println("Opcion incorrecta, volviendo al menu principal");
 
                 }
                 break;
             case 3:
-                presencial = (Presencial) restaurant.buscarPorDni(dni);
+                presencial =(Presencial)  restaurant.buscarPorDni(dni);
+
                     try {
                         if (presencial == null) {
                             throw new DniNOexistenteExecption();
                         }
                         else {
-                            if (presencial.getEspera() == false) {
-                                int opc;
-                                Presencial aux = presencial;
-                                imprimirOpcionesTomarPedido();
-                                opc = elegirOpcion(scan);
-                                switch (opc) {
-                                    case 1:
-                                        String seguir;
-                                        do {
-                                            System.out.println(restaurant.listarCombos());
-                                            opc = elegirOpcion(scan);
-                                            aux.pedirCombo(restaurant.getCartaComidas(), opc);
-                                            aux.calcularFactura();
-                                            System.out.println("Desea agregar otro combo? SI/NO");
-                                            seguir = scan.next();
-                                            if (seguir.equalsIgnoreCase("si")) {
-                                                System.out.println("--------------------------------------------------------");
-                                                System.out.println("Su pedido hasta ahora");
-                                                System.out.println(aux.mostrarPedidos());
-                                                System.out.println("--------------------------------------------------------");
-                                                System.out.println("Precione cualquier tecla para Continuar...");
-                                                new java.util.Scanner(System.in).nextLine();
 
-                                            }
-                                        } while (seguir.equalsIgnoreCase("Si"));
-                                        break;
-                                    case 2:
-                                        String continuar;
-                                        do {
-                                            imprimirOpcionesTomarPedidoComidas();
-                                            opc = elegirOpcion(scan);
-                                            aux.crearPedido(opc, restaurant.getCartaComidas());
-                                            aux.calcularFactura();
-                                            System.out.println("Desea agregar otra comida? SI/NO");
-                                            continuar = scan.next();
-                                            if (continuar.equalsIgnoreCase("si")) {
-                                                System.out.println("--------------------------------------------------------");
-                                                System.out.println("Su pedido hasta ahora");
-                                                System.out.println(aux.mostrarPedidos());
-                                                System.out.println("--------------------------------------------------------");
-                                                System.out.println("Precione cualquier tecla para Continuar...");
-                                                new java.util.Scanner(System.in).nextLine();
+                                if (presencial.getEspera() == false) {
+                                    int opc;
+                                    Presencial aux = presencial;
+                                    imprimirOpcionesTomarPedido();
+                                    opc = elegirOpcion(scan);
+                                    switch (opc) {
+                                        case 1:
+                                            String seguir;
+                                            do {
+                                                System.out.println(restaurant.listarCombos());
+                                                opc = elegirOpcion(scan);
+                                                aux.pedirCombo(restaurant.getCartaComidas(), opc);
+                                                aux.calcularFactura();
+                                                System.out.println("Desea agregar otro combo? SI/NO");
+                                                seguir = scan.next();
+                                                if (seguir.equalsIgnoreCase("si")) {
+                                                    System.out.println("--------------------------------------------------------");
+                                                    System.out.println("Su pedido hasta ahora");
+                                                    System.out.println(aux.mostrarPedidos());
+                                                    System.out.println("--------------------------------------------------------");
+                                                    System.out.println("Precione cualquier tecla para Continuar...");
+                                                    new java.util.Scanner(System.in).nextLine();
 
-                                            }
-                                        } while (continuar.equalsIgnoreCase("si"));
-                                        break;
-                                    default:
-                                        System.out.println("Opción invalida");
-                                        System.out.println("Precione cualquier tecla para Continuar...");
-                                        new java.util.Scanner(System.in).nextLine();
-                                        break;
-                                }
-                            }
-                            else {
-                                try {
-                                    throw new SentarPersonaException();
-                                }
-                                catch (SentarPersonaException e)
-                                {
-                                    System.out.println(e.getMessage());
-                                    System.out.println("Desea ubicarlo ahora? SI/NO");
-                                    String rta = scan.next();
+                                                }
+                                                else if (seguir.equalsIgnoreCase("no"))
+                                                    System.out.println("Volviendo al menu principal");
+                                                else
+                                                    System.out.println("Ingreso erroneo, volviendo al menu agregar comidas");
+                                            } while (seguir.equalsIgnoreCase("Si"));
+                                            break;
+                                        case 2:
+                                            String continuar;
+                                            do {
+                                                imprimirOpcionesTomarPedidoComidas();
+                                                opc = elegirOpcion(scan);
+                                                aux.crearPedido(opc, restaurant.getCartaComidas());
+                                                aux.calcularFactura();
+                                                System.out.println("Desea agregar otra comida? SI/NO");
+                                                continuar = scan.next();
+                                                if (continuar.equalsIgnoreCase("si")) {
+                                                    System.out.println("--------------------------------------------------------");
+                                                    System.out.println("Su pedido hasta ahora");
+                                                    System.out.println(aux.mostrarPedidos());
+                                                    System.out.println("--------------------------------------------------------");
+                                                    System.out.println("Precione cualquier tecla para Continuar...");
+                                                    new java.util.Scanner(System.in).nextLine();
+                                                }
+                                                else if (continuar.equalsIgnoreCase("no"))
+                                                    System.out.println("Volviendo al menu principal");
+                                                else
+                                                    System.out.println("Ingreso erroneo, volviendo al menu agregar comidas");
 
-                                    if (rta.equalsIgnoreCase("si")) {
-                                        try {
-                                            presencial.setEspera(restaurant.ocuparMesa(presencial));
-
-                                        }  catch (SinMesasException sinMesasException) {
-                                            System.out.println(sinMesasException.getMessage());
-                                            MenuPrincipal(scan, restaurant);
-                                        } catch (CapacidadMaximaException capacidadMaximaException) {
-                                            System.out.println(capacidadMaximaException.getMessage());
-                                        } catch (IdInexistenteMesaException idInexistenteMesaException) {
-                                            idInexistenteMesaException.printStackTrace();
-                                        }
-                                    }
-                                    else if (rta.equalsIgnoreCase("no"))
-                                    {
-                                        System.out.println("Volviendo Menu Principal");
-                                        System.out.println("\n\n");
-                                        System.out.println("Precione cualquier tecla para Continuar...");
-                                        new java.util.Scanner(System.in).nextLine();
-                                        MenuPrincipal(scan,restaurant);
-                                    }
-                                    else
-                                    {
-                                        try {
-                                            throw new IngresoInvalidoException("Ingreso invalido");
-
-                                        }
-                                        catch (IngresoInvalidoException h) {
-                                            System.out.println(h.getMessage());
-                                            System.out.println("\n\n");
+                                            } while (continuar.equalsIgnoreCase("si"));
+                                            break;
+                                        case 0:
+                                            MenuPrincipal(scan,restaurant);
+                                            break;
+                                        default:
+                                            System.out.println("Opción invalida");
                                             System.out.println("Precione cualquier tecla para Continuar...");
                                             new java.util.Scanner(System.in).nextLine();
-                                            MenuClientePresencial(3,scan,restaurant,dni);
+                                            break;
+                                    }
+                                } else {
+                                    try {
+                                        throw new SentarPersonaException();
+                                    } catch (SentarPersonaException e) {
+                                        System.out.println(e.getMessage());
+                                        System.out.println("Desea ubicarlo ahora? SI/NO");
+                                        String rta = scan.next();
+
+                                        if (rta.equalsIgnoreCase("si")) {
+                                            try {
+                                                presencial.setEspera(restaurant.ocuparMesa(presencial));
+
+                                            } catch (SinMesasException sinMesasException) {
+                                                System.out.println(sinMesasException.getMessage());
+                                                MenuPrincipal(scan, restaurant);
+                                            } catch (CapacidadMaximaException capacidadMaximaException) {
+                                                System.out.println(capacidadMaximaException.getMessage());
+                                            } catch (IdInexistenteMesaException idInexistenteMesaException) {
+                                                idInexistenteMesaException.printStackTrace();
+                                            }
+                                        } else if (rta.equalsIgnoreCase("no")) {
+                                            System.out.println("Volviendo Menu Principal");
+                                            System.out.println("\n");
+                                            System.out.println("Precione cualquier tecla para Continuar...");
+                                            new java.util.Scanner(System.in).nextLine();
+                                            MenuPrincipal(scan, restaurant);
+                                        } else {
+                                            try {
+                                                throw new IngresoInvalidoException("Ingreso invalido");
+
+                                            } catch (IngresoInvalidoException h) {
+                                                System.out.println(h.getMessage());
+                                                System.out.println("\n");
+                                                System.out.println("Precione cualquier tecla para Continuar...");
+                                                new java.util.Scanner(System.in).nextLine();
+                                                MenuClientePresencial(3, scan, restaurant, dni);
+                                            }
                                         }
                                     }
                                 }
-                            }
+
                         }
                     }
                      catch (DniNOexistenteExecption  e) {
@@ -344,8 +355,16 @@ public class MenuPpal {
                     if (aux == null) {
                         throw new DniNOexistenteExecption();
                     }
-                    else
+                    else {
+                        if(aux instanceof Virtual)
+                        {
+                            System.out.println("Su dni ingresado corresponde a un cliente virtual\n");
+
+                            System.out.println(aux.toString());
+                        }
+                        else
                         System.out.println(aux.toString());
+                    }
                 }
                 catch (DniNOexistenteExecption e){
                     System.out.println(e.getMessage());
@@ -378,26 +397,24 @@ public class MenuPpal {
         a.setCantPer(scan.nextInt());
         return a;
     }
-    public static Virtual crearClienteVirtual (Scanner scan)
+    public static Virtual crearClienteVirtual (Scanner scan,String dni)
     {
         Virtual a = new Virtual ();
         System.out.println("Nombre: ");
-        scan.nextLine();
-        a.setNombre(scan.nextLine());
+        a.setNombre(scan.next());
         System.out.println("Apellido: ");
-        a.setApellido(scan.nextLine());
-        System.out.println("DNI: ");
-        a.setDNI(scan.nextLine());
+        a.setApellido(scan.next());
+        a.setDNI(dni);
         System.out.println("Telefono: ");
-        a.setTelefono(scan.nextLine());
+        a.setTelefono(scan.next());
         System.out.println("Direccion: ");
-        a.setDireccion(scan.nextLine());
+        a.setDireccion(scan.next());
         return a;
     }
     public static void MenuDelivery (int op, Scanner scan,Restaurant restaurant, String dni)
     {
         Virtual virtual;
-        if (dni.equalsIgnoreCase(" ")&& op!=4) {
+        if (dni.equalsIgnoreCase(" ")&& op!=4 && op!=0&& op<5) {
             System.out.println(" Ingrese Dni del  Cliente: ");
             dni = scan.next();
         }
@@ -405,7 +422,7 @@ public class MenuPpal {
         switch (op)
         {
             case 1:
-                virtual = crearClienteVirtual(scan);
+                virtual = crearClienteVirtual(scan,dni);
 
                 try {
                     if (!restaurant.agregarCliente(virtual)) {
@@ -449,11 +466,16 @@ public class MenuPpal {
                                     else if(seguir.equalsIgnoreCase("no"))
                                     {
                                         System.out.println("Volviendo al menu principal");
-                                        MenuClientePresencial(3,scan,restaurant,dni);
+                                        MenuPrincipal(scan,restaurant);
+                                    }
+                                    else {
+                                        System.out.println("Ingreso invalido, volviendo al menu principal");
+                                        MenuPrincipal(scan,restaurant);
                                     }
                                 }while (seguir.equalsIgnoreCase("Si"));
                                 break;
                             case 2:
+
                                 String continuar;
                                 do {
                                     imprimirOpcionesTomarPedidoComidas();
@@ -473,11 +495,20 @@ public class MenuPpal {
                                     else if(continuar.equalsIgnoreCase("no"))
                                     {
                                         System.out.println("Volviendo al menu principal");
-                                        MenuClientePresencial(3,scan,restaurant,dni);
+                                        MenuPrincipal(scan,restaurant);
+                                    }
+                                    else {
+                                        System.out.println("Ingreso invalido, volviendo al menu principal");
+                                        MenuPrincipal(scan,restaurant);
                                     }
                                 }while (continuar.equalsIgnoreCase("si"));
                                 break;
                             case 0:
+                                break;
+                            default:
+                                System.out.println("Opcion invalida");
+
+                                MenuDelivery(2,scan,restaurant,dni);
                                 break;
                         }
                     }
@@ -504,7 +535,7 @@ public class MenuPpal {
                 {
                     System.out.println(l.getMessage());
                 }
-                MenuPrincipal(scan,restaurant);
+                MenuDelivery(2,scan,restaurant,dni);
                 break;
             case 3:
                 //System.out.println(" Ingrese Dni del  Cliente: ");
@@ -514,8 +545,17 @@ public class MenuPpal {
                     if (aux == null) {
                         throw new DniNOexistenteExecption();
                     }
-                    else
-                        System.out.println(aux.toString());
+                    else{
+
+                        if (aux instanceof Presencial)
+                        {
+                            System.out.println("El dni ingresado corresponde a un cliente Presencial");
+                            System.out.println(aux.toString());
+                        }
+                        else
+                            System.out.println(aux.toString());
+                    }
+
                 }
                 catch (DniNOexistenteExecption e){
                     System.out.println(e.getMessage());
@@ -523,7 +563,7 @@ public class MenuPpal {
                 break;
             case 4:
                 Virtual cliente;
-                System.out.println(restaurant.getListaClientes().listarDelivery());
+                System.out.println(restaurant.getListaClientes().listarDeliveryEntregado());
                 System.out.println("Ingrese el dni del cliente a entregar el pedido");
                 dni=scan.next();
                 cliente=(Virtual) restaurant.getListaClientes().buscarPorDni(dni);
@@ -560,6 +600,8 @@ public class MenuPpal {
         {
             case 1:
                 System.out.println(restaurant.imprimirMesasLibres());
+                System.out.println("Precione cualquier tecla para Continuar...");
+                new java.util.Scanner(System.in).nextLine();
                 break;
             case 2:
                 int id, flag = 0;
@@ -778,6 +820,9 @@ public class MenuPpal {
                         System.out.println(guardian.toString());
                         break;
                     case 0:
+                        System.out.println("Regrasando al menu principal");
+                        System.out.println("Precione cualquier tecla para Continuar...");
+                        new java.util.Scanner(System.in).nextLine();
                         break;
                     default:
                         System.out.println("Opción invalida");
