@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 public class Combo implements IPrecio, Serializable {
 
+    private static final long serialVersionUID = 5l;
     static final String K_PLATOPRINCIPAL = "Plato Principal";
     static final String K_BEBIDA = "Bebida";
     static final String K_POSTRE = "Postre";

@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 public class Virtual extends Cliente implements Serializable {
 
-
+    private static final long serialVersionUID = 3l;
     static final String K_TELEFONO = "Telefono";
     static final String K_DIRECCION = "Direccion";
     static final String K_ENTREGADO = "Entregado";

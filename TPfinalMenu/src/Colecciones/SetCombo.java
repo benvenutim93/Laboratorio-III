@@ -13,6 +13,8 @@ import java.util.Iterator;
 
 public class SetCombo implements IOpBasicas<Combo>, Serializable {
 
+    private static final long serialVersionUID = 12l;
+
     static final String K_LISTADOCOMBOS= "Listado Combos";
 
     private HashSet<Combo> setCombo;

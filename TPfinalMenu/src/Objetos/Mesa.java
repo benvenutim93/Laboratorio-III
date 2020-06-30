@@ -7,7 +7,11 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Mesa implements Serializable {
+public class Mesa implements Serializable
+{
+
+    private static final long serialVersionUID = 13l;
+
 
     public static String K_MESA_DNICLIENTE = "Dni Cliente";
     public static String K_MESA_CAPACIDAD = "Capacidad";

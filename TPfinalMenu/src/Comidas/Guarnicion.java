@@ -4,7 +4,10 @@ import Interfaces.IPrecio;
 
 import java.io.Serializable;
 
-public class Guarnicion extends Comida implements IPrecio, Serializable {
+public class Guarnicion extends Comida implements IPrecio, Serializable
+{
+    private static final long serialVersionUID = 7l;
+
     private boolean tieneSal;
     ///-------------------------------- [C O N S T R U C T O R E S ] --------------------------------
 

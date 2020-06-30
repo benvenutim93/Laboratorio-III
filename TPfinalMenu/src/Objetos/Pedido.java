@@ -6,7 +6,11 @@ import Interfaces.IPrecio;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pedido <T extends IPrecio> implements IOpBasicas, Serializable {
+public class Pedido <T extends IPrecio> implements IOpBasicas, Serializable
+{
+
+    private static final long serialVersionUID = 14l;
+
     private ArrayList<T> lista;
 
     public Pedido ()

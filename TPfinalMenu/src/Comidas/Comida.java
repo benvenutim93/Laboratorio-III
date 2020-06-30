@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 public abstract class Comida implements Serializable {
 
+    private static final long serialVersionUID = 6l;
+
     static final String K_NOMBRE = "Nombre";
     static final String K_PRECIO = "Precio";
 
