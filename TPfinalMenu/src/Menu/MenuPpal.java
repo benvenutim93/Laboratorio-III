@@ -504,6 +504,7 @@ public class MenuPpal {
                                 }while (continuar.equalsIgnoreCase("si"));
                                 break;
                             case 0:
+                                MenuPrincipal(scan,restaurant);
                                 break;
                             default:
                                 System.out.println("Opcion invalida");

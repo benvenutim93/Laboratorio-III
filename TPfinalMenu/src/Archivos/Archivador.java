@@ -126,12 +126,4 @@ public class Archivador
         }
         return listaClientes;
     }
-
-
-
-
-
-
-
-
 }

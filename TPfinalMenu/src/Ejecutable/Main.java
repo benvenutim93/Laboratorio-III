@@ -133,18 +133,12 @@ public class Main {
             System.out.println(e.getMessage());
         }*/
 
-        ListaClientes clientes = Archivador.leerArchivoClientes();
+      /* ListaClientes clientes = Archivador.leerArchivoClientes();
        System.out.println(clientes.listar());
 
+*/
 
-
-        //MenuPpal.MenuPrincipal(scan,restaurant);
-
-
-
-
-
-
+        MenuPpal.MenuPrincipal(scan,restaurant);
 
     }
 
