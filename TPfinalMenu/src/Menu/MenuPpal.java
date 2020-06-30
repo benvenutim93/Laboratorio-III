@@ -107,7 +107,7 @@ public class MenuPpal {
         System.out.println("6- Listado de comidas");
     }
     public static  void imprimirOpcionesTomarPedido(){
-        System.out.println("1-Combos\n"+"2-Comidas");
+        System.out.println("1-Combos\n"+"2-Comidas\n"+"0-Regresar");
     }
     public static void imprimirOpcionesTomarPedidoComidas(){
         System.out.println("1-Bebida\n"+ "2-PlatoPrinciapl\n"+"3-Postre\n"+"4-Guarnicion");
@@ -118,7 +118,7 @@ public class MenuPpal {
 
         Presencial presencial = null;
         Cliente cliente = null;
-        if (dni.equalsIgnoreCase(" ")) {
+        if (dni.equalsIgnoreCase(" ") && op<5 && op>0 ) {
             System.out.println(" Ingrese Dni del  Cliente: ");
             dni = scan.next();
         }
@@ -138,8 +138,6 @@ public class MenuPpal {
                 }
                 break;
             case 2:
-                //System.out.println(" Ingrese Dni del  Cliente: ");
-                //dni=scan.next();
                 try {
 
                     presencial = (Presencial) restaurant.buscarPorDni(dni);
@@ -175,27 +173,27 @@ public class MenuPpal {
                 }
                 break;
             case 3:
-                //System.out.println(" Ingrese Dni del  Cliente: ");
-                //dni=scan.next();
                 presencial = (Presencial) restaurant.buscarPorDni(dni);
-                if (presencial.getEspera()==false) {
                     try {
                         if (presencial == null) {
                             throw new DniNOexistenteExecption();
-                        } else {
-                            int opc;
-                            Presencial aux = presencial;
-                            imprimirOpcionesTomarPedido();
-                            opc = elegirOpcion(scan);
-                            switch (opc) {
-                                case 1:
-                                    String seguir;
-                                    do {
+                        }
+                        else {
+                            if (presencial.getEspera() == false) {
+                                int opc;
+                                Presencial aux = presencial;
+                                imprimirOpcionesTomarPedido();
+                                opc = elegirOpcion(scan);
+                                switch (opc) {
+                                    case 1:
+                                        String seguir;
+                                        do {
                                             System.out.println(restaurant.listarCombos());
                                             opc = elegirOpcion(scan);
                                             aux.pedirCombo(restaurant.getCartaComidas(), opc);
-                                            System.out.println("Desea agregar algo mas? SI/NO");
-                                            seguir  = scan.next();
+                                            aux.calcularFactura();
+                                            System.out.println("Desea agregar otro combo? SI/NO");
+                                            seguir = scan.next();
                                             if (seguir.equalsIgnoreCase("si")) {
                                                 System.out.println("--------------------------------------------------------");
                                                 System.out.println("Su pedido hasta ahora");
@@ -203,62 +201,92 @@ public class MenuPpal {
                                                 System.out.println("--------------------------------------------------------");
 
                                             }
-                                        }while (seguir.equalsIgnoreCase("Si"));
-                                    break;
-                                case 2:
-                                    String continuar;
-                                    do {
-                                        imprimirOpcionesTomarPedidoComidas();
-                                        opc = elegirOpcion(scan);
-                                        aux.crearPedido(opc, restaurant.getCartaComidas());
-                                        System.out.println("Desea agregar algo mas? SI/NO");
-                                        continuar  = scan.next();
-                                        if (continuar.equalsIgnoreCase("si")) {
-                                            System.out.println("--------------------------------------------------------");
-                                            System.out.println("Su pedido hasta ahora");
-                                            System.out.println(aux.mostrarPedidos());
-                                            System.out.println("--------------------------------------------------------");
+                                        } while (seguir.equalsIgnoreCase("Si"));
+                                        break;
+                                    case 2:
+                                        String continuar;
+                                        do {
+                                            imprimirOpcionesTomarPedidoComidas();
+                                            opc = elegirOpcion(scan);
+                                            aux.crearPedido(opc, restaurant.getCartaComidas());
+                                            aux.calcularFactura();
+                                            System.out.println("Desea agregar otra comida? SI/NO");
+                                            continuar = scan.next();
+                                            if (continuar.equalsIgnoreCase("si")) {
+                                                System.out.println("--------------------------------------------------------");
+                                                System.out.println("Su pedido hasta ahora");
+                                                System.out.println(aux.mostrarPedidos());
+                                                System.out.println("--------------------------------------------------------");
+
+                                            }
+                                        } while (continuar.equalsIgnoreCase("si"));
+                                        break;
+                                    default:
+                                        System.out.println("Opción invalida");
+                                        break;
+                                }
+                            }
+                            else {
+                                try {
+                                    throw new SentarPersonaException();
+                                }
+                                catch (SentarPersonaException e)
+                                {
+                                    System.out.println(e.getMessage());
+                                    System.out.println("Desea ubicarlo ahora? SI/NO");
+                                    String rta = scan.next();
+
+                                    if (rta.equalsIgnoreCase("si")) {
+                                        try {
+                                            presencial.setEspera(restaurant.ocuparMesa(presencial));
+                                           // MenuClientePresencial(3, scan, restaurant, dni);
+
+                                        }  catch (SinMesasException sinMesasException) {
+                                            System.out.println(sinMesasException.getMessage());
+                                            MenuPrincipal(scan, restaurant);
+                                        } catch (CapacidadMaximaException capacidadMaximaException) {
+                                            System.out.println(capacidadMaximaException.getMessage());
+                                        } catch (IdInexistenteMesaException idInexistenteMesaException) {
+                                            idInexistenteMesaException.printStackTrace();
+                                        }
+                                    }
+                                    else if (rta.equalsIgnoreCase("no"))
+                                    {
+                                        System.out.println("Volviendo Menu Principal");
+                                        MenuPrincipal(scan,restaurant);
+                                    }
+                                    else
+                                    {
+                                        try {
+                                            throw new IngresoInvalidoException("Ingreso invalido");
 
                                         }
-                                    }while (continuar.equalsIgnoreCase("si"));
-                                    break;
+                                        catch (IngresoInvalidoException h) {
+                                            System.out.println(h.getMessage());
+                                            MenuClientePresencial(3,scan,restaurant,dni);
+                                        }
+                                    }
+                                }
                             }
                         }
-                    } catch (DniNOexistenteExecption | ComidaInexistenteException | ComboNoExistenteException e) {
+                    }
+                     catch (DniNOexistenteExecption  e) {
                         System.out.println(e.getMessage());
+                         System.out.println(" Ingrese Dni nuevamente ");
+                         dni = scan.next();
+                         MenuClientePresencial(3,scan,restaurant,dni);
                     }
-                }
-                else {
-                    try {
-                        throw new SentarPersonaException();
-                    }
-                    catch (SentarPersonaException e)
+                    catch( ComidaInexistenteException a)
                     {
-                        System.out.println(e.getMessage());
-                        System.out.println("Desea ubicarlo ahora? SI/NO");
-                        String rta = scan.next();
-
-                        if (rta.equalsIgnoreCase("si")) {
-                            try {
-                                presencial.setEspera(restaurant.ocuparMesa(presencial));
-                                MenuClientePresencial(3, scan, restaurant, dni);
-
-                            }  catch (SinMesasException sinMesasException) {
-                                System.out.println(sinMesasException.getMessage());
-                                MenuPrincipal(scan, restaurant);
-                            } catch (CapacidadMaximaException capacidadMaximaException) {
-                                System.out.println(capacidadMaximaException.getMessage());
-                            } catch (IdInexistenteMesaException idInexistenteMesaException) {
-                                idInexistenteMesaException.printStackTrace();
-                            }
-                        }
-
+                        System.out.println(a.getMessage());
+                     }
+                    catch( ComboNoExistenteException f)
+                    {
+                        System.out.println(f.getMessage());
                     }
-                }
+                MenuClientePresencial(3,scan,restaurant,dni);
                 break;
             case 4:
-                //System.out.println(" Ingrese Dni del  Cliente: ");
-                //dni=scan.next();
                 Cliente aux= restaurant.buscarPorDni(dni);
                 try{
                     if (aux == null) {
@@ -269,6 +297,9 @@ public class MenuPpal {
                 }
                 catch (DniNOexistenteExecption e){
                     System.out.println(e.getMessage());
+                    System.out.println(" Ingrese Dni nuevamente ");
+                    dni = scan.next();
+                    MenuClientePresencial(4,scan,restaurant,dni);
                 }
                 break;
             case 0: //salir
@@ -276,6 +307,7 @@ public class MenuPpal {
             default:
                 System.out.println("Opción invalida");
                 op = elegirOpcion(scan);
+                MenuClientePresencial(op,scan,restaurant,dni);
                 break;
         }
         MenuPrincipal(scan,restaurant);
@@ -335,10 +367,8 @@ public class MenuPpal {
                 }
                 break;
             case 2:
-                //System.out.println(" Ingrese Dni del  Cliente: ");
-                //dni=scan.next();
-                virtual = (Virtual) restaurant.buscarPorDni(dni);
                 try {
+                    virtual = (Virtual) restaurant.buscarPorDni(dni);
                     if (virtual == null) {
                         throw new DniNOexistenteExecption();
                     }
@@ -355,7 +385,7 @@ public class MenuPpal {
                                     opc = elegirOpcion(scan);
                                     aux.pedirCombo(restaurant.getCartaComidas(), opc);
                                     virtual.calcularFactura();
-                                    System.out.println("Desea agregar otro combo mas? SI/NO");
+                                    System.out.println("Desea agregar otro combo? SI/NO");
                                     seguir  = scan.next();
                                     if (seguir.equalsIgnoreCase("si")) {
                                         System.out.println("--------------------------------------------------------");
@@ -363,6 +393,11 @@ public class MenuPpal {
                                         System.out.println(aux.mostrarPedidos());
                                         System.out.println("--------------------------------------------------------");
 
+                                    }
+                                    else if(seguir.equalsIgnoreCase("no"))
+                                    {
+                                        System.out.println("Volviendo al menu principal");
+                                        MenuClientePresencial(3,scan,restaurant,dni);
                                     }
                                 }while (seguir.equalsIgnoreCase("Si"));
                                 break;
@@ -383,16 +418,41 @@ public class MenuPpal {
                                         System.out.println("--------------------------------------------------------");
 
                                     }
+                                    else if(continuar.equalsIgnoreCase("no"))
+                                    {
+                                        System.out.println("Volviendo al menu principal");
+                                        MenuClientePresencial(3,scan,restaurant,dni);
+                                    }
                                 }while (continuar.equalsIgnoreCase("si"));
-
-
+                                break;
+                            case 0:
+                                break;
                         }
                     }
                 }
-         catch (DniNOexistenteExecption | ComidaInexistenteException | ComboNoExistenteException e) {
-        System.out.println(e.getMessage());
+                catch (DniNOexistenteExecption e) {
+                    System.out.println(e.getMessage());
+                    System.out.println(" Ingrese Dni nuevamente ");
+                    dni = scan.next();
+                    MenuDelivery(2,scan,restaurant,dni);
                 }
-                MenuDelivery(2,scan, restaurant,dni);
+                catch (ClassCastException kk)
+                {
+                    System.out.println("El DNI ingresado corresponde a un cliente presencial");
+                    System.out.println(" Ingrese Dni nuevamente ");
+                    dni = scan.next();
+                    MenuDelivery(2,scan,restaurant,dni);
+                }
+                catch(ComidaInexistenteException g)
+                {
+                    System.out.println(g.getMessage());
+
+                }
+                catch( ComboNoExistenteException l)
+                {
+                    System.out.println(l.getMessage());
+                }
+                MenuPrincipal(scan,restaurant);
                 break;
             case 3:
                 //System.out.println(" Ingrese Dni del  Cliente: ");
@@ -503,25 +563,25 @@ public class MenuPpal {
 
 
                 System.out.println("\033[33m"+"Creando Combo"+"\u001B[0m");
-                System.out.println("\033[35m"+"Eliga un PlatoPrincipal"+"\u001B[0m");
+                System.out.println("\033[35m"+"Elija un PlatoPrincipal"+"\u001B[0m");
                 System.out.println(restaurant.getCartaComidas().listarPlatosPrincipales());
                 pos=elegirOpcion(scan);
                 plato= (PlatoPrincipal) restaurant.getCartaComidas().getComidaPos(pos);
 
                 System.out.println("\033[33m"+"Creando Combo"+"\u001B[0m");
-                System.out.println("\033[35m"+"Eliga una Bebida"+"\u001B[0m");
+                System.out.println("\033[35m"+"Elija una Bebida"+"\u001B[0m");
                 System.out.println(restaurant.getCartaComidas().listarBebidas());
                 pos=elegirOpcion(scan);
                 bebida=(Bebida)restaurant.getCartaComidas().getComidaPos(pos);
 
                 System.out.println("\033[33m"+"Creando Combo"+"\u001B[0m");
-                System.out.println("\033[35m"+"Eliga un Postre"+"\u001B[0m");
+                System.out.println("\033[35m"+"Elija un Postre"+"\u001B[0m");
                 System.out.println(restaurant.getCartaComidas().listarPostres());
                 pos=elegirOpcion(scan);
                 postre=(Postre)restaurant.getCartaComidas().getComidaPos(pos);
 
                 System.out.println("\033[33m"+"Creando Combo"+"\u001B[0m");
-                System.out.println("\033[35m"+"Eliga una Guarnicion"+"\u001B[0m");
+                System.out.println("\033[35m"+"Elija una Guarnicion"+"\u001B[0m");
                 System.out.println(restaurant.getCartaComidas().listarGuarnicion());
                 pos=elegirOpcion(scan);
                 guarni=(Guarnicion)restaurant.getCartaComidas().getComidaPos(pos);
@@ -537,7 +597,7 @@ public class MenuPpal {
                 }
                 break;
             case 2:
-                System.out.println("Eliga un combo a " +"\033[31m"+"Eliminar"+"\u001B[0m");
+                System.out.println("Elija un combo a " +"\033[31m"+"Eliminar"+"\u001B[0m");
                 System.out.println(restaurant.listarCombos());
 
                 pos=elegirOpcion(scan);
@@ -553,10 +613,11 @@ public class MenuPpal {
                 break;
 
             case 3:
+
                 break;
             case 4:
-            System.out.println("\033[33m"+"Eliga una comida a Borrar"+"\u001B[0m");
-            System.out.println("\033[35m"+"Eliga una comida a "+"\033[31m"+"Eliminar"+"\u001B[0m"+ "\u001B[0m");
+            System.out.println("\033[33m"+"Elija una comida a Borrar"+"\u001B[0m");
+            System.out.println("\033[35m"+"Elija una comida a "+"\033[31m"+"Eliminar"+"\u001B[0m"+ "\u001B[0m");
             System.out.println(restaurant.listarComidaConPosicion());
             pos=elegirOpcion(scan);
             comida=restaurant.getCartaComidas().getComidaPos(pos);
