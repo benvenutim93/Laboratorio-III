@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
-public abstract class Persona implements Serializable {
+public abstract class Persona {
 
     static final String K_NOMBRE = "Nombre" ;
     static final String K_APELLIDO = "Apellido" ;

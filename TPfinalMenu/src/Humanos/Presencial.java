@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class Presencial extends Cliente implements Serializable {
 
 
-    private static final long serialVersionUID = 14;
+    private static final long serialVersionUID = 2l;
     static final String K_CANTIDADPERSONAS = "Cantidad de Personas";
     static final String K_ESPERA = "Espera";
     private int cantPer;

@@ -9,7 +9,9 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ListaComidas implements IOpBasicas<Comida>, Serializable {
+public class ListaComidas implements IOpBasicas<Comida>, Serializable
+{
+    private static final long serialVersionUID = 11l;
 
     static final String K_LISTADOCOMIDA = "Listado Comida";
 

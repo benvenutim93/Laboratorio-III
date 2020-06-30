@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class Bebida extends Comida implements IPrecio, Serializable {
 
+    private static final long serialVersionUID = 4l;
     private boolean tieneGas;
     private  String temperatura;
 

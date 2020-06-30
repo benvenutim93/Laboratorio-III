@@ -17,7 +17,7 @@ import org.json.JSONObject;
 public  class Cliente extends Persona implements Serializable {
 
 
-    private static final long serialVersionUID = 10;
+    private static final long serialVersionUID = 1l;
     static final String K_FACTURA = "Factura" ;
     static final String K_CANTIDADPEDIDOS = "Cantidad de Pedidos" ;
 
