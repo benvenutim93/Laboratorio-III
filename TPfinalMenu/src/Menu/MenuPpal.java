@@ -8,6 +8,7 @@ import Excepciones.*;
 import Humanos.*;
 import Comidas.*;
 import Objetos.*;
+import org.json.JSONException;
 
 
 public class MenuPpal {
@@ -41,6 +42,13 @@ public class MenuPpal {
                 imprimirOpcionesGestionCombosComidas();
                 var = elegirOpcion(scan);
                 MenuCombos(var,scan,restaurant);
+                break;
+            case 3312:
+                try {
+                    System.out.println(restaurant.codeRestaurant());
+                } catch (JSONException e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             case 0:
                 System.out.println("Gracias, vuelva pronto! =) ");
@@ -105,6 +113,13 @@ public class MenuPpal {
         System.out.println("4- Eliminar comidas");
         System.out.println("5- Modificar precio");
         System.out.println("6- Listado de comidas");
+    }
+    public static void ImprimirOpcionesSubMenuComida()
+    {
+        System.out.println("1-Bebida");
+        System.out.println("2-Plato Principal");
+        System.out.println("3-Postre");
+        System.out.println("4-Guarnicion");
     }
     public static  void imprimirOpcionesTomarPedido(){
         System.out.println("1-Combos\n"+"2-Comidas\n"+"0-Regresar");
@@ -475,6 +490,7 @@ public class MenuPpal {
             default:
                 System.out.println("Opción invalida");
                 op = elegirOpcion(scan);
+                MenuDelivery(op,scan,restaurant,dni);
                 break;
         }
         MenuPrincipal(scan,restaurant);
@@ -540,6 +556,7 @@ public class MenuPpal {
             default:
                 System.out.println("Opción invalida");
                 op = elegirOpcion(scan);
+                MenuMesas(op,scan,restaurant);
                 break;
         }
         MenuPrincipal(scan, restaurant);
@@ -613,7 +630,114 @@ public class MenuPpal {
                 break;
 
             case 3:
+                ImprimirOpcionesSubMenuComida();
+                op=elegirOpcion(scan);
+                String nombre="";
+                double precio=0;
+                switch (op)
+                {
+                    case 1:
+                        System.out.println("Ingrese el precio");
+                        precio=scan.nextInt();
+                        System.out.println("Ingrese el nombre");
+                        nombre=scan.next();
+                        System.out.println("desea gas? si/no");
+                        boolean gas;
+                        String opcion=scan.next();
+                        if(opcion.equalsIgnoreCase("si"))
+                        {
+                            gas=true;
+                        }
+                        else if(opcion.equalsIgnoreCase("no"))
+                            gas=false;
+                        else
+                        {
+                            System.out.println("Opcion invalida sera enviada con gas");
+                            gas=true;
+                        }
+                        System.out.println("Ingrese  temperatura: ");
+                        String temperatura="";
+                        System.out.println("1-Fria ");
+                        System.out.println("2-Caliente");
+                        System.out.println("3-Temperatura ambiente");
+                        int opcion1=scan.nextInt();
+                        if(opcion1==1)
+                            temperatura="Fria";
+                        else if(opcion1==2)
+                            temperatura="Caliente";
+                        else if (opcion1==3)
+                            temperatura = "Temperatura ambiente";
+                        else
+                        {
+                            System.out.println("Opcion invalida sera enviada con temperatura ambiente");
+                            temperatura="Temperatura ambiente";
+                        }
+                        Bebida b1= new Bebida(precio,nombre,gas,temperatura);
+                        System.out.println("Esta es su bebida creada\n");
+                        System.out.println(b1.toString());
 
+                        break;
+                    case 2:
+                        boolean tcc;
+                        System.out.println("Ingrese el precio");
+                        precio=scan.nextInt();
+                        System.out.println("Ingrese el nombre");
+                        nombre=scan.next();
+                        System.out.println("Apto celiaco? si/no ");
+                        String tacc=scan.next();
+                        if(tacc.equalsIgnoreCase("si"))
+                        {
+                         tcc=true;
+                        }
+                        else
+                            tcc=false;
+                        PlatoPrincipal plat1= new PlatoPrincipal(precio,nombre,tcc);
+                        System.out.println(plat1.toString());
+                        System.out.println("Este es su plato creado\n");
+                        break;
+                    case 3:
+                        boolean top;
+                        System.out.println("Ingrese el precio");
+                        precio=scan.nextInt();
+                        System.out.println("Ingrese el nombre");
+                        nombre=scan.next();
+                        System.out.println("Salsa? si/no");
+                        String topito=scan.next();
+                        if (topito.equalsIgnoreCase("si"))
+                        {
+                            top=true;
+                        }
+                        else
+                            top=false;
+                        Postre pote1= new Postre(precio,nombre,top);
+                        System.out.println("Este es su postre creado\n");
+                        System.out.println(pote1.toString());
+                        break;
+                    case 4:
+                        boolean sal;
+                        System.out.println("Ingrese el precio");
+                        precio=scan.nextInt();
+                        System.out.println("Ingrese el nombre");
+                        nombre=scan.next();
+                        System.out.println("Sal? si/no");
+                        String salsita=scan.next();
+                        if(salsita.equalsIgnoreCase("si"))
+                            sal=true;
+                        else
+                            sal=false;
+                        Guarnicion guardian= new Guarnicion(precio,nombre,sal);
+                        System.out.println("Esta es su guarnicion creada\n");
+                        System.out.println(guardian.toString());
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("Opción invalida");
+                        op = elegirOpcion(scan);
+                        MenuCombos(op,scan,restaurant);
+                        break;
+
+                }
                 break;
             case 4:
             System.out.println("\033[33m"+"Elija una comida a Borrar"+"\u001B[0m");
@@ -630,20 +754,23 @@ public class MenuPpal {
                 restaurant.eliminarComida(comida);
                 System.out.println("\033[33m"+"Comida eliminada con exito"+"\u001B[0m");
             }
-
             break;
             case 5:
+                //preg nico
                 break;
             case 6:
+                System.out.println(restaurant.listarCompleto());
+                System.out.println("Press Any Key To Continue...");
+                new java.util.Scanner(System.in).nextLine();
                 break;
             case 0:
                 break;
-
+            default:
+                System.out.println("Opción invalida");
+                op = elegirOpcion(scan);
+                MenuCombos(op,scan,restaurant);
+                break;
         }
         MenuPrincipal(scan,restaurant);
     }
-
-
-
-
 }
