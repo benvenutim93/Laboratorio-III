@@ -67,7 +67,7 @@ public class Combo implements IPrecio, Serializable {
     }
 
     private void ponerPrecio() {
-        double rta;
+
         double acum = 0;
         if (plato != null) {
             acum += plato.getPrecio();
@@ -81,10 +81,8 @@ public class Combo implements IPrecio, Serializable {
         if (guarnicion != null) {
             acum += guarnicion.getPrecio();
         }
-        //descuento
-        rta = acum * .90;
 
-        this.precio = rta;
+        this.precio = acum;
     }
     ///-------------------------------- [S E T T E R S /\ G E T T E R S] --------------------------------
 
@@ -145,7 +143,7 @@ public class Combo implements IPrecio, Serializable {
         }
         return builder.toString();
     }
-    //guarnicion
+        //guarnicion
         public void sinSal(){
           guarnicion.sinSal();
         }
@@ -165,7 +163,7 @@ public class Combo implements IPrecio, Serializable {
             bebida.setTemperatura(b);
         }
 
-        public void cambiarPrecio(int precio) throws PrecioNegativoException {
+        public void cambiarPrecio(double precio) throws PrecioNegativoException {
         if(precio >= 0 ) {
             this.precio = precio;
         }else {
@@ -187,6 +185,8 @@ public class Combo implements IPrecio, Serializable {
     public int hashCode() {
         return 1;
     }
+
+
 
 
     public Combo getComboComida() {

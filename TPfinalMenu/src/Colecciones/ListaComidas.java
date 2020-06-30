@@ -205,4 +205,8 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable {
 
         return builder.toString();
     }
+    public int getCantComidas()
+    {
+        return listaComidas.size();
+    }
 }

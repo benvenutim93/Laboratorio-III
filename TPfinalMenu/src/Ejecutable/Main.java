@@ -132,9 +132,9 @@ public class Main {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }*/
-        ListaClientes aux= Archivador.leerArchivoClientes();
-        System.out.println(aux.listar());
-        //MenuPpal.MenuPrincipal(scan,restaurant);
+      /*  ListaClientes aux= Archivador.leerArchivoClientes();
+        System.out.println(aux.listar());*/
+        MenuPpal.MenuPrincipal(scan,restaurant);
 
 
 
