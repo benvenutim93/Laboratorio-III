@@ -2,6 +2,7 @@ package Ejecutable;
 
 import Archivos.Archivador;
 import Colecciones.ListaClientes;
+import Colecciones.ListaMesas;
 import Colecciones.Restaurant;
 import Colecciones.SetCombo;
 import Comidas.*;
@@ -126,7 +127,14 @@ public class Main {
 
             //JSONObject jsonObject = restaurant.codeRestaurant();
             //System.out.println(jsonObject.toString());
-            MenuPpal.MenuPrincipal(scan,restaurant);
+       /* try {
+            Archivador.agregarClientes(restaurant.getListaClientes());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }*/
+        ListaClientes aux= Archivador.leerArchivoClientes();
+        System.out.println(aux.listar());
+        //MenuPpal.MenuPrincipal(scan,restaurant);
 
 
 

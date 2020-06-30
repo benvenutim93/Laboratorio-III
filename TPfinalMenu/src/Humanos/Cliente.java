@@ -14,8 +14,10 @@ import Excepciones.ComidaInexistenteException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class Cliente extends Persona implements Serializable {
+public  class Cliente extends Persona implements Serializable {
 
+
+    private static final long serialVersionUID = 10;
     static final String K_FACTURA = "Factura" ;
     static final String K_CANTIDADPEDIDOS = "Cantidad de Pedidos" ;
 
@@ -229,5 +231,9 @@ public abstract class Cliente extends Persona implements Serializable {
     @Override
     public int hashCode() {
         return 3;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 }

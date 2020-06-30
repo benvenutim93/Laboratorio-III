@@ -11,6 +11,7 @@ import java.io.Serializable;
 
 public class Virtual extends Cliente implements Serializable {
 
+
     static final String K_TELEFONO = "Telefono";
     static final String K_DIRECCION = "Direccion";
     static final String K_ENTREGADO = "Entregado";

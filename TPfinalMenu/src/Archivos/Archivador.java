@@ -6,6 +6,8 @@ import Colecciones.SetCombo;
 import Comidas.Combo;
 import Comidas.Comida;
 import Humanos.Cliente;
+import Humanos.Presencial;
+
 import java.io.*;
 
 
@@ -91,8 +93,10 @@ public class Archivador
         FileOutputStream fileOutputStream = new FileOutputStream(ARCHIVO_CLIENTES);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
-        for (Cliente aux: listaClientes.getListaClientes())
+        for (Cliente aux: listaClientes.getListaClientes()) {
+            if (aux instanceof Presencial)
             objectOutputStream.writeObject(aux);
+        }
 
         objectOutputStream.close();
     }
@@ -104,12 +108,15 @@ public class Archivador
             FileInputStream fileInputStream = new FileInputStream(ARCHIVO_CLIENTES);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             boolean bandera = true;
-            Cliente aux ;
+            Presencial aux;
             while (bandera) {
-                aux = (Cliente) objectInputStream.readObject();
+                aux = (Presencial) objectInputStream.readObject();
                 listaClientes.agregar(aux);
             }
             objectInputStream.close();
+        }
+        catch (EOFException l) {
+            System.out.println(l.getMessage());
         }
         catch (FileNotFoundException e) {
             e.printStackTrace(); }
@@ -120,7 +127,4 @@ public class Archivador
         }
         return listaClientes;
     }
-
-
-
 }

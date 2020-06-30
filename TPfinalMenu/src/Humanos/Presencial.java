@@ -11,6 +11,8 @@ import java.io.Serializable;
 
 public class Presencial extends Cliente implements Serializable {
 
+
+    private static final long serialVersionUID = 14;
     static final String K_CANTIDADPERSONAS = "Cantidad de Personas";
     static final String K_ESPERA = "Espera";
     private int cantPer;
