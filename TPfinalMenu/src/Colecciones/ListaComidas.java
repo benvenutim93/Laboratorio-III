@@ -101,6 +101,7 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable {
         return builder.toString();
     }
 
+
     public String listaBebidas() {
         StringBuilder builder = new StringBuilder();
         if (!listaComidas.isEmpty()) {

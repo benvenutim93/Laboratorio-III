@@ -43,6 +43,13 @@ public class ListaClientes implements IOpBasicas<Cliente>
             builder.append(aux.toString()+"\n");
         return builder.toString();
     }
+    public String listarDeliveryEntregado() {
+        StringBuilder builder = new StringBuilder();
+        for (Cliente aux : listaClientes)
+            if (aux instanceof Virtual && ((Virtual) aux).isEntregado()==false)
+                builder.append(aux.toString()+"\n");
+        return builder.toString();
+    }
 
     public JSONObject codeListaClientes() throws JSONException {
         JSONArray virtuales = new JSONArray();
