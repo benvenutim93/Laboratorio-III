@@ -94,7 +94,6 @@ public class Archivador
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
         for (Cliente aux: listaClientes.getListaClientes()) {
-            if (aux instanceof Presencial)
             objectOutputStream.writeObject(aux);
         }
 
@@ -108,9 +107,9 @@ public class Archivador
             FileInputStream fileInputStream = new FileInputStream(ARCHIVO_CLIENTES);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             boolean bandera = true;
-            Presencial aux;
+            Cliente aux;
             while (bandera) {
-                aux = (Presencial) objectInputStream.readObject();
+                aux = (Cliente) objectInputStream.readObject();
                 listaClientes.agregar(aux);
             }
             objectInputStream.close();
@@ -127,4 +126,12 @@ public class Archivador
         }
         return listaClientes;
     }
+
+
+
+
+
+
+
+
 }

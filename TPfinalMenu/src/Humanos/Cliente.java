@@ -21,7 +21,7 @@ public  class Cliente extends Persona implements Serializable {
     static final String K_FACTURA = "Factura" ;
     static final String K_CANTIDADPEDIDOS = "Cantidad de Pedidos" ;
 
-    private transient Pedido pedido;
+    private Pedido pedido;
     private double factura;
     private int cantPedidos;
 
@@ -170,29 +170,31 @@ public  class Cliente extends Persona implements Serializable {
     public String mostrarPedidos()
     {
         StringBuilder buil=new StringBuilder();
-        for(int i=0;i< pedido.getTotal();i++){
-            buil.append("\n["+i+"]\n");
-            if(pedido.getObjeto(i) instanceof Combo) {
-                Combo combo = (Combo) pedido.getObjeto(i);
-                buil.append(combo.getCombo());
+
+            for(int i=0;i< this.cantPedidos;i++) {
+                buil.append("\n[" + i + "]\n");
+                if (pedido.getObjeto(i) instanceof Combo) {
+                    Combo combo = (Combo) pedido.getObjeto(i);
+                    buil.append(combo.getCombo());
+                }
+                if (pedido.getObjeto(i) instanceof PlatoPrincipal) {
+                    PlatoPrincipal platoPrincipal = (PlatoPrincipal) pedido.getObjeto(i);
+                    buil.append(platoPrincipal.toString());
+                }
+                if (pedido.getObjeto(i) instanceof Bebida) {
+                    Bebida bebida = (Bebida) pedido.getObjeto(i);
+                    buil.append(bebida.toString());
+                }
+                if (pedido.getObjeto(i) instanceof Postre) {
+                    Postre postre = (Postre) pedido.getObjeto(i);
+                    buil.append(postre.toString());
+                }
+                if (pedido.getObjeto(i) instanceof Guarnicion) {
+                    Guarnicion guarnicion = (Guarnicion) pedido.getObjeto(i);
+                    buil.append(guarnicion.toString());
+                }
             }
-            if(pedido.getObjeto(i) instanceof PlatoPrincipal) {
-                PlatoPrincipal platoPrincipal = (PlatoPrincipal) pedido.getObjeto(i);
-                buil.append(platoPrincipal.toString());
-            }
-            if(pedido.getObjeto(i) instanceof Bebida) {
-                Bebida bebida = (Bebida) pedido.getObjeto(i);
-                buil.append(bebida.toString());
-            }
-            if(pedido.getObjeto(i) instanceof Postre) {
-                Postre postre = (Postre) pedido.getObjeto(i);
-                buil.append(postre.toString());
-            }
-            if(pedido.getObjeto(i) instanceof Guarnicion) {
-                Guarnicion guarnicion = (Guarnicion) pedido.getObjeto(i);
-                buil.append(guarnicion.toString());
-            }
-        }
+
         return buil.toString();
     }
 

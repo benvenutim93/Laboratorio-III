@@ -127,13 +127,17 @@ public class Main {
 
             //JSONObject jsonObject = restaurant.codeRestaurant();
             //System.out.println(jsonObject.toString());
-       /* try {
+        /*try {
             Archivador.agregarClientes(restaurant.getListaClientes());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }*/
-        ListaClientes aux= Archivador.leerArchivoClientes();
-        System.out.println(aux.listar());
+
+        ListaClientes clientes = Archivador.leerArchivoClientes();
+       System.out.println(clientes.listar());
+
+
+
         //MenuPpal.MenuPrincipal(scan,restaurant);
 
 
