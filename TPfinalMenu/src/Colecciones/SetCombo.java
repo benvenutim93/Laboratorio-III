@@ -35,7 +35,7 @@ public class SetCombo implements IOpBasicas<Combo>, Serializable {
      * @param nuevoPrecio (Integer)
      * @return TRUE si se pudo cambiar el nombre - FALSE sino se pudo cambiar
      */
-    public boolean actualizarPrecioCombo(Combo aCambiar, int nuevoPrecio) throws PrecioNegativoException {
+    public boolean actualizarPrecioCombo(Combo aCambiar, double nuevoPrecio) throws PrecioNegativoException {
         boolean rta = false;
 
         Iterator<Combo> it = setCombo.iterator();

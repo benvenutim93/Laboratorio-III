@@ -1,9 +1,14 @@
 package Menu;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import Colecciones.ListaComidas;
 import Colecciones.ListaMesas;
 import Colecciones.Restaurant;
+import Colecciones.SetCombo;
 import Excepciones.*;
 import Humanos.*;
 import Comidas.*;
@@ -12,6 +17,7 @@ import org.json.JSONException;
 
 
 public class MenuPpal {
+
     public static void MenuPrincipal (Scanner scan, Restaurant restaurant)
     {
         int op, var;
@@ -54,6 +60,20 @@ public class MenuPpal {
                 System.out.println("Gracias, vuelva pronto! =) ");
                 System.exit(0);
                 break;
+            default:
+                try{
+                    throw new IngresoInvalidoException("Ingreso invalido");
+                }
+                catch (IngresoInvalidoException a)
+                {
+
+                    System.out.println(a.getMessage());
+                    System.out.println("Precione cualquier tecla para Continuar...");
+                    new java.util.Scanner(System.in).nextLine();
+                    MenuPrincipal(scan,restaurant);
+
+                }
+                break;
         }
     }
 
@@ -93,6 +113,7 @@ public class MenuPpal {
         System.out.println("1- Tomar datos del cliente");
         System.out.println("2- Tomar pedido");
         System.out.println("3- Mostrar datos cliente");
+        System.out.println("4-Entregar Pedido");
         System.out.println("0- Regresar");
     }
     public static void imprimirOpcionesMesas()
@@ -147,6 +168,8 @@ public class MenuPpal {
 
                     }else {
                         System.out.println(presencial.toString());
+                        System.out.println("Precione cualquier tecla para Continuar...");
+                        new java.util.Scanner(System.in).nextLine();
                     }
                 }catch(DniExistenteException e){
                     System.out.println(e.getMessage());
@@ -159,6 +182,8 @@ public class MenuPpal {
                     if (presencial != null) {
                         System.out.println("Cliente existe!");
                         System.out.println(presencial.toString());
+                        System.out.println("Precione cualquier tecla para Continuar...");
+                        new java.util.Scanner(System.in).nextLine();
                     } else
                     {
                         throw new ClienteInexistenteException(dni);
@@ -214,6 +239,8 @@ public class MenuPpal {
                                                 System.out.println("Su pedido hasta ahora");
                                                 System.out.println(aux.mostrarPedidos());
                                                 System.out.println("--------------------------------------------------------");
+                                                System.out.println("Precione cualquier tecla para Continuar...");
+                                                new java.util.Scanner(System.in).nextLine();
 
                                             }
                                         } while (seguir.equalsIgnoreCase("Si"));
@@ -232,12 +259,16 @@ public class MenuPpal {
                                                 System.out.println("Su pedido hasta ahora");
                                                 System.out.println(aux.mostrarPedidos());
                                                 System.out.println("--------------------------------------------------------");
+                                                System.out.println("Precione cualquier tecla para Continuar...");
+                                                new java.util.Scanner(System.in).nextLine();
 
                                             }
                                         } while (continuar.equalsIgnoreCase("si"));
                                         break;
                                     default:
                                         System.out.println("Opción invalida");
+                                        System.out.println("Precione cualquier tecla para Continuar...");
+                                        new java.util.Scanner(System.in).nextLine();
                                         break;
                                 }
                             }
@@ -254,7 +285,6 @@ public class MenuPpal {
                                     if (rta.equalsIgnoreCase("si")) {
                                         try {
                                             presencial.setEspera(restaurant.ocuparMesa(presencial));
-                                           // MenuClientePresencial(3, scan, restaurant, dni);
 
                                         }  catch (SinMesasException sinMesasException) {
                                             System.out.println(sinMesasException.getMessage());
@@ -268,6 +298,9 @@ public class MenuPpal {
                                     else if (rta.equalsIgnoreCase("no"))
                                     {
                                         System.out.println("Volviendo Menu Principal");
+                                        System.out.println("\n\n");
+                                        System.out.println("Precione cualquier tecla para Continuar...");
+                                        new java.util.Scanner(System.in).nextLine();
                                         MenuPrincipal(scan,restaurant);
                                     }
                                     else
@@ -278,6 +311,9 @@ public class MenuPpal {
                                         }
                                         catch (IngresoInvalidoException h) {
                                             System.out.println(h.getMessage());
+                                            System.out.println("\n\n");
+                                            System.out.println("Precione cualquier tecla para Continuar...");
+                                            new java.util.Scanner(System.in).nextLine();
                                             MenuClientePresencial(3,scan,restaurant,dni);
                                         }
                                     }
@@ -287,6 +323,7 @@ public class MenuPpal {
                     }
                      catch (DniNOexistenteExecption  e) {
                         System.out.println(e.getMessage());
+                         System.out.println("\n\n");
                          System.out.println(" Ingrese Dni nuevamente ");
                          dni = scan.next();
                          MenuClientePresencial(3,scan,restaurant,dni);
@@ -360,7 +397,7 @@ public class MenuPpal {
     public static void MenuDelivery (int op, Scanner scan,Restaurant restaurant, String dni)
     {
         Virtual virtual;
-        if (dni.equalsIgnoreCase(" ")) {
+        if (dni.equalsIgnoreCase(" ")&& op!=4) {
             System.out.println(" Ingrese Dni del  Cliente: ");
             dni = scan.next();
         }
@@ -483,6 +520,17 @@ public class MenuPpal {
                 catch (DniNOexistenteExecption e){
                     System.out.println(e.getMessage());
                 }
+                break;
+            case 4:
+                Virtual cliente;
+                System.out.println(restaurant.getListaClientes().listarDelivery());
+                System.out.println("Ingrese el dni del cliente a entregar el pedido");
+                dni=scan.next();
+                cliente=(Virtual) restaurant.getListaClientes().buscarPorDni(dni);
+                cliente.setEntregado(true);
+                System.out.println("Precione cualquier tecla para Continuar...");
+                new java.util.Scanner(System.in).nextLine();
+                System.out.println(cliente.toString());
                 break;
             case 0:
                 //salir
@@ -756,11 +804,122 @@ public class MenuPpal {
             }
             break;
             case 5:
-                //preg nico
+                System.out.println("Desea cambiarle el precio a un ...");
+                System.out.println("1-Combo");
+                System.out.println("2-Comidas");
+                System.out.println("0-Regresar menu principal");
+                op=scan.nextInt();
+                switch (op)
+                {
+                    case 1:
+                        Combo nuevo;
+                        System.out.println(restaurant.listarCombos());
+                        System.out.println("Elija el numero del combo a cambiar");
+                        op=elegirOpcion(scan);
+                            nuevo = restaurant.getSetCombos().getComboPos(op);
+                            if(nuevo==null)
+                            {
+                                System.out.println("Opcion erronea");
+                                SetCombo listita= restaurant.getSetCombos();
+                                while(op>listita.getCantidad() || op<0) {
+                                    System.out.println("Ingrese un nuevo numero del combo a cambiar precio");
+                                    op = elegirOpcion(scan);
+                                }
+                                nuevo= restaurant.getSetCombos().getComboPos(op);
+                            }
+                        System.out.println("Que precio desea ponerle?");
+                        double preci=scan.nextDouble();
+                        try {
+                            restaurant.getSetCombos().actualizarPrecioCombo(nuevo,preci);
+                        } catch (PrecioNegativoException e) {
+                            System.out.println(e.getMessage());
+                            while(preci<0) {
+                                System.out.println("Ingrese un nuevo precio?");
+                                preci = scan.nextDouble();
+                            }
+                            try {
+                                nuevo.cambiarPrecio(preci);
+                            } catch (PrecioNegativoException precioNegativoException) {
+                                System.out.println(precioNegativoException.getMessage());
+                            }
+                        }
+                        System.out.println(nuevo.getDatosCombo());
+                        System.out.println("Desea seguir cambiando precios? si/ no");
+                        String rta=scan.next();
+                        if(rta.equalsIgnoreCase("si"))
+                            MenuCombos(5,scan,restaurant);
+                        else if (rta.equalsIgnoreCase("no")) {
+                            System.out.println("Volviendo al menu principal");
+                            MenuPrincipal(scan, restaurant);
+                        }
+                        else
+                        {
+                            System.out.println("Opcion erronea, volviendo al menu principal");
+                            MenuPrincipal(scan,restaurant);
+                        }
+                        break;
+                    case 2:
+                        Comida cambiar;
+                        System.out.println(restaurant.listarComidaConPosicion());
+                        System.out.println("Ingrese el numero de la comida a cambiar precio");
+                        op=elegirOpcion(scan);
+                        try {
+                             cambiar = restaurant.getCartaComidas().getComidaPos(op);
+                        }
+                        catch(IndexOutOfBoundsException e)
+                        {
+                            System.out.println(e.getMessage());
+                            System.out.println("Opcion erronea");
+                            ListaComidas lista=restaurant.getListaComidas();
+                            while(op>=lista.getCantComidas() || op<0) {
+                                System.out.println("Ingrese un nuevo numero de la comida a cambiar precio");
+                                op = elegirOpcion(scan);
+
+                            }
+                            cambiar= restaurant.getCartaComidas().getComidaPos(op);
+                        }
+                        System.out.println("Ingrese el nuevo precio");
+                        double precioo=scan.nextDouble();
+                        try {
+                            cambiar.cambiarPrecio(precioo);
+                        } catch (PrecioNegativoException e) {
+                            System.out.println(e.getMessage());
+                            while(precioo<0) {
+                                System.out.println("Ingrese un nuevo precio?");
+                                precioo = scan.nextDouble();
+                            }
+                            try {
+                                cambiar.cambiarPrecio(precioo);
+                            } catch (PrecioNegativoException precioNegativoException) {
+                                System.out.println(precioNegativoException.getMessage());
+                            }
+                        }
+                        System.out.println(cambiar.toString());
+                        System.out.println("Desea seguir cambiando precios? si/ no");
+                        String rtaa=scan.next();
+                        if(rtaa.equalsIgnoreCase("si"))
+                            MenuCombos(5,scan,restaurant);
+                        else if (rtaa.equalsIgnoreCase("no")) {
+                            System.out.println("Volviendo al menu principal");
+                            MenuPrincipal(scan, restaurant);
+                        }
+                        else
+                        {
+                            System.out.println("Opcion erronea, volviendo al menu principal");
+                            MenuPrincipal(scan,restaurant);
+                        }
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("Opción invalida");
+                        MenuCombos(5,scan,restaurant);
+                        break;
+                }
                 break;
             case 6:
                 System.out.println(restaurant.listarCompleto());
-                System.out.println("Press Any Key To Continue...");
+                System.out.println("Precione cualquier tecla para Continuar...");
                 new java.util.Scanner(System.in).nextLine();
                 break;
             case 0:
