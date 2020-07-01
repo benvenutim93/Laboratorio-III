@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Pedido <T extends IPrecio> implements IOpBasicas, Serializable
 {
 
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 18l;
 
     private ArrayList<T> lista;
 
