@@ -23,6 +23,9 @@ public class ListaMesas implements IOpBasicas {
     private ArrayList<Mesa> listaMesa;
 
 
+    public ArrayList<Mesa> getListaMesa() {
+        return listaMesa;
+    }
 
     //Constructores
     public ListaMesas ()

@@ -124,8 +124,16 @@ public class Main {
         restaurant.agregarMesa(c);
         restaurant.agregarMesa(d);
 
+        /*try {
+            Archivador.agregarMesas(restaurant.getListaMesas());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
-            //JSONObject jsonObject = restaurant.codeRestaurant();
+        //ListaMesas lista = Archivador.leerArchivoMesas();
+        //System.out.println(lista.listar());
+
+        //JSONObject jsonObject = restaurant.codeRestaurant();
             //System.out.println(jsonObject.toString());
         /*try {
             Archivador.agregarClientes(restaurant.getListaClientes());
@@ -138,7 +146,7 @@ public class Main {
 
 */
 
-        MenuPpal.MenuPrincipal(scan,restaurant);
+        //MenuPpal.MenuPrincipal(scan,restaurant);
 
     }
 

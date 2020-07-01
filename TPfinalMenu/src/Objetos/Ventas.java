@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  * Clase desarrollada para la futura expansion del sistema. Esta busca llevar
- * al dia la parte contable del negocio.
+ * al dia la parte contable del negocio. Actualmente en desarrollo
  */
 public class Ventas
 {
