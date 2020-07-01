@@ -52,7 +52,6 @@ public class MenuPpal {
                 break;
             case 0:
                 System.out.println("Gracias, vuelva pronto! =) ");
-                System.exit(0);
                 break;
             default:
                 try{
@@ -69,6 +68,7 @@ public class MenuPpal {
                 }
                 break;
         }
+
     }
 
     public static int elegirOpcion (Scanner scan)
@@ -159,7 +159,9 @@ public class MenuPpal {
             case 1:
                 presencial = crearClientePresencial(scan, dni);
                 try {
-                    if (!restaurant.agregarCliente(presencial)) {
+                    boolean rta=false;
+                    rta=restaurant.agregarCliente(presencial);
+                    if (rta==false) {
                         throw new DniExistenteException();
 
                     }else {
@@ -225,7 +227,6 @@ public class MenuPpal {
 
                                 if (presencial.getEspera() == false) {
                                     int opc;
-                                    Presencial aux = presencial;
                                     imprimirOpcionesTomarPedido();
                                     opc = elegirOpcion(scan);
                                     switch (opc) {
@@ -234,14 +235,14 @@ public class MenuPpal {
                                             do {
                                                 System.out.println(restaurant.listarCombos());
                                                 opc = elegirOpcion(scan);
-                                                aux.pedirCombo(restaurant.getCartaComidas(), opc);
-                                                aux.calcularFactura();
+                                                presencial.pedirCombo(restaurant.getCartaComidas(), opc);
+                                                presencial.calcularFactura();
                                                 System.out.println("Desea agregar otro combo? SI/NO");
                                                 seguir = scan.next();
                                                 if (seguir.equalsIgnoreCase("si")) {
                                                     System.out.println("--------------------------------------------------------");
                                                     System.out.println("Su pedido hasta ahora");
-                                                    System.out.println(aux.mostrarPedidos());
+                                                    System.out.println(presencial.mostrarPedidos());
                                                     System.out.println("--------------------------------------------------------");
                                                     System.out.println("Precione enter para Continuar...");
                                                     new java.util.Scanner(System.in).nextLine();
@@ -258,14 +259,14 @@ public class MenuPpal {
                                             do {
                                                 imprimirOpcionesTomarPedidoComidas();
                                                 opc = elegirOpcion(scan);
-                                                aux.crearPedido(opc, restaurant.getCartaComidas());
-                                                aux.calcularFactura();
+                                                presencial.crearPedido(opc, restaurant.getCartaComidas());
+                                                presencial.calcularFactura();
                                                 System.out.println("Desea agregar otra comida? SI/NO");
                                                 continuar = scan.next();
                                                 if (continuar.equalsIgnoreCase("si")) {
                                                     System.out.println("--------------------------------------------------------");
                                                     System.out.println("Su pedido hasta ahora");
-                                                    System.out.println(aux.mostrarPedidos());
+                                                    System.out.println(presencial.mostrarPedidos());
                                                     System.out.println("--------------------------------------------------------");
                                                     System.out.println("Precione enter para Continuar...");
                                                     new java.util.Scanner(System.in).nextLine();
@@ -649,6 +650,7 @@ public class MenuPpal {
                     seguir = scan.next();
 
                 }while (seguir.equalsIgnoreCase("si"));
+
                 if(seguir.equalsIgnoreCase("no"))
                 {
                     System.out.println("Rergresando al menu principal");
