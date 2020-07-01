@@ -51,6 +51,20 @@ public class ListaMesas implements IOpBasicas {
     }
 
     /**
+     * Sirve para saber la cantidad de mesas libres que tenemos
+     * @return la cantidad de mesas
+     */
+    public int cantidadMesasLibres()
+    {
+        int rta=0;
+        for(Mesa aux:listaMesa)
+        {
+            if(aux.isEstaOcupado()==true)
+                rta++;
+        }
+        return rta;
+    }
+    /**
      * Imprime un listado de mesas libres
      * @return string con todas las mesas libres
      */
@@ -174,12 +188,13 @@ public class ListaMesas implements IOpBasicas {
     public Mesa buscarMesaIDmesa (int id)
     {
         int flag = 0, i = 0, pos = -1;
-        Mesa aux = new Mesa ();
+        Mesa aux = null;
         while (i < cantidadMesas() && flag == 0)
         {
             Mesa comparar = listaMesa.get(i);
             if (comparar.getIdMesa() == id)
             {
+                System.out.println("Entro al if");
                 flag = 1;
                 aux = listaMesa.get(i);
             }
@@ -369,7 +384,6 @@ public class ListaMesas implements IOpBasicas {
         return listadoMesas;
     }
 
-    //Metodos Interfaz
 
     /**
      * Imprime el listado de todas las mesas agregadas

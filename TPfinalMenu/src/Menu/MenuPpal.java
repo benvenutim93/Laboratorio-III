@@ -1,8 +1,5 @@
 package Menu;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Colecciones.*;
@@ -65,7 +62,7 @@ public class MenuPpal {
                 {
 
                     System.out.println(a.getMessage());
-                    System.out.println("Precione cualquier tecla para Continuar...");
+                    System.out.println("Precione enter para Continuar...");
                     new java.util.Scanner(System.in).nextLine();
                     MenuPrincipal(scan,restaurant);
 
@@ -167,7 +164,7 @@ public class MenuPpal {
 
                     }else {
                         System.out.println(presencial.toString());
-                        System.out.println("Precione cualquier tecla para Continuar...");
+                        System.out.println("Precione enter para Continuar...");
                         new java.util.Scanner(System.in).nextLine();
                     }
                 }catch(DniExistenteException e){
@@ -182,7 +179,7 @@ public class MenuPpal {
                     if (presencial != null) {
                         System.out.println("Cliente existe!");
                         System.out.println(presencial.toString());
-                        System.out.println("Precione cualquier tecla para Continuar...");
+                        System.out.println("Precione enter para Continuar...");
                         new java.util.Scanner(System.in).nextLine();
                     } else
                     {
@@ -246,7 +243,7 @@ public class MenuPpal {
                                                     System.out.println("Su pedido hasta ahora");
                                                     System.out.println(aux.mostrarPedidos());
                                                     System.out.println("--------------------------------------------------------");
-                                                    System.out.println("Precione cualquier tecla para Continuar...");
+                                                    System.out.println("Precione enter para Continuar...");
                                                     new java.util.Scanner(System.in).nextLine();
 
                                                 }
@@ -270,7 +267,7 @@ public class MenuPpal {
                                                     System.out.println("Su pedido hasta ahora");
                                                     System.out.println(aux.mostrarPedidos());
                                                     System.out.println("--------------------------------------------------------");
-                                                    System.out.println("Precione cualquier tecla para Continuar...");
+                                                    System.out.println("Precione enter para Continuar...");
                                                     new java.util.Scanner(System.in).nextLine();
                                                 }
                                                 else if (continuar.equalsIgnoreCase("no"))
@@ -285,7 +282,7 @@ public class MenuPpal {
                                             break;
                                         default:
                                             System.out.println("Opción invalida");
-                                            System.out.println("Precione cualquier tecla para Continuar...");
+                                            System.out.println("Precione enter para Continuar...");
                                             new java.util.Scanner(System.in).nextLine();
                                             break;
                                     }
@@ -312,7 +309,7 @@ public class MenuPpal {
                                         } else if (rta.equalsIgnoreCase("no")) {
                                             System.out.println("Volviendo Menu Principal");
                                             System.out.println("\n");
-                                            System.out.println("Precione cualquier tecla para Continuar...");
+                                            System.out.println("Precione enter para Continuar...");
                                             new java.util.Scanner(System.in).nextLine();
                                             MenuPrincipal(scan, restaurant);
                                         } else {
@@ -322,7 +319,7 @@ public class MenuPpal {
                                             } catch (IngresoInvalidoException h) {
                                                 System.out.println(h.getMessage());
                                                 System.out.println("\n");
-                                                System.out.println("Precione cualquier tecla para Continuar...");
+                                                System.out.println("Precione enter para Continuar...");
                                                 new java.util.Scanner(System.in).nextLine();
                                                 MenuClientePresencial(3, scan, restaurant, dni);
                                             }
@@ -569,7 +566,7 @@ public class MenuPpal {
                 dni=scan.next();
                 cliente=(Virtual) restaurant.getListaClientes().buscarPorDni(dni);
                 cliente.setEntregado(true);
-                System.out.println("Precione cualquier tecla para Continuar...");
+                System.out.println("Precione enter para Continuar...");
                 new java.util.Scanner(System.in).nextLine();
                 System.out.println(cliente.toString());
                 break;
@@ -591,6 +588,11 @@ public class MenuPpal {
         Mesa a = new Mesa ();
         System.out.println("Capacidad: ");
         a.setCapacidad(scan.nextInt());
+        while(a.getCapacidad()<=0)
+        {
+            System.out.println("ingrese un numero mayor a 0");
+            a.setCapacidad(scan.nextInt());
+        }
         return a;
     }
 
@@ -601,46 +603,88 @@ public class MenuPpal {
         {
             case 1:
                 System.out.println(restaurant.imprimirMesasLibres());
-                System.out.println("Precione cualquier tecla para Continuar...");
+                System.out.println("Precione enter para Continuar...");
                 new java.util.Scanner(System.in).nextLine();
                 break;
             case 2:
                 int id, flag = 0;
-                System.out.println(restaurant.imprimirMesasOcupadas());
-                System.out.println("Ingrese el ID de la mesa a liberar");
-                id = scan.nextInt();
-                do {
-                        try {
-                            restaurant.liberarMesa(id);
-                            System.out.println(restaurant.imprimirMesasOcupadas());
-                            flag = 1;
-
-                        } catch (IdInexistenteMesaException e) {
-                            System.out.println(e.getMessage());
-                            System.out.println("Ingrese un ID valido");
-                            id = scan.nextInt();
-                        } catch (IndexOutOfBoundsException ex)
+                try {
+                    if (restaurant.getListaMesas().cantidadMesasLibres() == 0) {
+                        throw new MesasLibresException("Todas las mesas estan disponibles");
+                    }
+                    else
                         {
-                            System.out.println("Ingrese un ID menor o igual a "+restaurant.cantidadMesas());
-                            id = scan.nextInt();
-                        }
-                    } while (flag == 0);
+                        System.out.println(restaurant.imprimirMesasOcupadas());
+                        System.out.println("Ingrese el ID de la mesa a liberar");
+                        id = scan.nextInt();
+                        do {
+                            try {
+                                restaurant.liberarMesa(id);
+                                System.out.println(restaurant.imprimirMesasOcupadas());
+                                flag = 1;
+
+                            } catch (IdInexistenteMesaException e) {
+                                System.out.println(e.getMessage());
+                                System.out.println("Ingrese un ID valido");
+                                id = scan.nextInt();
+                            } catch (IndexOutOfBoundsException ex) {
+                                System.out.println("Ingrese un ID menor o igual a " + restaurant.cantidadMesas());
+                                id = scan.nextInt();
+                            }
+                        } while (flag == 0);
+                    }
+                }
+                catch (MesasLibresException a)
+                {
+                    System.out.println(a.getMessage());
+                }
+
                 break;
             case 3:
                 String seguir;
                 do{
+
                     restaurant.agregarMesa(crearMesa(scan));
                     System.out.println("Quiere agregar mas mesas? SI/NO");
                     seguir = scan.next();
+
                 }while (seguir.equalsIgnoreCase("si"));
+                if(seguir.equalsIgnoreCase("no"))
+                {
+                    System.out.println("Rergresando al menu principal");
+                    MenuPrincipal(scan,restaurant);
+                }
+                else
+                {
+                    System.out.println("Opcion incorrecta, volviendo al menu principal");
+                    MenuPrincipal(scan,restaurant);
+                }
                 break;
             case 4:
                 int id2;
                 System.out.println(restaurant.mostrarListaMesas());
                 System.out.println("Ingrese el ID de la mesa a eliminar");
                 id2 = scan.nextInt();
-                restaurant.eliminarMesa(restaurant.buscarMesaIDmesa(id2));
-                System.out.println(restaurant.mostrarListaMesas());
+                try {
+                    if (id2 > restaurant.getListaMesas().cantidadMesasLibres()) {
+                        throw new IdInexistenteMesaException("El id ingresado no existe");
+                    }
+                    else {
+                        restaurant.eliminarMesa(restaurant.buscarMesaIDmesa(id2));
+                        System.out.println(restaurant.mostrarListaMesas());
+                    }
+                }
+                catch (IdInexistenteMesaException a)
+                {
+                    System.out.println(a.getMessage());
+                    while(id2 > restaurant.getListaMesas().cantidadMesas())
+                    {
+                        System.out.println("Ingrese un id valido");
+                        id2 = scan.nextInt();
+                    }
+                    restaurant.eliminarMesa(restaurant.buscarMesaIDmesa(id2));
+                    System.out.println(restaurant.mostrarListaMesas());
+                }
                 break;
             case 0:
                 break;
@@ -660,10 +704,10 @@ public class MenuPpal {
     {
         Combo combo;
         Comida comida;
-        PlatoPrincipal plato ;
-        Bebida bebida ;
-        Postre postre;
-        Guarnicion guarni;
+        PlatoPrincipal plato =null;
+        Bebida bebida=null ;
+        Postre postre=null;
+        Guarnicion guarni=null;
         int pos;String confirmar;
         switch (op)
         {
@@ -674,25 +718,100 @@ public class MenuPpal {
                 System.out.println("\033[35m"+"Elija un PlatoPrincipal"+"\u001B[0m");
                 System.out.println(restaurant.getCartaComidas().listarPlatosPrincipales());
                 pos=elegirOpcion(scan);
-                plato= (PlatoPrincipal) restaurant.getCartaComidas().getComidaPos(pos);
+                try {
+                    if (restaurant.getCartaComidas().getComidaPos(pos) instanceof PlatoPrincipal) {
+                        plato = (PlatoPrincipal) restaurant.getCartaComidas().getComidaPos(pos);
+                    }
+                    else
+                        throw new ComidaInexistenteException("La opcion ingresada no existe");
+                }
+                catch(ComidaInexistenteException a)
+                    {
+                        boolean bandera=true;
+                        while(bandera==true) {
+                            System.out.println(a.getMessage());
+                            pos = elegirOpcion(scan);
+                            if (restaurant.getCartaComidas().getComidaPos(pos) instanceof PlatoPrincipal) {
+                                plato = (PlatoPrincipal) restaurant.getCartaComidas().getComidaPos(pos);
+                                bandera=false;
+                            }
+                        }
+                    }
 
                 System.out.println("\033[33m"+"Creando Combo"+"\u001B[0m");
                 System.out.println("\033[35m"+"Elija una Bebida"+"\u001B[0m");
                 System.out.println(restaurant.getCartaComidas().listarBebidas());
                 pos=elegirOpcion(scan);
-                bebida=(Bebida)restaurant.getCartaComidas().getComidaPos(pos);
+
+                try {
+                    if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Bebida) {
+                        bebida = (Bebida) restaurant.getCartaComidas().getComidaPos(pos);
+                    }
+                    else
+                        throw new ComidaInexistenteException("La opcion ingresada no existe");
+                }
+                catch(ComidaInexistenteException a)
+                {
+                    boolean bandera=true;
+                    while(bandera==true) {
+                        System.out.println(a.getMessage());
+                        pos = elegirOpcion(scan);
+                        if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Bebida) {
+                            bebida = (Bebida) restaurant.getCartaComidas().getComidaPos(pos);
+                            bandera=false;
+                        }
+
+                    }
+
+                }
 
                 System.out.println("\033[33m"+"Creando Combo"+"\u001B[0m");
                 System.out.println("\033[35m"+"Elija un Postre"+"\u001B[0m");
                 System.out.println(restaurant.getCartaComidas().listarPostres());
                 pos=elegirOpcion(scan);
-                postre=(Postre)restaurant.getCartaComidas().getComidaPos(pos);
+                try {
+                    if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Postre) {
+                        postre = (Postre) restaurant.getCartaComidas().getComidaPos(pos);
+                    }
+                    else
+                        throw new ComidaInexistenteException("La opcion ingresada no existe");
+                }
+                catch(ComidaInexistenteException a)
+                {
+                    boolean bandera=true;
+                    while(bandera==true) {
+                        System.out.println(a.getMessage());
+                        pos = elegirOpcion(scan);
+                        if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Postre) {
+                            postre = (Postre) restaurant.getCartaComidas().getComidaPos(pos);
+                            bandera=false;
+                        }
+                    }
+                }
 
                 System.out.println("\033[33m"+"Creando Combo"+"\u001B[0m");
                 System.out.println("\033[35m"+"Elija una Guarnicion"+"\u001B[0m");
                 System.out.println(restaurant.getCartaComidas().listarGuarnicion());
                 pos=elegirOpcion(scan);
-                guarni=(Guarnicion)restaurant.getCartaComidas().getComidaPos(pos);
+                try {
+                    if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Guarnicion) {
+                        guarni = (Guarnicion) restaurant.getCartaComidas().getComidaPos(pos);
+                    }
+                    else
+                        throw new ComidaInexistenteException("La opcion ingresada no existe");
+                }
+                catch(ComidaInexistenteException a)
+                {
+                    boolean bandera=true;
+                    while(bandera==true) {
+                        System.out.println(a.getMessage());
+                        pos = elegirOpcion(scan);
+                        if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Guarnicion) {
+                            guarni = (Guarnicion) restaurant.getCartaComidas().getComidaPos(pos);
+                            bandera=false;
+                        }
+                    }
+                }
 
                 combo=new Combo(plato,bebida,postre,guarni);
                 System.out.println("\033[33m"+"Combo a agregar "+"\u001B[0m");
@@ -822,7 +941,7 @@ public class MenuPpal {
                         break;
                     case 0:
                         System.out.println("Regrasando al menu principal");
-                        System.out.println("Precione cualquier tecla para Continuar...");
+                        System.out.println("Precione enter para Continuar...");
                         new java.util.Scanner(System.in).nextLine();
                         break;
                     default:
@@ -965,7 +1084,7 @@ public class MenuPpal {
                 break;
             case 6:
                 System.out.println(restaurant.listarCompleto());
-                System.out.println("Precione cualquier tecla para Continuar...");
+                System.out.println("Precione enter para Continuar...");
                 new java.util.Scanner(System.in).nextLine();
                 break;
             case 0:
