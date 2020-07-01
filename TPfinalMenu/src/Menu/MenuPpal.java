@@ -127,7 +127,7 @@ public class MenuPpal {
         System.out.println("3- Agregar comidas");
         System.out.println("4- Eliminar comidas");
         System.out.println("5- Modificar precio");
-        System.out.println("6- Listado de comidas");
+        System.out.println("6- Listado de comidas/combos");
         System.out.println("0-Regresar");
     }
     public static void ImprimirOpcionesSubMenuComida()
@@ -702,8 +702,8 @@ public class MenuPpal {
 
     public static void MenuCombos (int op, Scanner scan,Restaurant restaurant)
     {
-        Combo combo;
-        Comida comida;
+        Combo combo=null;
+        Comida comida=null;
         PlatoPrincipal plato =null;
         Bebida bebida=null ;
         Postre postre=null;
@@ -719,8 +719,11 @@ public class MenuPpal {
                 System.out.println(restaurant.getCartaComidas().listarPlatosPrincipales());
                 pos=elegirOpcion(scan);
                 try {
-                    if (restaurant.getCartaComidas().getComidaPos(pos) instanceof PlatoPrincipal) {
-                        plato = (PlatoPrincipal) restaurant.getCartaComidas().getComidaPos(pos);
+                    if(pos<=restaurant.getCartaComidas().getListaComida().getCantComidas()) {
+                        if (restaurant.getCartaComidas().getComidaPos(pos) instanceof PlatoPrincipal) {
+                            plato = (PlatoPrincipal) restaurant.getCartaComidas().getComidaPos(pos);
+                        } else
+                            throw new ComidaInexistenteException("La opcion ingresada no existe");
                     }
                     else
                         throw new ComidaInexistenteException("La opcion ingresada no existe");
@@ -744,8 +747,11 @@ public class MenuPpal {
                 pos=elegirOpcion(scan);
 
                 try {
-                    if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Bebida) {
-                        bebida = (Bebida) restaurant.getCartaComidas().getComidaPos(pos);
+                    if(pos<=restaurant.getCartaComidas().getListaComida().getCantComidas()) {
+                        if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Bebida) {
+                            bebida = (Bebida) restaurant.getCartaComidas().getComidaPos(pos);
+                        } else
+                            throw new ComidaInexistenteException("La opcion ingresada no existe");
                     }
                     else
                         throw new ComidaInexistenteException("La opcion ingresada no existe");
@@ -770,8 +776,11 @@ public class MenuPpal {
                 System.out.println(restaurant.getCartaComidas().listarPostres());
                 pos=elegirOpcion(scan);
                 try {
-                    if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Postre) {
-                        postre = (Postre) restaurant.getCartaComidas().getComidaPos(pos);
+                    if(pos<=restaurant.getCartaComidas().getListaComida().getCantComidas()) {
+                        if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Postre) {
+                            postre = (Postre) restaurant.getCartaComidas().getComidaPos(pos);
+                        } else
+                            throw new ComidaInexistenteException("La opcion ingresada no existe");
                     }
                     else
                         throw new ComidaInexistenteException("La opcion ingresada no existe");
@@ -794,8 +803,11 @@ public class MenuPpal {
                 System.out.println(restaurant.getCartaComidas().listarGuarnicion());
                 pos=elegirOpcion(scan);
                 try {
-                    if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Guarnicion) {
-                        guarni = (Guarnicion) restaurant.getCartaComidas().getComidaPos(pos);
+                    if(pos<=restaurant.getCartaComidas().getListaComida().getCantComidas()) {
+                        if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Guarnicion) {
+                            guarni = (Guarnicion) restaurant.getCartaComidas().getComidaPos(pos);
+                        } else
+                            throw new ComidaInexistenteException("La opcion ingresada no existe");
                     }
                     else
                         throw new ComidaInexistenteException("La opcion ingresada no existe");
@@ -806,9 +818,11 @@ public class MenuPpal {
                     while(bandera==true) {
                         System.out.println(a.getMessage());
                         pos = elegirOpcion(scan);
-                        if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Guarnicion) {
-                            guarni = (Guarnicion) restaurant.getCartaComidas().getComidaPos(pos);
-                            bandera=false;
+                        if(pos<=restaurant.getCartaComidas().getListaComida().getCantComidas()) {
+                            if (restaurant.getCartaComidas().getComidaPos(pos) instanceof Guarnicion) {
+                                guarni = (Guarnicion) restaurant.getCartaComidas().getComidaPos(pos);
+                                bandera = false;
+                            }
                         }
                     }
                 }
@@ -816,26 +830,67 @@ public class MenuPpal {
                 combo=new Combo(plato,bebida,postre,guarni);
                 System.out.println("\033[33m"+"Combo a agregar "+"\u001B[0m");
                 System.out.println(combo.getCombo());
+                System.out.println("Desea confirmar? si/no");
                 confirmar=scan.next();
 
                 if (confirmar.equalsIgnoreCase("si")){
                     restaurant.agregarCombo(combo);
                     System.out.println("\033[33m"+"Combo agregado al Resto"+"\u001B[0m");
                 }
+                else if(confirmar.equalsIgnoreCase("no")) {
+                    System.out.println("Volviendo al menu principal");
+                    MenuPrincipal(scan,restaurant);
+                }
+                else {
+                    System.out.println("Ingreso invalido, volviendo al menu principal");
+                    MenuPrincipal(scan,restaurant);
+                }
                 break;
             case 2:
                 System.out.println("Elija un combo a " +"\033[31m"+"Eliminar"+"\u001B[0m");
                 System.out.println(restaurant.listarCombos());
-
                 pos=elegirOpcion(scan);
-                combo= restaurant.getSetCombos().getComboPos(pos);
-                System.out.println("\033[33m"+"Combo a "+"\033[31m"+"Eliminar"+"\u001B[0m"+"\u001B[0m");
-                System.out.println(combo.getCombo());
-                System.out.println("\033[33m"+"Desea borrar este combo (SI/NO) "+"\u001B[0m");
-                confirmar=scan.next();
-                if(confirmar.equalsIgnoreCase("si")){
-                    restaurant.eliminarCombo(combo);
-                    System.out.println("\033[33m"+"Combo Eliminado del Restaurant "+"\u001B[0m");
+                try {
+                    if (pos <= restaurant.getCartaComidas().getCantidadCombo()) {
+                        combo = restaurant.getSetCombos().getComboPos(pos);
+                        System.out.println("\033[33m" + "Combo a " + "\033[31m" + "Eliminar" + "\u001B[0m" + "\u001B[0m");
+                        System.out.println(combo.getCombo());
+                        System.out.println("\033[33m" + "Desea borrar este combo (SI/NO) " + "\u001B[0m");
+                        confirmar = scan.next();
+                        if (confirmar.equalsIgnoreCase("si")) {
+                            restaurant.eliminarCombo(combo);
+                            System.out.println("\033[33m" + "Combo Eliminado del Restaurant " + "\u001B[0m");
+                        }
+                    } else
+                        throw new ComboNoExistenteException("La opcion ingresada no corresponde a ningun combo");
+                }
+                catch (ComboNoExistenteException a) {
+                    boolean bandera = true;
+
+                    while (bandera == true) {
+                        System.out.println(a.getMessage());
+                        pos = elegirOpcion(scan);
+                        if (pos <= restaurant.getCartaComidas().getCantidadCombo()) {
+                            combo = restaurant.getSetCombos().getComboPos(pos);
+                            bandera = false;
+                        }
+                    }
+                    System.out.println("\033[33m" + "Combo a " + "\033[31m" + "Eliminar" + "\u001B[0m" + "\u001B[0m");
+                    System.out.println(combo.getCombo());
+                    System.out.println("\033[33m" + "Desea borrar este combo (SI/NO) " + "\u001B[0m");
+                    confirmar = scan.next();
+                    if (confirmar.equalsIgnoreCase("si")) {
+                        restaurant.eliminarCombo(combo);
+                        System.out.println("\033[33m" + "Combo Eliminado del Restaurant " + "\u001B[0m");
+                    }
+                    else if(confirmar.equalsIgnoreCase("no")) {
+                        System.out.println("Volviendo al menu principal");
+                        MenuPrincipal(scan,restaurant);
+                    }
+                    else {
+                        System.out.println("Ingreso invalido, volviendo al menu principal");
+                        MenuPrincipal(scan,restaurant);
+                    }
                 }
                 break;
 
@@ -885,6 +940,7 @@ public class MenuPpal {
                         Bebida b1= new Bebida(precio,nombre,gas,temperatura);
                         System.out.println("Esta es su bebida creada\n");
                         System.out.println(b1.toString());
+                        restaurant.getCartaComidas().agregarComida(b1);
 
                         break;
                     case 2:
@@ -904,6 +960,7 @@ public class MenuPpal {
                         PlatoPrincipal plat1= new PlatoPrincipal(precio,nombre,tcc);
                         System.out.println(plat1.toString());
                         System.out.println("Este es su plato creado\n");
+                        restaurant.getCartaComidas().agregarComida(plat1);
                         break;
                     case 3:
                         boolean top;
@@ -922,6 +979,7 @@ public class MenuPpal {
                         Postre pote1= new Postre(precio,nombre,top);
                         System.out.println("Este es su postre creado\n");
                         System.out.println(pote1.toString());
+                        restaurant.getCartaComidas().agregarComida(pote1);
                         break;
                     case 4:
                         boolean sal;
@@ -938,6 +996,7 @@ public class MenuPpal {
                         Guarnicion guardian= new Guarnicion(precio,nombre,sal);
                         System.out.println("Esta es su guarnicion creada\n");
                         System.out.println(guardian.toString());
+                        restaurant.getCartaComidas().agregarComida(guardian);
                         break;
                     case 0:
                         System.out.println("Regrasando al menu principal");
@@ -946,8 +1005,8 @@ public class MenuPpal {
                         break;
                     default:
                         System.out.println("Opción invalida");
-                        op = elegirOpcion(scan);
-                        MenuCombos(op,scan,restaurant);
+
+                        MenuCombos(3,scan,restaurant);
                         break;
 
                 }
@@ -957,16 +1016,62 @@ public class MenuPpal {
             System.out.println("\033[35m"+"Elija una comida a "+"\033[31m"+"Eliminar"+"\u001B[0m"+ "\u001B[0m");
             System.out.println(restaurant.listarComidaConPosicion());
             pos=elegirOpcion(scan);
-            comida=restaurant.getCartaComidas().getComidaPos(pos);
+            try {
+                if (pos > restaurant.getCartaComidas().getListaComida().getCantComidas()) {
+                    throw new ComidaInexistenteException("La opcion ingresada no corresponde a ninguna comida");
+                } else {
+                    comida = restaurant.getCartaComidas().getComidaPos(pos);
+                    System.out.println("Desea borra esta comida (SI/NO)");
+                    System.out.println("\033[31m" + comida.toString() + "\u001B[0m");
 
-            System.out.println("Desea borra esta comida (SI/NO)");
-                System.out.println("\033[31m"+comida.toString()+"\u001B[0m");
-
-            confirmar=scan.next();
-            if (confirmar.equalsIgnoreCase("si")){
-                restaurant.eliminarComida(comida);
-                System.out.println("\033[33m"+"Comida eliminada con exito"+"\u001B[0m");
+                    confirmar = scan.next();
+                    if (confirmar.equalsIgnoreCase("si")) {
+                        restaurant.eliminarComida(comida);
+                        System.out.println("\033[33m" + "Comida eliminada con exito" + "\u001B[0m");
+                    }
+                    else if(confirmar.equalsIgnoreCase("no"))
+                    {
+                        System.out.println("Volviendo al menu");
+                        MenuPrincipal(scan,restaurant);
+                    }
+                    else{
+                        System.out.println("Opcion erronea, volviendo al menu principal");
+                        MenuPrincipal(scan,restaurant);
+                    }
+                }
             }
+            catch (ComidaInexistenteException a)
+            {
+                boolean bandera=true;
+                while(bandera== true)
+                {
+                    System.out.println(a.getMessage());
+                    pos=elegirOpcion(scan);
+                    if (pos <= restaurant.getCartaComidas().getListaComida().getCantComidas())
+                    {
+                        bandera=false;
+                        comida = restaurant.getCartaComidas().getComidaPos(pos);
+                        System.out.println("Desea borra esta comida (SI/NO)");
+                        System.out.println("\033[31m" + comida.toString() + "\u001B[0m");
+
+                        confirmar = scan.next();
+                        if (confirmar.equalsIgnoreCase("si")) {
+                            restaurant.eliminarComida(comida);
+                            System.out.println("\033[33m" + "Comida eliminada con exito" + "\u001B[0m");
+                        }
+                        else if(confirmar.equalsIgnoreCase("no"))
+                        {
+                            System.out.println("Volviendo al menu");
+                            MenuPrincipal(scan,restaurant);
+                        }
+                        else{
+                            System.out.println("Opcion erronea, volviendo al menu principal");
+                            MenuPrincipal(scan,restaurant);
+                        }
+                    }
+                }
+            }
+
             break;
             case 5:
                 System.out.println("Desea cambiarle el precio a un ...");
