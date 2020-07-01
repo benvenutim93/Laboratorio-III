@@ -23,7 +23,7 @@ public class Main {
 
         Restaurant restaurant = new Restaurant();
         scan = new Scanner (System.in);
-
+/*
         //Plantos principal
         PlatoPrincipal milanesa= new PlatoPrincipal(250,"Milanesa",true);
         PlatoPrincipal milanesaNapo= new PlatoPrincipal(350,"Milanesa Napolitana",true);
@@ -65,6 +65,7 @@ public class Main {
         Guarnicion pureDeZapallo = new Guarnicion(65,"Pure de Zapallo",true);
         Guarnicion pureDePapa = new Guarnicion(65,"Pure de papa",true);
         Guarnicion ensalada = new Guarnicion(70,"Ensalada",true);
+        Guarnicion ensaladaRusa=new Guarnicion(100,"Ensalada Rusa",true);
         //Combos
         Combo combo1=new Combo(hamburguesa,pepsi,gelatina,batatasFritas);
         Combo combo2=new Combo(pancho,manaosDeUva,vigilante,pureDePapa);
@@ -77,7 +78,7 @@ public class Main {
         Combo combo9=new Combo(asadoDeTofu,aguaSaborizada,brownie,papasPays);
         Combo combo10=new Combo(pechugaAlaPlancha,aguaSaborizada,ensaladaFrutas,papasNoisette);
 
-
+//----------------------------------------Combos-------------------------------------
         restaurant.agregarCombo(combo1);
         restaurant.agregarCombo(combo2);
         restaurant.agregarCombo(combo3);
@@ -89,64 +90,95 @@ public class Main {
         restaurant.agregarCombo(combo9);
         restaurant.agregarCombo(combo10);
 
-
+//----------------------------------------Bebidas-------------------------------------
         restaurant.agregarComida(manaosDeUva);
+        restaurant.agregarComida(coca);
+        restaurant.agregarComida(pepsi);
+        restaurant.agregarComida(te);
+        restaurant.agregarComida(agua);
+        restaurant.agregarComida(cafe);
+        restaurant.agregarComida(sprite);
+        restaurant.agregarComida(pasoDelosToros);
+        restaurant.agregarComida(soda);
+        restaurant.agregarComida(aguaSaborizada);
+
+//----------------------------------------PlatosPrincipales-------------------------------------
         restaurant.agregarComida(milanesa);
-        restaurant.agregarComida(helado);
-        restaurant.agregarComida(pureDePapa);
         restaurant.agregarComida(milanesaNapo);
         restaurant.agregarComida(pancho);
         restaurant.agregarComida(hamburguesa);
-        restaurant.agregarComida(ensaladaFrutas);
-        restaurant.agregarComida(ensalada);
+        restaurant.agregarComida(milanesaCaballo);
+        restaurant.agregarComida(choripan);
+        restaurant.agregarComida(sangucheCarne);
+        restaurant.agregarComida(asadoDeTofu);
+        restaurant.agregarComida(pechugaAlaPlancha);
+        restaurant.agregarComida(morcilla);
 
-        Presencial nico= new Presencial("Nico","Bertu","543453123",5);
+
+//----------------------------------------Guarniciones-------------------------------------
+        restaurant.agregarComida(ensalada);
+        restaurant.agregarComida(pureDePapa);
+        restaurant.agregarComida(batatasFritas);
+        restaurant.agregarComida(papasFritas);
+        restaurant.agregarComida(papasNoisette);
+        restaurant.agregarComida(papasPays);
+        restaurant.agregarComida(pureDeZapallo);
+        restaurant.agregarComida(ensaladaRusa);
+//----------------------------------------Postres-------------------------------------
+        restaurant.agregarComida(ensaladaFrutas);
+        restaurant.agregarComida(helado);
+        restaurant.agregarComida(flan);
+        restaurant.agregarComida(gelatina);
+        restaurant.agregarComida(bombonSuizo);
+        restaurant.agregarComida(brownie);
+        restaurant.agregarComida(postrBalcarce);
+        restaurant.agregarComida(postreChocolate);
+        restaurant.agregarComida(lemonPie);
+        restaurant.agregarComida(vigilante);
+//----------------------------------------Clientes-------------------------------------
+        Presencial nico= new Presencial("Nico","Bertu","456",5);
         Presencial marian = new Presencial("Marian","Benv","123",2);
-        Virtual lau = new Virtual("Lautaro", "Fullone", "456", "476965", "Espa 3571" );
-        Virtual rodri = new Virtual("Rodri", "Perez", "5454521", "548525", "Lejos123");
+        Virtual lau = new Virtual("Lautaro", "Fullone", "789", "476965", "Espa 3571" );
+        Virtual rodri = new Virtual("Rodri", "Perez", "159", "548525", "Lejos123");
 
         restaurant.agregarCliente(nico);
         restaurant.agregarCliente(lau);
         restaurant.agregarCliente(marian);
         restaurant.agregarCliente(rodri);
 
-        //ListaClientes listaClientes = Archivador.leerArchivoClientes();
-        //System.out.println(listaClientes.listar());
-        //MenuPpal.MenuPrincipal(scan,restaurant);
-
+//----------------------------------------Mesas-------------------------------------
         Mesa a = new Mesa (4, false);
         Mesa b = new Mesa (8, false);
         Mesa c = new Mesa (6, true);
         Mesa d = new Mesa (3, false);
+        Mesa e =new Mesa  (2, false);
 
         restaurant.agregarMesa(a);
         restaurant.agregarMesa(b);
         restaurant.agregarMesa(c);
         restaurant.agregarMesa(d);
+        restaurant.agregarMesa(e);
 
-        /*try {
-            Archivador.agregarMesas(restaurant.getListaMesas());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
-        //ListaMesas lista = Archivador.leerArchivoMesas();
-        //System.out.println(lista.listar());
 
-        //JSONObject jsonObject = restaurant.codeRestaurant();
-            //System.out.println(jsonObject.toString());
-        /*try {
-            Archivador.agregarClientes(restaurant.getListaClientes());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }*/
-
-      /* ListaClientes clientes = Archivador.leerArchivoClientes();
-       System.out.println(clientes.listar());
-
+          try {
+                Archivador.agregarClientes(restaurant.getListaClientes());
+                Archivador.agregarComidas(restaurant.getListaComidas());
+                Archivador.agregarMesas(restaurant.getListaMesas());
+                Archivador.cargarArchivoCombos(restaurant.getSetCombos());
+          }
+          catch (IOException g)
+          {
+              System.out.println("Fin main");
+          }
 */
+            restaurant.setListaClientes(Archivador.leerArchivoClientes());
+            restaurant.setListaMesas(Archivador.leerArchivoMesas());
+            restaurant.getCartaComidas().setListaComida(Archivador.leerArchivoComidas());
+            restaurant.getCartaComidas().setSetCombos(Archivador.leerArchivoCombos());
 
-        //MenuPpal.MenuPrincipal(scan,restaurant);
+           MenuPpal.MenuPrincipal(scan,restaurant);
+
 
     }
 

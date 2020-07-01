@@ -364,4 +364,17 @@ public class Restaurant
         return listaMesas.eliminar(obj);
     }
 
+    public void setListaClientes(ListaClientes listaClientes) {
+        this.listaClientes = listaClientes;
+    }
+
+    public void setListaMesas(ListaMesas b)
+    {
+        this.listaMesas=b;
+    }
+
+    public void setCartaComidas(CartaComidas cartaComidas) {
+        this.cartaComidas = cartaComidas;
+    }
+
 }

@@ -214,5 +214,7 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable
         return listaComidas.size();
     }
 
-
+    public void setListaComidas(ArrayList<Comida> listaComidas) {
+        this.listaComidas = listaComidas;
+    }
 }

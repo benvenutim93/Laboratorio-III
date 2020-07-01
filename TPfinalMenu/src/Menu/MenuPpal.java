@@ -365,9 +365,9 @@ public class MenuPpal {
                 }
                 catch (DniNOexistenteExecption e){
                     System.out.println(e.getMessage());
-                    System.out.println(" Ingrese Dni nuevamente ");
-                    dni = scan.next();
-                    MenuClientePresencial(4,scan,restaurant,dni);
+                    System.out.println(" Volviendo al Menu principal ");
+
+                   MenuPrincipal(scan,restaurant);
                 }
                 break;
             case 0: //salir

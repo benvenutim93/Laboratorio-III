@@ -153,6 +153,11 @@ public class CartaComidas
         return listaComida.listarComidaConPosicion();
     }
 
+    public void setListaComida(ListaComidas listaComida) {
+        this.listaComida = listaComida;
+    }
 
-
+    public void setSetCombos(SetCombo setCombos) {
+        this.setCombos = setCombos;
+    }
 }

@@ -111,4 +111,8 @@ public class SetCombo implements IOpBasicas<Combo>, Serializable {
         }
         return rta;
     }
+
+    public void setSetCombo(HashSet<Combo> setCombo) {
+        this.setCombo = setCombo;
+    }
 }
