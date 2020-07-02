@@ -87,8 +87,8 @@ public class Virtual extends Cliente implements Serializable {
         return direccion;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setDireccion(String calle, String altura) {
+        this.direccion = calle +" "+altura;
     }
 
     public boolean isEntregado() {

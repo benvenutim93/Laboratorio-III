@@ -2,6 +2,7 @@ package Menu;
 
 import java.util.Scanner;
 
+import Archivos.JsonUtiles;
 import Colecciones.*;
 import Excepciones.*;
 import Humanos.*;
@@ -45,6 +46,7 @@ public class MenuPpal {
                 break;
             case 3312:
                 try {
+                    JsonUtiles.grabar(restaurant.codeRestaurant());
                     System.out.println(restaurant.codeRestaurant());
                 } catch (JSONException e) {
                     System.out.println(e.getMessage());
@@ -94,6 +96,7 @@ public class MenuPpal {
     public static void imprimirOpionesClientePresencial ()
     {
         System.out.println("\n\n");
+        System.out.println(" ---- MENU CLIENTE ----");
         System.out.println("1- Nuevo Cliente");
         System.out.println("2- Cliente existente");
         System.out.println("3- Tomar pedido");
@@ -104,6 +107,7 @@ public class MenuPpal {
     public static void imprimirOpcionesDelivery ()
     {
         System.out.println("\n\n");
+        System.out.println(" ---- MENU DELIVERY ----");
         System.out.println("1- Tomar datos del cliente");
         System.out.println("2- Tomar pedido");
         System.out.println("3- Mostrar datos cliente");
@@ -113,6 +117,7 @@ public class MenuPpal {
     public static void imprimirOpcionesMesas()
     {
         System.out.println("\n\n");
+        System.out.println(" ---- MENU MESAS ----");
         System.out.println("1- Mesas disponibles");
         System.out.println("2- Liberar mesa");
         System.out.println("3- Agregar mesa");
@@ -122,6 +127,7 @@ public class MenuPpal {
     public static void imprimirOpcionesGestionCombosComidas ()
     {
         System.out.println("\n\n");
+        System.out.println(" ---- MENU GESTION COMIDAS ----");
         System.out.println("1- Agregar combos");
         System.out.println("2- Eliminar combos");
         System.out.println("3- Agregar comidas");
@@ -132,6 +138,7 @@ public class MenuPpal {
     }
     public static void ImprimirOpcionesSubMenuComida()
     {
+        System.out.println(" ---- MENU PLATOS ----");
         System.out.println("1-Bebida");
         System.out.println("2-Plato Principal");
         System.out.println("3-Postre");
@@ -139,10 +146,17 @@ public class MenuPpal {
         System.out.println("0-Regresar");
     }
     public static  void imprimirOpcionesTomarPedido(){
-        System.out.println("1-Combos\n"+"2-Comidas\n"+"0-Regresar");
+        System.out.println(" ---- MENU COMIDAS ----");
+        System.out.println("1-Combos");
+        System.out.println("2-Comidas");
+        System.out.println("0-Regresar");
     }
     public static void imprimirOpcionesTomarPedidoComidas(){
-        System.out.println("1-Bebida\n"+ "2-PlatoPrinciapl\n"+"3-Postre\n"+"4-Guarnicion");
+        System.out.println(" ---- MENU COMIDAS ----");
+        System.out.println("1-Bebida");
+        System.out.println("2-Plato Princiapl");
+        System.out.println("3-Postre");
+        System.out.println("4-Guarnicion");
     }
 
     public static void MenuClientePresencial (int op, Scanner scan, Restaurant restaurant, String dni)
@@ -397,6 +411,8 @@ public class MenuPpal {
     }
     public static Virtual crearClienteVirtual (Scanner scan,String dni)
     {
+        String calle = "";
+        String altura = "";
         Virtual a = new Virtual ();
         System.out.println("Nombre: ");
         a.setNombre(scan.next());
@@ -405,8 +421,11 @@ public class MenuPpal {
         a.setDNI(dni);
         System.out.println("Telefono: ");
         a.setTelefono(scan.next());
-        System.out.println("Direccion: ");
-        a.setDireccion(scan.next());
+        System.out.println("Calle: ");
+        calle = scan.next();
+        System.out.println("Altura: " );
+        altura = scan.next();
+        a.setDireccion(calle, altura);
         return a;
     }
     public static void MenuDelivery (int op, Scanner scan,Restaurant restaurant, String dni)
@@ -463,6 +482,10 @@ public class MenuPpal {
                                     }
                                     else if(seguir.equalsIgnoreCase("no"))
                                     {
+                                        System.out.println("--------------------------------------------------------");
+                                        System.out.println("Su pedido");
+                                        System.out.println(aux.mostrarPedidos());
+                                        System.out.println("--------------------------------------------------------");
                                         System.out.println("Volviendo al menu principal");
                                         MenuPrincipal(scan,restaurant);
                                     }
@@ -502,11 +525,9 @@ public class MenuPpal {
                                 }while (continuar.equalsIgnoreCase("si"));
                                 break;
                             case 0:
-                                MenuPrincipal(scan,restaurant);
                                 break;
                             default:
                                 System.out.println("Opcion invalida");
-
                                 MenuDelivery(2,scan,restaurant,dni);
                                 break;
                         }
@@ -534,7 +555,6 @@ public class MenuPpal {
                 {
                     System.out.println(l.getMessage());
                 }
-                MenuDelivery(2,scan,restaurant,dni);
                 break;
             case 3:
                 //System.out.println(" Ingrese Dni del  Cliente: ");
@@ -554,7 +574,6 @@ public class MenuPpal {
                         else
                             System.out.println(aux.toString());
                     }
-
                 }
                 catch (DniNOexistenteExecption e){
                     System.out.println(e.getMessage());
@@ -581,7 +600,6 @@ public class MenuPpal {
                 break;
         }
         MenuPrincipal(scan,restaurant);
-
     }
 
     public static Mesa crearMesa (Scanner scan)
