@@ -59,6 +59,11 @@ public class Mesa implements Serializable
         this.dniCliente = dniCliente;
     }
 
+    /**
+     * Codifica la mesa en JSON
+     * @return JSONObject
+     * @throws JSONException
+     */
     public JSONObject code() throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(K_MESA_CAPACIDAD, getCapacidad());

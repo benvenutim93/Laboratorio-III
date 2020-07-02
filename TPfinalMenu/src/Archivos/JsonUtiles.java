@@ -12,6 +12,11 @@ import org.json.JSONObject;
 
 public class JsonUtiles {
     public final static String JSON_ARCHI = "JSON.json";
+
+    /**
+     * Graba en un archivo, el string de un JSONObject
+     * @param obj
+     */
     public static void grabar(JSONObject obj) {
         try {
             FileWriter file = new FileWriter(JSON_ARCHI);
@@ -24,6 +29,10 @@ public class JsonUtiles {
         }
     }
 
+    /**
+     * Lee desde un archivo, el String de un JSONObject.
+     * @return String
+     */
     public static String leer()
     {
         String contenido = "";
