@@ -44,31 +44,57 @@ public class Virtual extends Cliente implements Serializable {
         return jsonObject;
     }
 
+    /**
+     * Cambia el estado del atributo "entregado" a true
+     */
     public void realizarEntrega() {
         entregado=true;
     }
+    /**
+     * Guarda en el arreglo de pedidos, el combo seleccionado
+     * @param cartaComidas es para mostrar la carta, y poder recorrerla y asi extraer los combos
+     * @param num  es la posicion de donde se encuentra los combos
+     */
     @Override
     public void pedirCombo(CartaComidas cartaComidas,int num) throws ComboNoExistenteException {
         super.pedirCombo(cartaComidas,num);
         setCantPedidos();
     }
 
+    /**
+     *  agrega una comida al pedido(plato principal, postre, guardicion, o bebida) NO AGREGA COMBOS
+     *
+     * @param num indica que comida es la que va a agregar
+     * @param carta es la carta de comidas
+     */
     @Override
     public void crearPedido(int num,CartaComidas carta)throws ComidaInexistenteException {
         super.crearPedido(num,carta);
         setCantPedidos();
     }
 
+    /**Recorre el array de los pedidos, va sumando el precio
+     * y modifica el atributo factura al terminar de sumar
+     */
     @Override
     public void calcularFactura() {
         super.calcularFactura();
     }
 
+    /**elimina ya sea un combo o una comida elegida
+     *
+     * @param i es en donde se encuentra el combo o la comida q se elige para eliminar
+     * @return true si lo elimino, false si no
+     */
     @Override
     public boolean eliminar(int i) {
         return super.eliminar(i);
     }
 
+    /**
+     * Muestra todos los pedidos de un cliente determinado
+     * @return toString del builder
+     */
     @Override
     public String mostrarPedidos() {
         return super.mostrarPedidos();
@@ -91,6 +117,9 @@ public class Virtual extends Cliente implements Serializable {
         this.direccion = calle +" "+altura;
     }
 
+    /**
+     * @return el atributo entregado del cliente
+     */
     public boolean isEntregado() {
         return entregado;
     }

@@ -52,9 +52,9 @@ public  class Cliente extends Persona implements Serializable {
 
 
     /**
-     * Recibe como parametro la carta de comida, y le pide el nombre del combo que desea
-     * y lo guarda en el arreglo de pedidos
-     * @param cartaComidas es para mostrar la carta, y poder recorrerla y asi extraer los combos/objetos
+     * Guarda en el arreglo de pedidos, el combo seleccionado
+     * @param cartaComidas es para mostrar la carta, y poder recorrerla y asi extraer los combos
+     * @param num  es la posicion de donde se encuentra los combos
      */
     public void pedirCombo(CartaComidas cartaComidas, int num) throws ComboNoExistenteException {
         Combo respuesta = null;
@@ -78,9 +78,11 @@ public  class Cliente extends Persona implements Serializable {
             throw new ComboNoExistenteException("El combo ingresado es invalido");
     }
 
-    /** agrega una comida al pedido(plato principal, postre, guardicion, o bebida) NO AGREGA COMBOS
+    /**
+     *  agrega una comida al pedido(plato principal, postre, guardicion, o bebida) NO AGREGA COMBOS
      *
      * @param num indica que comida es la que va a agregar
+     * @param carta es la carta de comidas
      */
     public void crearPedido(int num,CartaComidas carta) throws ComidaInexistenteException
     {
@@ -157,8 +159,8 @@ public  class Cliente extends Persona implements Serializable {
 
     }
 
-    /**Recorre el array de los pedidos y va sumando el precio
-     * seria como un """set"""
+    /**Recorre el array de los pedidos, va sumando el precio
+     * y modifica el atributo factura al terminar de sumar
      */
     public void calcularFactura()
     {
@@ -251,6 +253,11 @@ public  class Cliente extends Persona implements Serializable {
         return  super.toString()+"\nPedidos realizados= "+mostrarPedidos()+"\nFactura= "+getFactura()+"\nCantidad de Pedidos= "+getCantPedidos();
     }
 
+    /**
+     * Compara usando el instanceof en los objetos
+     * @param o es el objeto a compara
+     * @return true si es igual, false si no
+     */
     @Override
     public boolean equals(Object o) {
         boolean rta=false;
