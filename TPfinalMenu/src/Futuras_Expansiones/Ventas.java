@@ -1,4 +1,4 @@
-package Objetos;
+package Futuras_Expansiones;
 
 import Comidas.Combo;
 

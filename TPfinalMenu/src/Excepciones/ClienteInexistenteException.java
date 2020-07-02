@@ -5,7 +5,7 @@ public class ClienteInexistenteException extends Exception {
     private  String dni;
 
     public ClienteInexistenteException(String dni){
-        super("Cliente inexistente");
+        super("\033[31m"+"Cliente inexistente"+"\u001B[0m");
         this.dni=dni;
 
     }

@@ -4,6 +4,9 @@ import Interfaces.IPrecio;
 
 import java.io.Serializable;
 
+/**
+ * @author Nicolas
+ */
 public class Bebida extends Comida implements IPrecio, Serializable {
 
     private static final long serialVersionUID = 4l;
@@ -37,6 +40,10 @@ public class Bebida extends Comida implements IPrecio, Serializable {
 
     ///-------------------------------- [M E T O D O S] --------------------------------
 
+    /**
+     * Devuelve los datos de la Bebida
+     * @return String
+     */
     public String datos(){
         return super.getNombre()+" -> [Temperatura: "+getTemperatura()+"] - [Tiene gas: "+isTieneGas()+"]";
     }

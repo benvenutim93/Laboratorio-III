@@ -8,6 +8,9 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+/**
+ * @author Nicolas
+ */
 public class Combo implements IPrecio, Serializable {
 
     private static final long serialVersionUID = 5l;
@@ -67,6 +70,9 @@ public class Combo implements IPrecio, Serializable {
         return jsonObject;
     }
 
+    /**
+     * Pone el precio del combo dependiedno de lo que se cargue4.
+     */
     private void ponerPrecio() {
 
         double acum = 0;
@@ -145,32 +151,66 @@ public class Combo implements IPrecio, Serializable {
         return builder.toString();
     }
         //guarnicion
+
+    /**
+     * le saca la sal a la comida.
+     */
         public void sinSal(){
           guarnicion.sinSal();
         }
         //platoprincipal
+
+    /**
+     * Para pooner una comida si es apto para tacc
+     * @param b
+     */
         public void setAptoTACC(boolean b){
         plato.setAptoTacc(b);
         }
         //postre
+
+    /**
+     * Saca el topping del postre
+     */
         public void sacarTopping(){
         postre.sinTopping();
         }
         //bebida
+
+    /**
+     * Pone el gas de la bebida
+     * @param b
+     */
         public void ponerGas(boolean b){
         bebida.setTieneGas(b);
         }
-        public void ponerTemperatura(String b){
+
+    /**
+     * pone la temperatura de la bebida
+     * @param b
+     */
+    public void ponerTemperatura(String b){
             bebida.setTemperatura(b);
         }
 
-        public void cambiarPrecio(double precio) throws PrecioNegativoException {
+    /**
+     * Cambia el Precio de un combo, tira una excepcion solo si se ingresa un precio negativo o == 0
+     * @param precio
+     * @throws PrecioNegativoException
+     */
+    public void cambiarPrecio(double precio) throws PrecioNegativoException {
         if(precio >= 0 ) {
             this.precio = precio;
         }else {
             throw new PrecioNegativoException("Error : Precio Negativo");
         }
     }
+
+    /**
+     * Compara el ID del combo
+     * @param o
+     * @return True si es el mismo combo (ID)
+     */
     @Override
     public boolean equals(Object o) {
         boolean rta=false;
@@ -188,8 +228,10 @@ public class Combo implements IPrecio, Serializable {
     }
 
 
-
-
+    /**
+     * Devuelve el combo
+     * @return Combo
+     */
     public Combo getComboComida() {
         return this;
     }

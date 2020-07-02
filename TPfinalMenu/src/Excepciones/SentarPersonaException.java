@@ -5,7 +5,7 @@ public class SentarPersonaException extends Exception{
 
     public SentarPersonaException()
         {
-            super("Necesita ubicar al cliente en una mesa primero");
+            super("\033[31m"+"Necesita ubicar al cliente en una mesa primero"+"\u001B[0m");
         }
 }
 

@@ -11,6 +11,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 
+/**
+ * @author Nicolas
+ */
 public class SetCombo implements IOpBasicas<Combo>, Serializable {
 
     private static final long serialVersionUID = 12l;
@@ -19,10 +22,22 @@ public class SetCombo implements IOpBasicas<Combo>, Serializable {
 
     private HashSet<Combo> setCombo;
 
+
+    /**
+     * CONSTRUCTOR
+     */
     public SetCombo() {
         this.setCombo = new HashSet<Combo>();
     }
 
+///-------------------------------- [M E T O D O S] --------------------------------
+
+
+    /**
+     * Crea un json array con los combos que existen
+     * @return JSONArray
+     * @throws JSONException
+     */
     public JSONArray codeSetCombos() throws JSONException {
         JSONArray jsonArray = new JSONArray();
         for (Combo aux : setCombo)
@@ -50,6 +65,12 @@ public class SetCombo implements IOpBasicas<Combo>, Serializable {
         }
         return rta;
     }
+
+    /**
+     * Devuelve el combo con la Id pasada por parametro
+     * @param pos (int)
+     * @return
+     */
     public Combo getComboPos(int pos) {
      Combo rta=null;
         Iterator<Combo> it = setCombo.iterator();
@@ -63,6 +84,11 @@ public class SetCombo implements IOpBasicas<Combo>, Serializable {
         return rta;
     }
 
+    /**
+     * Devuelve el HashSet cargado hasta el momento
+     * @return SetCombo(combos)
+     *
+     */
     public HashSet<Combo> getSetCombo() {
         return setCombo;
     }
@@ -71,6 +97,7 @@ public class SetCombo implements IOpBasicas<Combo>, Serializable {
         return setCombo.size();
     }
 
+    //------------------------------------------listar---------------------
 
     @Override
     /**
@@ -88,6 +115,7 @@ public class SetCombo implements IOpBasicas<Combo>, Serializable {
 
         return builder.toString();
     }
+//-----------------------------------------------OVERRIDES----------------------------------------------------
 
     /**
      * Agrega un combo a la carta (criterio de comparacion  ID )
@@ -102,6 +130,11 @@ public class SetCombo implements IOpBasicas<Combo>, Serializable {
         return rta;
     }
 
+    /**
+     * Elimina un Combo del HashSet.
+     * @param  obj
+     * @return TRUE si se elimino con exito
+     */
     @Override
     public boolean eliminar(Combo obj) {
         boolean rta = false;
@@ -112,6 +145,10 @@ public class SetCombo implements IOpBasicas<Combo>, Serializable {
         return rta;
     }
 
+    /**
+     * Carga el HashSet con uno
+     * @param setCombo (HashSet<Combo>)
+     */
     public void setSetCombo(HashSet<Combo> setCombo) {
         this.setCombo = setCombo;
     }

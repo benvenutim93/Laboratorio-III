@@ -23,6 +23,11 @@ public class Archivador
     //static final String ARCHIVO_PRESENCIAL="presencial.dat";
     //static final String ARCHIVO_VIRTUAL="virtual.dat";
 
+    /**
+     * Carga en un Archivo la lista de Comidas del restaurant
+     * @param listaComidas
+     * @throws IOException
+     */
     public static void agregarComidas (ListaComidas listaComidas) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(ARCHIVO_COMIDAS);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -33,6 +38,10 @@ public class Archivador
         objectOutputStream.close();
     }
 
+    /**
+     * Retorna una lista de comidas cargada en el Archivo
+     * @return ListaComidas
+     */
     public static ListaComidas leerArchivoComidas (){
         ListaComidas listaComidas = new ListaComidas();
         try{

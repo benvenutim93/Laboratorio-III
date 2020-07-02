@@ -4,6 +4,6 @@ public class IngresoInvalidoException extends Exception{
 
     public IngresoInvalidoException(String a)
     {
-        super(a);
+        super("\033[31m"+a+"\u001B[0m");
     }
 }

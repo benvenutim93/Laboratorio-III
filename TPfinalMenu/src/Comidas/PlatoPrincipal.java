@@ -4,6 +4,9 @@ import Interfaces.IPrecio;
 
 import java.io.Serializable;
 
+/**
+ * @author  Nicolas
+ */
 public class PlatoPrincipal extends  Comida implements IPrecio, Serializable
 {
     private static final long serialVersionUID = 8l;
@@ -26,6 +29,11 @@ public class PlatoPrincipal extends  Comida implements IPrecio, Serializable
     }
 
     ///-------------------------------- [M E T O D O S] --------------------------------
+
+    /**
+     * Devuelve los datos de la comida
+     * @return String
+     */
     public String datos(){
         return super.getNombre()+(" -> [Libre de TACC: "+isAptoTacc()+ "]");
     }

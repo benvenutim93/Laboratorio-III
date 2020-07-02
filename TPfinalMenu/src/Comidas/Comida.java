@@ -6,6 +6,9 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+/**
+ * @author  Nicolas
+ */
 public abstract class Comida implements Serializable {
 
     private static final long serialVersionUID = 6l;

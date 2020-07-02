@@ -9,6 +9,9 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * @author Nicolas
+ */
 public class ListaComidas implements IOpBasicas<Comida>, Serializable
 {
     private static final long serialVersionUID = 11l;
@@ -23,7 +26,11 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable
 
 ///-------------------------------- [M E T O D O S] --------------------------------
 
-
+    /**
+     * Convierte  la ListaComidas en un JSONArray
+     * @return JSONArray
+     * @throws JSONException
+     */
     public JSONArray codeListaComidas() throws JSONException {
         JSONArray jsonArray = new JSONArray();
         for (Comida aux : listaComidas)
@@ -31,6 +38,10 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable
         return jsonArray;
     }
 
+    /**
+     * Devuelve la lista de comidas
+     * @return ListaComidas
+     */
     public ArrayList<Comida> getListaComidas() {
         return listaComidas;
     }
@@ -62,8 +73,28 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable
         }
         return rta;
     }
+    /**
+     * Devuelve la cantidad de comidas cargadas.
+     * @return int(cantidad de comidas)
+     */
+    public int getCantComidas()
+    {
+        return listaComidas.size();
+    }
 
+    /**
+     * Carga una lista de comida .
+     * @param listaComidas (ArrayList<Comida>)
+     */
+    public void setListaComidas(ArrayList<Comida> listaComidas) {
+        this.listaComidas = listaComidas;
+    }
     //------------------------------------------listar---------------------
+
+    /**
+     * Devuelve todas las Guarniciones cargadas en la Lista de comidas
+     * @return String(Guarnicion)
+     */
     public String listaGuarnicion() {
         StringBuilder builder = new StringBuilder();
         if (!listaComidas.isEmpty()) {
@@ -77,6 +108,10 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable
         return builder.toString();
     }
 
+    /**
+     *Devuelve todas los Postre cargadas en la Lista de comidas
+     * @return String(Postre)
+     */
     public String listaPostre() {
         StringBuilder builder = new StringBuilder();
         if (!listaComidas.isEmpty()) {
@@ -90,6 +125,10 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable
         return builder.toString();
     }
 
+    /**
+     *Devuelve todas las PlatosPrincipales cargadas en la Lista de comidas
+     * @return String(PlatosPrincipales)
+     */
     public String listaPlatosprincipales() {
         StringBuilder builder = new StringBuilder();
         if (!listaComidas.isEmpty()) {
@@ -103,7 +142,10 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable
         return builder.toString();
     }
 
-
+    /**
+     *Devuelve todas las Bebidas cargadas en la Lista de comidas
+     * @return String(Bebidas)
+     */
     public String listaBebidas() {
         StringBuilder builder = new StringBuilder();
         if (!listaComidas.isEmpty()) {
@@ -117,6 +159,10 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable
         return builder.toString();
     }
 
+    /**
+     * Lista todas las comidas cargadas.
+     * @return String
+     */
     @Override
     public String listar() {
         StringBuilder builder = new StringBuilder();
@@ -153,35 +199,10 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable
 
         return builder.toString();
     }
-
-//---------------------------------------------------------------------------------------------------
-
-    @Override
     /**
-     * Agrega una comida al ArrayList sin que este repetida
-     * @param nueva (Comida)
-     * @return true agregado con exito
+     * Te lista las comidas con su posicion en el arreglo.
+     * @return String
      */
-    public boolean agregar(Comida obj) {
-        boolean rta = false;
-        if (!listaComidas.contains(obj)) {
-            rta = listaComidas.add(obj);
-        }
-        return rta;
-    }
-
-
-
-    @Override
-    public boolean eliminar(Comida obj) {
-        boolean rta = false;
-        if (!listaComidas.isEmpty()) {
-            rta = listaComidas.remove(obj);
-        }
-
-        return rta;
-    }
-
     public String listarComidaConPosicion() {
         StringBuilder builder = new StringBuilder();
 
@@ -209,12 +230,37 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable
 
         return builder.toString();
     }
-    public int getCantComidas()
-    {
-        return listaComidas.size();
+
+//-----------------------------------------------OVERRIDES----------------------------------------------------
+
+    @Override
+    /**
+     * Agrega una comida al ArrayList sin que este repetida
+     * @param nueva (Comida)
+     * @return true agregado con exito
+     */
+    public boolean agregar(Comida obj) {
+        boolean rta = false;
+        if (!listaComidas.contains(obj)) {
+            rta = listaComidas.add(obj);
+        }
+        return rta;
     }
 
-    public void setListaComidas(ArrayList<Comida> listaComidas) {
-        this.listaComidas = listaComidas;
+
+    /**
+     * Elimina una comida de la Lista.
+     * @param obj (Comida)
+     * @return true si se elimino con exito
+     */
+    @Override
+    public boolean eliminar(Comida obj) {
+        boolean rta = false;
+        if (!listaComidas.isEmpty()) {
+            rta = listaComidas.remove(obj);
+        }
+
+        return rta;
     }
+
 }

@@ -11,6 +11,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import Excepciones.PrecioNegativoException;
 
+/**
+ * @author Nicolas
+ */
 public class CartaComidas
 {
     static final String K_COMBOS = "Combos";
@@ -23,17 +26,31 @@ public class CartaComidas
         this.listaComida=new ListaComidas();
         this.setCombos=new SetCombo();
     }
+///-------------------------------- [M E T O D O S] --------------------------------
 
+    /**
+     * Devuelve la lista de comidas .
+     * @return ListaComidas(clase)
+     */
     public ListaComidas getListaComida ()
     {
         return listaComida;
     }
 
+    /**
+     * Devuelve los combos cargados.
+     * @return SetCombo(clases)
+     */
     public SetCombo getSetCombos ()
     {
         return setCombos;
     }
 
+    /**
+     * Crea un Json Object de la clase.
+     * @return JSONObject
+     * @throws JSONException
+     */
     public JSONObject codeCartaComidas() throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(K_LISTADOCOMIDA, listaComida.codeListaComidas());
@@ -57,6 +74,63 @@ public class CartaComidas
      */
     public boolean agregarCombo(Combo nuevo){
         return setCombos.agregar(nuevo);
+    }
+
+    /**
+ * Devuelve la cantidad de combos que hay cargados.
+ * @return int
+ */
+public int getCantidadCombo(){
+    return   setCombos.getCantidad();
+}
+
+    /**
+     * Busca la comida en un lugar especifico del arreglo de comidas
+     * @param pos (entero)
+     * @return Comida
+     */
+    public  Comida getComidaPos(int pos){return  listaComida.getComidapos(pos);}
+
+    /**
+     * Devuelve un hashset de combos.
+     * @return HashSet<Combo>
+     */
+    public HashSet<Combo> getCartaCombo(){
+        return  setCombos.getSetCombo();
+    }
+
+    /**
+     * Elimina un combo determinado de la coleccion de combos
+     * @param aBorrar
+     * @return true o false si lo elimino o no respectivamente
+     */
+    public boolean eliminarCombo(Combo aBorrar){
+        return setCombos.eliminar(aBorrar);
+    }
+
+    /**
+     * Elimina una comida determinada de la lista de comidas
+     * @param aBorrar
+     * @return true o false si la elimino o no respectivamente
+     */
+    public boolean eliminarComida(Comida aBorrar){
+        return listaComida.eliminar(aBorrar);
+    }
+
+    /**
+     * Carga una lista de comidas .
+     * @param listaComida
+     */
+    public void setListaComida(ListaComidas listaComida) {
+        this.listaComida = listaComida;
+    }
+
+    /**
+     * Carga el SetCombos .
+     * @param setCombos
+     */
+    public void setSetCombos(SetCombo setCombos) {
+        this.setCombos = setCombos;
     }
 ///-----------------------------------------Listar--------------------------------------
     /**
@@ -115,49 +189,14 @@ public class CartaComidas
      */
     public  String listarGuarnicion(){return listaComida.listaGuarnicion();}
 
-    ///-----------------------------------------------------------------
-    public int getCantidadCombo(){
-        return   setCombos.getCantidad();
-    }
-
     /**
-     * Busca la comida en un lugar especifico del arreglo de comidas
-     * @param pos (entero)
-     * @return Comida
+     * Lista la comidas con sus respectivas posiciones
+     * @return String
      */
-    public  Comida getComidaPos(int pos){return  listaComida.getComidapos(pos);}
-    public HashSet<Combo> getCartaCombo(){
-        return  setCombos.getSetCombo();
-    }
-
-    /**
-     * Elimina un combo determinado de la coleccion de combos
-     * @param aBorrar
-     * @return true o false si lo elimino o no respectivamente
-     */
-    public boolean eliminarCombo(Combo aBorrar){
-        return setCombos.eliminar(aBorrar);
-    }
-
-    /**
-     * Elimina una comida determinada de la lista de comidas
-     * @param aBorrar
-     * @return true o false si la elimino o no respectivamente
-     */
-    public boolean eliminarComida(Comida aBorrar){
-        return listaComida.eliminar(aBorrar);
-    }
-
-
     public String listarComidaConPosicion() {
         return listaComida.listarComidaConPosicion();
     }
+    ///-----------------------------------------------------------------
 
-    public void setListaComida(ListaComidas listaComida) {
-        this.listaComida = listaComida;
-    }
 
-    public void setSetCombos(SetCombo setCombos) {
-        this.setCombos = setCombos;
-    }
 }
