@@ -22,7 +22,10 @@ public class ListaMesas implements IOpBasicas {
     //Atributos de clase
     private ArrayList<Mesa> listaMesa;
 
-
+    /**
+     * Método get, para obtener la Lista de las Mesas
+     * @return ArrayList <Mesa>
+     */
     public ArrayList<Mesa> getListaMesa() {
         return listaMesa;
     }
@@ -332,6 +335,11 @@ public class ListaMesas implements IOpBasicas {
         return pos;
     }
 
+    /**
+     * Metodo que codifica la Lista de las Mesas en JSON
+     * @return JSONArray
+     * @throws JSONException
+     */
     public JSONArray codeListaMesas () throws JSONException
     {
         JSONArray array = new JSONArray();

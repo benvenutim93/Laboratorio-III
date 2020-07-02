@@ -20,11 +20,10 @@ public class Archivador
     static final String ARCHIVO_COMBOS = "combos.dat";
     static final String ARCHIVO_CLIENTES = "clientes.dat";
     static final String ARCHIVO_MESAS = "mesas.dat";
-    //static final String ARCHIVO_PRESENCIAL="presencial.dat";
-    //static final String ARCHIVO_VIRTUAL="virtual.dat";
+
 
     /**
-     * Carga en un Archivo la lista de Comidas del restaurant
+     * Se encarga de actualizar los datos del archivo de Comidas
      * @param listaComidas
      * @throws IOException
      */
@@ -39,8 +38,8 @@ public class Archivador
     }
 
     /**
-     * Retorna una lista de comidas cargada en el Archivo
-     * @return ListaComidas
+     * Se encarga de devolver lo que e archivo de Comidas contine
+     * @return lista de comidas
      */
     public static ListaComidas leerArchivoComidas (){
         ListaComidas listaComidas = new ListaComidas();
@@ -68,6 +67,11 @@ public class Archivador
 
 //---------------------------------------------------------------------------------------------------------------------
 
+    /**
+     * Se encarga de actualizar los datos del archivo de Combos
+     * @param setCombo
+     * @throws IOException
+     */
     public static void cargarArchivoCombos(SetCombo setCombo) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(ARCHIVO_COMBOS);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -76,6 +80,10 @@ public class Archivador
         objectOutputStream.close();
     }
 
+    /**
+     * Se encarga de devolver lo que e archivo de Combos contine
+     * @return set de combos
+     */
     public static SetCombo leerArchivoCombos() {
         SetCombo rta=new SetCombo();
         try {
@@ -104,90 +112,11 @@ public class Archivador
 
 //---------------------------------------------------------------------------------------------------------------------
 
-   /* public static void cargarArchivoClienteVirtual(ListaClientes listaClientes) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(ARCHIVO_VIRTUAL);
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-
-        for (Cliente aux: listaClientes.getListaClientes()) {
-            if(aux instanceof Virtual)
-                objectOutputStream.writeObject(aux);
-        }
-        objectOutputStream.close();
-    }
-    public static ListaClientes leerArchivoClientesVirtual () {
-        ListaClientes listaClientes = new ListaClientes();
-
-        try {
-            FileInputStream fileInputStream = new FileInputStream(ARCHIVO_VIRTUAL);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            boolean bandera = true;
-            Virtual aux;
-            while (bandera) {
-                aux = (Virtual) objectInputStream.readObject();
-                listaClientes.agregar(aux);
-            }
-            objectInputStream.close();
-        }
-        catch (EOFException l) {
-
-            System.out.println("Fin archivo Clientes");
-        }
-        catch (FileNotFoundException e) {
-
-            e.printStackTrace(); }
-        catch (IOException e) {
-
-            e.printStackTrace(); }
-        catch (ClassNotFoundException e) {
-
-            e.printStackTrace();
-        }
-        return listaClientes;
-    }
-
-    public static void cargarArchivoClientePresencial(ListaClientes listaClientes) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(ARCHIVO_PRESENCIAL);
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-
-        for (Cliente aux: listaClientes.getListaClientes()) {
-            if(aux instanceof Presencial)
-            objectOutputStream.writeObject(aux);
-        }
-
-        objectOutputStream.close();
-    }
-    public static ListaClientes leerArchivoClientesPresenciales () {
-        ListaClientes listaClientes = new ListaClientes();
-
-        try {
-            FileInputStream fileInputStream = new FileInputStream(ARCHIVO_PRESENCIAL);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            boolean bandera = true;
-            Presencial aux;
-            while (bandera) {
-                aux = (Presencial) objectInputStream.readObject();
-                listaClientes.agregar(aux);
-            }
-            objectInputStream.close();
-        }
-        catch (EOFException l) {
-
-            System.out.println("Fin archivo Clientes");
-        }
-        catch (FileNotFoundException e) {
-
-            e.printStackTrace(); }
-        catch (IOException e) {
-
-            e.printStackTrace(); }
-        catch (ClassNotFoundException e) {
-
-            e.printStackTrace();
-        }
-        return listaClientes;
-    }
-*/
-
+    /**
+     * Se encarga de actualizar los datos del archivo de clientes
+     * @param listaClientes
+     * @throws IOException
+     */
     public static void agregarClientes (ListaClientes listaClientes) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(ARCHIVO_CLIENTES);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -199,6 +128,10 @@ public class Archivador
         objectOutputStream.close();
     }
 
+    /**
+     * Se encarga de devolver lo que e archivo de Clientes contine
+     * @return lista de clientes
+     */
     public static ListaClientes leerArchivoClientes () {
         ListaClientes listaClientes = new ListaClientes();
 
@@ -232,6 +165,11 @@ public class Archivador
 
 //---------------------------------------------------------------------------------------------------------------------
 
+    /**
+     * Se encarga de actualizar los datos del archivo de Mesas
+     * @param listaMesas
+     * @throws IOException
+     */
     public static void agregarMesas (ListaMesas listaMesas) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(ARCHIVO_MESAS);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -243,6 +181,10 @@ public class Archivador
         objectOutputStream.close();
     }
 
+    /**
+     * Se encarga de devolver lo que e archivo de Mesas contine
+     * @return lista de mesas
+     */
     public static ListaMesas leerArchivoMesas () {
         ListaMesas listaMesas = new ListaMesas();
 

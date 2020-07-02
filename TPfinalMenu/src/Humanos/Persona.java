@@ -6,6 +6,10 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+/**
+ * Esta clase sirve como "Base" de los diversos clientes
+ *(es abstracta)
+ */
 public abstract class Persona implements Serializable{
 
     static final String K_NOMBRE = "Nombre" ;
