@@ -36,6 +36,11 @@ public class ListaClientes implements IOpBasicas<Cliente>
             builder.append(aux.toString()+"\n");
         return builder.toString();
     }
+
+    /**
+     * Lista todos los clientes Virtuales
+     * @return toString del builder
+     */
     public String listarDelivery() {
         StringBuilder builder = new StringBuilder();
         for (Cliente aux : listaClientes)
@@ -43,6 +48,11 @@ public class ListaClientes implements IOpBasicas<Cliente>
             builder.append(aux.toString()+"\n");
         return builder.toString();
     }
+
+    /**
+     * Lista los clientes virtuales a los cuales ya se les entrego su pedido
+     * @return toString del builder
+     */
     public String listarDeliveryEntregado() {
         StringBuilder builder = new StringBuilder();
         for (Cliente aux : listaClientes)
