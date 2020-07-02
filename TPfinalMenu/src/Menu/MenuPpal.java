@@ -257,13 +257,22 @@ public class MenuPpal {
                                                     System.out.println("--------------------------------------------------------");
                                                     System.out.println("Su pedido hasta ahora");
                                                     System.out.println(presencial.mostrarPedidos());
+                                                    presencial.calcularFactura();
+                                                    System.out.println("|"+" Factura "+presencial.getFactura());
                                                     System.out.println("--------------------------------------------------------");
                                                     System.out.println("Precione enter para Continuar...");
                                                     new java.util.Scanner(System.in).nextLine();
 
                                                 }
-                                                else if (seguir.equalsIgnoreCase("no"))
+                                                else if (seguir.equalsIgnoreCase("no")) {
+                                                    System.out.println("Su pedido es:");
+                                                    System.out.println(presencial.mostrarPedidos());
+                                                    presencial.calcularFactura();
+                                                    System.out.println("|"+" Factura "+presencial.getFactura());
+                                                    System.out.println("\nVolviendo al menu principal");
+                                                   // MenuPrincipal(scan,restaurant);;
                                                     System.out.println("Volviendo al menu principal");
+                                                }
                                                 else
                                                     System.out.println("Ingreso erroneo, volviendo al menu agregar comidas");
                                             } while (seguir.equalsIgnoreCase("Si"));
@@ -281,19 +290,30 @@ public class MenuPpal {
                                                     System.out.println("--------------------------------------------------------");
                                                     System.out.println("Su pedido hasta ahora");
                                                     System.out.println(presencial.mostrarPedidos());
+                                                    presencial.calcularFactura();
+                                                    System.out.println("|"+" Factura "+presencial.getFactura());
                                                     System.out.println("--------------------------------------------------------");
                                                     System.out.println("Precione enter para Continuar...");
                                                     new java.util.Scanner(System.in).nextLine();
                                                 }
-                                                else if (continuar.equalsIgnoreCase("no"))
+                                                else if (continuar.equalsIgnoreCase("no")) {
+
+                                                    System.out.println("Su pedido es:");
+                                                    System.out.println(presencial.mostrarPedidos());
+                                                    presencial.calcularFactura();
+                                                    System.out.println("|" + " Factura " + presencial.getFactura());
+                                                    System.out.println("\nVolviendo al menu principal");
+                                                   // MenuPrincipal(scan, restaurant);
+
                                                     System.out.println("Volviendo al menu principal");
+                                                }
                                                 else
                                                     System.out.println("Ingreso erroneo, volviendo al menu agregar comidas");
 
                                             } while (continuar.equalsIgnoreCase("si"));
                                             break;
                                         case 0:
-                                            MenuPrincipal(scan,restaurant);
+
                                             break;
                                         default:
                                             System.out.println("Opción invalida");
@@ -326,7 +346,7 @@ public class MenuPpal {
                                             System.out.println("\n");
                                             System.out.println("Precione enter para Continuar...");
                                             new java.util.Scanner(System.in).nextLine();
-                                            MenuPrincipal(scan, restaurant);
+                                           // MenuPrincipal(scan, restaurant);
                                         } else {
                                             try {
                                                 throw new IngresoInvalidoException("Ingreso invalido");
@@ -359,7 +379,7 @@ public class MenuPpal {
                     {
                         System.out.println(f.getMessage());
                     }
-                MenuClientePresencial(3,scan,restaurant,dni);
+               // MenuClientePresencial(3,scan,restaurant,dni);
                 break;
             case 4:
                 Cliente aux= restaurant.buscarPorDni(dni);
@@ -477,21 +497,25 @@ public class MenuPpal {
                                         System.out.println("--------------------------------------------------------");
                                         System.out.println("Su pedido hasta ahora");
                                         System.out.println(aux.mostrarPedidos());
+                                        virtual.calcularFactura();
+                                        System.out.println("|"+" Factura "+virtual.getFactura());
                                         System.out.println("--------------------------------------------------------");
+                                        System.out.println("Precione enter para Continuar...");
+                                        new java.util.Scanner(System.in).nextLine();
 
                                     }
                                     else if(seguir.equalsIgnoreCase("no"))
                                     {
-                                        System.out.println("--------------------------------------------------------");
-                                        System.out.println("Su pedido");
+                                        System.out.println("Su pedido es:");
                                         System.out.println(aux.mostrarPedidos());
-                                        System.out.println("--------------------------------------------------------");
-                                        System.out.println("Volviendo al menu principal");
-                                        MenuPrincipal(scan,restaurant);
+                                        virtual.calcularFactura();
+                                        System.out.println("|"+" Factura "+virtual.getFactura());
+                                        System.out.println("\nVolviendo al menu principal");
+
                                     }
                                     else {
                                         System.out.println("Ingreso invalido, volviendo al menu principal");
-                                        MenuPrincipal(scan,restaurant);
+
                                     }
                                 }while (seguir.equalsIgnoreCase("Si"));
                                 break;
@@ -510,17 +534,24 @@ public class MenuPpal {
                                         System.out.println("Su pedido hasta ahora");
 
                                         System.out.println(aux.mostrarPedidos());
+                                        virtual.calcularFactura();
+                                        System.out.println("|"+" Factura "+virtual.getFactura());
                                         System.out.println("--------------------------------------------------------");
+                                        System.out.println("Precione enter para Continuar...");
+                                        new java.util.Scanner(System.in).nextLine();
 
                                     }
                                     else if(continuar.equalsIgnoreCase("no"))
                                     {
-                                        System.out.println("Volviendo al menu principal");
-                                        MenuPrincipal(scan,restaurant);
+                                        System.out.println("Su pedido es:");
+                                        System.out.println(aux.mostrarPedidos());
+                                        virtual.calcularFactura();
+                                        System.out.println("|"+" Factura "+virtual.getFactura());
+                                        System.out.println("\nVolviendo al menu principal");
+
                                     }
                                     else {
                                         System.out.println("Ingreso invalido, volviendo al menu principal");
-                                        MenuPrincipal(scan,restaurant);
                                     }
                                 }while (continuar.equalsIgnoreCase("si"));
                                 break;

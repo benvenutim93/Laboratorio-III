@@ -139,9 +139,9 @@ public class Main {
         restaurant.agregarComida(lemonPie);
         restaurant.agregarComida(vigilante);
 
-
+*/
 //----------------------------------------Clientes-------------------------------------
-
+/*
         Presencial nico= new Presencial("Nico","Bertu","456",5);
         Presencial marian = new Presencial("Marian","Benv","123",2);
         Virtual lau = new Virtual("Lautaro", "Fullone", "789", "476965", "Espa 3571" );
@@ -151,9 +151,9 @@ public class Main {
         restaurant.agregarCliente(lau);
         restaurant.agregarCliente(marian);
         restaurant.agregarCliente(rodri);
-
+*/
 //----------------------------------------Mesas-------------------------------------
-        Mesa a = new Mesa (4, false);
+ /*       Mesa a = new Mesa (4, false);
         Mesa b = new Mesa (8, false);
         Mesa c = new Mesa (6, true);
         Mesa d = new Mesa (3, false);
@@ -167,40 +167,33 @@ public class Main {
 */
 
 
-          try {
+        //  try {
              // Archivador.agregarComidas(restaurant.getListaComidas());
              // Archivador.agregarMesas(restaurant.getListaMesas());
              // Archivador.cargarArchivoCombos(restaurant.getSetCombos());
               //Archivador.agregarClientes(restaurant.getListaClientes());
 
-              //Archivador.cargarArchivoClientePresencial(restaurant.getListaClientes());
-              //Archivador.cargarArchivoClienteVirtual(restaurant.getListaClientes());*/
 
-              //ListaClientes nuevo;
+
               restaurant.setListaMesas(Archivador.leerArchivoMesas());
               restaurant.getCartaComidas().setListaComida(Archivador.leerArchivoComidas());
               restaurant.getCartaComidas().setSetCombos(Archivador.leerArchivoCombos());
               restaurant.setListaClientes(Archivador.leerArchivoClientes());
-              //nuevo=Archivador.leerArchivoClientes();
-              //System.out.println(nuevo.listar());
-             // restaurant.setListaClientes(Archivador.leerArchivoClientesPresenciales());
-              //restaurant.setListaClientes(Archivador.leerArchivoClientesVirtual());
 
-              //System.out.println(restaurant.listarClientes());
+
               MenuPpal.MenuPrincipal(scan,restaurant);
 
 
-              Archivador.agregarComidas(restaurant.getListaComidas());
-              Archivador.agregarMesas(restaurant.getListaMesas());
-              Archivador.cargarArchivoCombos(restaurant.getSetCombos());
-              Archivador.agregarClientes(restaurant.getListaClientes());
-             // Archivador.cargarArchivoClientePresencial(restaurant.getListaClientes());
-              //Archivador.cargarArchivoClienteVirtual(restaurant.getListaClientes());
+             // Archivador.agregarComidas(restaurant.getListaComidas());
+              //Archivador.agregarMesas(restaurant.getListaMesas());
+              //Archivador.cargarArchivoCombos(restaurant.getSetCombos());
+              //Archivador.agregarClientes(restaurant.getListaClientes());
 
-          } catch (IOException g)
-          {
-              System.out.println("Fin main");
-          }
+
+       //   } catch (IOException g)
+       //   {
+       //       System.out.println("Fin main");
+       //   }*/
 
 
     }

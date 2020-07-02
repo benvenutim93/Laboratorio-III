@@ -10,6 +10,7 @@ import Humanos.Cliente;
 import Humanos.Presencial;
 import Humanos.Virtual;
 import Objetos.Mesa;
+import Objetos.Pedido;
 
 import java.io.*;
 
@@ -142,6 +143,7 @@ public class Archivador
             Cliente aux;
             while (bandera) {
                 aux = (Cliente) objectInputStream.readObject();
+                aux.setPedido(new Pedido());
                 listaClientes.agregar(aux);
             }
             objectInputStream.close();
