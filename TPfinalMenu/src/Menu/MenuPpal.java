@@ -1162,15 +1162,10 @@ public class MenuPpal {
                 }while (seguir.equalsIgnoreCase("si"));
 
                 if(seguir.equalsIgnoreCase("no"))
-                {
                     System.out.println("Rergresando al menu principal");
-                    MenuPrincipal(scan,restaurant);
-                }
+
                 else
-                {
                     System.out.println("Opcion incorrecta, volviendo al menu principal");
-                    MenuPrincipal(scan,restaurant);
-                }
                 break;
             case 4:
                 int id2;
@@ -1202,8 +1197,7 @@ public class MenuPpal {
                 break;
             default:
                 System.out.println("Opción invalida");
-                op = elegirOpcion(scan);
-                MenuMesas(op,scan,restaurant);
+                System.out.println(" Volviendo al menu principal ");
                 break;
         }
         MenuPrincipal(scan, restaurant);
@@ -1351,11 +1345,9 @@ public class MenuPpal {
                 }
                 else if(confirmar.equalsIgnoreCase("no")) {
                     System.out.println("Volviendo al menu principal");
-                    MenuPrincipal(scan,restaurant);
                 }
                 else {
                     System.out.println("Ingreso invalido, volviendo al menu principal");
-                    MenuPrincipal(scan,restaurant);
                 }
                 break;
             case 2:
@@ -1395,14 +1387,11 @@ public class MenuPpal {
                         restaurant.eliminarCombo(combo);
                         System.out.println("\033[33m" + "Combo Eliminado del Restaurant " + "\u001B[0m");
                     }
-                    else if(confirmar.equalsIgnoreCase("no")) {
+                    else if(confirmar.equalsIgnoreCase("no"))
                         System.out.println("Volviendo al menu principal");
-                        MenuPrincipal(scan,restaurant);
-                    }
-                    else {
+                    else
                         System.out.println("Ingreso invalido, volviendo al menu principal");
-                        MenuPrincipal(scan,restaurant);
-                    }
+
                 }
                 break;
 
@@ -1516,9 +1505,7 @@ public class MenuPpal {
                         new java.util.Scanner(System.in).nextLine();
                         break;
                     default:
-                        System.out.println("Opción invalida");
-
-                        MenuCombos(3,scan,restaurant);
+                        System.out.println("Opción invalida, volviendo al menu principal");
                         break;
 
                 }
@@ -1543,12 +1530,10 @@ public class MenuPpal {
                     }
                     else if(confirmar.equalsIgnoreCase("no"))
                     {
-                        System.out.println("Volviendo al menu");
-                        MenuPrincipal(scan,restaurant);
+                        System.out.println("Volviendo al menu principal");
                     }
                     else{
                         System.out.println("Opcion erronea, volviendo al menu principal");
-                        MenuPrincipal(scan,restaurant);
                     }
                 }
             }
@@ -1572,18 +1557,12 @@ public class MenuPpal {
                             System.out.println("\033[33m" + "Comida eliminada con exito" + "\u001B[0m");
                         }
                         else if(confirmar.equalsIgnoreCase("no"))
-                        {
-                            System.out.println("Volviendo al menu");
-                            MenuPrincipal(scan,restaurant);
-                        }
-                        else{
+                            System.out.println("Volviendo al menu princiapal");
+                        else
                             System.out.println("Opcion erronea, volviendo al menu principal");
-                            MenuPrincipal(scan,restaurant);
-                        }
                     }
                 }
             }
-
             break;
             case 5:
                 System.out.println("Desea cambiarle el precio a un ...");
@@ -1626,19 +1605,6 @@ public class MenuPpal {
                             }
                         }
                         System.out.println(nuevo.getDatosCombo());
-                        System.out.println("Desea seguir cambiando precios? si/ no");
-                        String rta=scan.next();
-                        if(rta.equalsIgnoreCase("si"))
-                            MenuCombos(5,scan,restaurant);
-                        else if (rta.equalsIgnoreCase("no")) {
-                            System.out.println("Volviendo al menu principal");
-                            MenuPrincipal(scan, restaurant);
-                        }
-                        else
-                        {
-                            System.out.println("Opcion erronea, volviendo al menu principal");
-                            MenuPrincipal(scan,restaurant);
-                        }
                         break;
                     case 2:
                         Comida cambiar;
@@ -1677,25 +1643,11 @@ public class MenuPpal {
                             }
                         }
                         System.out.println(cambiar.toString());
-                        System.out.println("Desea seguir cambiando precios? si/ no");
-                        String rtaa=scan.next();
-                        if(rtaa.equalsIgnoreCase("si"))
-                            MenuCombos(5,scan,restaurant);
-                        else if (rtaa.equalsIgnoreCase("no")) {
-                            System.out.println("Volviendo al menu principal");
-                            MenuPrincipal(scan, restaurant);
-                        }
-                        else
-                        {
-                            System.out.println("Opcion erronea, volviendo al menu principal");
-                            MenuPrincipal(scan,restaurant);
-                        }
                         break;
                     case 0:
                         break;
                     default:
-                        System.out.println("Opción invalida");
-                        MenuCombos(5,scan,restaurant);
+                        System.out.println("Opción invalida, volviendo al menu principal");
                         break;
                 }
                 break;
@@ -1707,9 +1659,8 @@ public class MenuPpal {
             case 0:
                 break;
             default:
-                System.out.println("Opción invalida");
-                op = elegirOpcion(scan);
-                MenuCombos(op,scan,restaurant);
+                System.out.println("Opción invalida, volviendo al menu principal");
+
                 break;
         }
         MenuPrincipal(scan,restaurant);

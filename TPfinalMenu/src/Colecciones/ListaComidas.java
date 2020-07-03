@@ -189,10 +189,10 @@ public class ListaComidas implements IOpBasicas<Comida>, Serializable
                 }
 
             }
-            builder.append("----PlatosPrincipales:" + builderPlato.toString());
-            builder.append("\n----Bebidas:" + builderBebida.toString());
-            builder.append("\n----Postres:" + builderPostre.toString());
-            builder.append("\n----Guarniciones  :" + builderGuarnicion.toString());
+            builder.append("----PlatosPrincipales:\n" + builderPlato.toString());
+            builder.append("\n\n----Bebidas:\n" + builderBebida.toString());
+            builder.append("\n\n----Postres:\n" + builderPostre.toString());
+            builder.append("\n\n----Guarniciones:\n" + builderGuarnicion.toString());
         } else {
             builder.append("No hay comidas cargadas ");
         }
