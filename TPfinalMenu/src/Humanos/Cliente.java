@@ -77,7 +77,6 @@ public  class Cliente extends Persona implements Serializable {
         else
             throw new ComboNoExistenteException("El combo ingresado es invalido");
     }
-
     /**
      *  agrega una comida al pedido(plato principal, postre, guardicion, o bebida) NO AGREGA COMBOS
      *
